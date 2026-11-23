@@ -1,0 +1,41 @@
+<section id="readability">
+<div class="head">
+<p class="eyebrow">Criterion 1 · Code readability and maintainability</p>
+<h2>Each concern has one home</h2>
+</div>
+<div class="grid2">
+<div class="code in" style="--i:0">
+<p class="code-line">src/bls_mcp/</p>
+<p class="code-line">├─ app.py&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="code-dim">transport launcher</span></p>
+<p class="code-line">├─ server.py&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="code-dim">server assembly</span></p>
+<p class="code-line">├─ lifespan.py&#160;&#160;&#160;&#160;&#160;&#160;<span class="code-dim">per-run Services</span></p>
+<p class="code-line">├─ mcp/tools/&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="code-dim">15 files, 1 tool each</span></p>
+<p class="code-line">├─ mcp/resources/&#160;&#160;&#160;<span class="code-dim">guides, methodology</span></p>
+<p class="code-line">├─ mcp/prompts/&#160;&#160;&#160;&#160;&#160;<span class="code-dim">basket-design prompt</span></p>
+<p class="code-line">├─ models/&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="code-dim">Pydantic contracts</span></p>
+<p class="code-line">├─ services/&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="code-dim">domain logic</span></p>
+<p class="code-line">├─ storage/&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="code-dim">DuckDB snapshot reads</span></p>
+<p class="code-line">├─ ingestion/&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span class="code-dim">bls-data CLI</span></p>
+<p class="code-line">└─ clients/bls.py&#160;&#160;&#160;<span class="code-dim">the one live client</span></p>
+</div>
+<div class="col in" style="--i:1">
+<p><b>Separated layers.</b> Transport, assembly, tools, models, services and storage each live in their own module.</p>
+<p><b>One tool per file.</b> Each registers itself explicitly; nothing is discovered by magic.</p>
+<p><b>No hidden state.</b> A frozen Services object is opened once per server run, never a module singleton.</p>
+<p><b>Intent in the docstrings.</b> The calculation module states its formula and its Q04 rule.</p>
+<p><b>Checked.</b> mypy finds no issues in 118 files, and a template seeds the next server.</p>
+</div>
+</div>
+<div class="pn"></div>
+<aside>Point at the tree: a reader can find any tool, model or query without searching.
+
+Evidence:
+• src/bls_mcp/mcp/tools/__init__.py registers each of 15 tools explicitly, one module per tool.
+• src/bls_mcp/lifespan.py: “Dependencies owned by one running server, never a module singleton.”
+• src/bls_mcp/mcp/adapters.py: domain_errors() turns domain exceptions into ToolError; unexpected errors stay masked (mask_error_details=True in server.py).
+• src/bls_mcp/services/source_calculation.py opens with the formula and the quarterly-to-annual rule.
+• uv run mypy src/bls_mcp src/portable_llm_mcp: “Success: no issues found in 118 source files” (clean clone, 2026-11-17).
+• src/templates/example_server/ is the copyable template for the next server.
+
+Known gaps, covered in future work: ruff reports 27 lint errors and 5 unformatted files (mostly eval/asksage); PARS has two server.py entry points.</aside>
+</section>

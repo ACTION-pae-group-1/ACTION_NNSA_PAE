@@ -1,0 +1,138 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Generative UI
+
+> Let the LLM build custom Prefab UIs on the fly.
+
+New in version `3.2.0`
+
+<video src="https://mintcdn.com/fastmcp/vSGk7FpAqZwRutXA/apps/images/generative-ui.mp4?fit=max&auto=format&n=vSGk7FpAqZwRutXA&q=85&s=9c60ab21448c63f90ff274b8017e7954" autoPlay loop muted playsInline />
+
+With Generative UI, the LLM writes the UI code at runtime. Instead of calling a pre-built tool with a fixed shape, the model writes Prefab Python tailored to the current data and request. The user watches the UI stream in as the model generates it.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.apps.generative import GenerativeUI
+
+mcp = FastMCP("Prefab Studio")
+mcp.add_provider(GenerativeUI())
+```
+
+One provider registers three things:
+
+* **`generate_prefab_ui`** — a tool that accepts Python code, executes it in a Pyodide sandbox, and renders the result as a Prefab app
+* **`search_prefab_components`** — a tool the LLM uses to discover what components are available
+* **The streaming renderer** — a `ui://` resource with browser-side Pyodide that progressively renders partial code as the LLM generates it
+
+## How it works
+
+When the LLM calls `generate_prefab_ui`, it writes Prefab Python code into the `code` argument. The MCP Apps protocol creates the renderer iframe in parallel with the tool call, so the app is already running by the time partial arguments start flowing.
+
+As the LLM generates each token:
+
+1. The host forwards partial arguments to the app via `ontoolinputpartial`
+2. The renderer extracts the growing `code` string
+3. Browser-side Pyodide executes whatever compiles successfully
+4. The user sees components appear as they're written
+
+When the LLM finishes, the server runs the complete code in a server-side Pyodide sandbox for validation, and the renderer swaps the streaming preview for the final server-validated result.
+
+## What the LLM writes
+
+The tool description includes examples that teach the model the Prefab patterns. A typical generation looks like:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from prefab_ui.components import Column, Row, Heading, Text, Badge, Card, CardContent
+from prefab_ui.components.charts import BarChart, ChartSeries
+from prefab_ui.app import PrefabApp
+
+with PrefabApp() as app:
+    with Column(gap=6, css_class="p-6"):
+        Heading("Q3 Revenue Report")
+
+        BarChart(
+            data=[
+                {"month": "Jul", "revenue": 42000},
+                {"month": "Aug", "revenue": 51000},
+                {"month": "Sep", "revenue": 63000},
+            ],
+            series=[ChartSeries(data_key="revenue", label="Revenue")],
+            x_axis="month",
+        )
+
+        with Row(gap=4):
+            with Card():
+                with CardContent():
+                    Text("Total", css_class="text-sm text-muted-foreground")
+                    Heading("$156,000")
+            with Card():
+                with CardContent():
+                    Text("Growth", css_class="text-sm text-muted-foreground")
+                    Badge("+18%", variant="success")
+```
+
+The model writes real Python — loops, f-strings, computation, helper functions. Prefab gives it charts, tables, forms, cards, badges, and layout primitives to compose.
+
+## The component search tool
+
+Before writing code, the LLM can call `search_prefab_components` to discover what's available:
+
+```text theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+search_prefab_components("Chart")
+→ 9 components matching 'Chart':
+
+  ## Charts
+  Import: `from prefab_ui.components.charts import <name>`
+  AreaChart — Area chart with one or more series.
+  BarChart — Bar chart with one or more series.
+  ...
+```
+
+Space-separated terms match independently, so `"Card Badge Metric"` returns all three. A query that matches five or fewer components returns full docstrings and arguments; a broader one returns this compact listing. Pass `detail=True` or `detail=False` to override. The search tool introspects Prefab classes at runtime, so it matches the installed version.
+
+## Passing data
+
+The `generate_prefab_ui` tool accepts a `data` parameter. Values become global variables in the sandbox:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+# The LLM can reference 'sales_data' directly in its code
+result = await generate_prefab_ui(
+    code="...",
+    data={"sales_data": [{"month": "Jan", "revenue": 42000}, ...]}
+)
+```
+
+This lets the model use data from earlier in the conversation to build visualizations.
+
+## Configuration
+
+`GenerativeUI` takes options for customizing tool names:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+GenerativeUI(
+    tool_name="generate_prefab_ui",           # default
+    components_tool_name="search_prefab_components",  # default
+    include_components_tool=True,              # default
+)
+```
+
+## Requirements
+
+Generative UI needs `fastmcp[apps]`, which pulls in `prefab-ui`. The server-side Pyodide sandbox (for final validation) requires [Deno](https://deno.land) on your `PATH`; FastMCP does not install it, and `generate_prefab_ui` calls fail until it is present. Pyodide itself downloads on first use.
+
+The streaming renderer loads Pyodide from CDN in the browser. The CSP is configured automatically by the provider — no manual setup.
+
+## Sandbox limitations
+
+The Pyodide sandbox includes the Python standard library and Prefab. External packages (NumPy, pandas, requests, etc.) are **not available** — the LLM's code must work with only built-in Python and Prefab. If the LLM imports something unavailable, the sandbox raises `ImportError`.
+
+## Next steps
+
+* **[Interactive Tools](https://gofastmcp.com/docs/apps/prefab.md)** — the component building blocks the LLM will use
+* **[Prefab component reference](https://prefab.prefect.io/docs/components)** — full component library
+* **[Development](https://gofastmcp.com/docs/apps/development.md)** — preview generative tools locally with `fastmcp dev apps`
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

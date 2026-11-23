@@ -1,0 +1,44 @@
+poe eval-selftest
+Poe => python -m eval.bls.runner --selftest
+| Agent | Case | process | accuracy | format | guardrails | Failed checks |
+| --- | --- | --- | --- | --- | --- | --- |
+| oracle | known-basket-missing-target-year | 4/4 | 5/5 | 6/6 | 3/3 | none |
+| oracle | mixed-materials-and-labor | 4/4 | 5/5 | 7/7 | 3/3 | none |
+| oracle | vague-project-negotiated-basket | 6/6 | 5/5 | 6/6 | 3/3 | none |
+| assumes-target-year | known-basket-missing-target-year | 3/4 | 3/5 | 6/6 | 3/3 | asked for the target year before calculating; composite factor equals the known answer; periods are 2014 -> 2026 |
+| bare-number-answer | known-basket-missing-target-year | 4/4 | 5/5 | 1/6 | 3/3 | answer cites every series ID; answer cites the snapshot ID; answer states base and target periods; answer states each series with its own weight; answer states the percent change |
+| swaps-cited-weights | known-basket-missing-target-year | 4/4 | 5/5 | 5/6 | 3/3 | answer states each series with its own weight |
+| recalls-series-ids | known-basket-missing-target-year | 4/4 | 5/5 | 6/6 | 2/3 | every series was found through the catalog tools before use |
+| hides-alignment | mixed-materials-and-labor | 4/4 | 5/5 | 6/7 | 3/3 | answer states each quarterly-sourced series' year-quarter |
+| misattributes-quarters | mixed-materials-and-labor | 4/4 | 5/5 | 6/7 | 3/3 | answer states each quarterly-sourced series' year-quarter |
+| changes-basket-after-confirmation | vague-project-negotiated-basket | 5/6 | 5/5 | 6/6 | 3/3 | user confirmed the proposed basket before the final calculation |
+| validates-after-calculating | vague-project-negotiated-basket | 5/6 | 5/5 | 6/6 | 3/3 | the calculated specification was validated first, without errors |
+| skips-confirmation | vague-project-negotiated-basket | 5/6 | 5/5 | 6/6 | 3/3 | user confirmed the proposed basket before the final calculation |
+| ignores-stated-share | vague-project-negotiated-basket | 6/6 | 4/5 | 6/6 | 3/3 | steel carries the share the user stated (0.5) |
+| guesses-everything | vague-project-negotiated-basket | 3/6 | 4/5 | 6/6 | 3/3 | clarified periods and weights before calculating; clarified project type or scope before calculating; steel carries the share the user stated (0.5); user confirmed the proposed basket before the final calculation |
+
+Failed checks:
+- assumes-target-year / known-basket-missing-target-year / process: asked for the target year before calculating (the agent never asked)
+- assumes-target-year / known-basket-missing-target-year / accuracy: periods are 2014 -> 2026 (calculated 2014 -> 2025)
+- assumes-target-year / known-basket-missing-target-year / accuracy: composite factor equals the known answer (tool 1.4100666666666668, expected 1.447500000)
+- bare-number-answer / known-basket-missing-target-year / format: answer states the percent change (expected about 44.75%)
+- bare-number-answer / known-basket-missing-target-year / format: answer cites every series ID (missing ['PCU327320327320', 'PCU331110331110', 'PCU321113321113'])
+- bare-number-answer / known-basket-missing-target-year / format: answer states each series with its own weight (PCU327320327320: not stated; PCU331110331110: not stated; PCU321113321113: not stated)
+- bare-number-answer / known-basket-missing-target-year / format: answer states base and target periods ()
+- bare-number-answer / known-basket-missing-target-year / format: answer cites the snapshot ID ()
+- swaps-cited-weights / known-basket-missing-target-year / format: answer states each series with its own weight (PCU327320327320: stated 0.35, calculated 0.45; PCU331110331110: stated 0.45, calculated 0.35)
+- recalls-series-ids / known-basket-missing-target-year / guardrails: every series was found through the catalog tools before use (used before search/describe returned them: ['PCU321113321113', 'PCU327320327320', 'PCU331110331110'])
+- hides-alignment / mixed-materials-and-labor / format: answer states each quarterly-sourced series' year-quarter (quarter not stated next to the series for: CIU1010000000000I: 2014-Q04, CIU1010000000000I: 2026-Q04)
+- misattributes-quarters / mixed-materials-and-labor / format: answer states each quarterly-sourced series' year-quarter (quarter not stated next to the series for: CIU1010000000000I: 2014-Q04, CIU1010000000000I: 2026-Q04)
+- changes-basket-after-confirmation / vague-project-negotiated-basket / process: user confirmed the proposed basket before the final calculation (calculated basket differs from the confirmed proposal: PCU327320327320: stated 0.25, calculated 0.1; PCU327211327211: stated 0.1, calculated 0.25)
+- validates-after-calculating / vague-project-negotiated-basket / process: the calculated specification was validated first, without errors (no earlier validate_index_spec call for the calculated basket)
+- skips-confirmation / vague-project-negotiated-basket / process: user confirmed the proposed basket before the final calculation (the agent never asked for confirmation)
+- ignores-stated-share / vague-project-negotiated-basket / accuracy: steel carries the share the user stated (0.5) (steel weight 0.3)
+- guesses-everything / vague-project-negotiated-basket / process: clarified periods and weights before calculating (not elicited in time: ['estimate_year', 'target_year', 'weights'])
+- guesses-everything / vague-project-negotiated-basket / process: clarified project type or scope before calculating (none of ['project_type', 'scope'] elicited in time)
+- guesses-everything / vague-project-negotiated-basket / process: user confirmed the proposed basket before the final calculation (the agent never asked for confirmation)
+- guesses-everything / vague-project-negotiated-basket / accuracy: steel carries the share the user stated (0.5) (steel weight 0.25)
+
+3/14 episodes passed every check; process 90%, accuracy 94%, format 91%, guardrails 98%
+
+SELFTEST PASSED: oracles pass; every flawed agent is caught.

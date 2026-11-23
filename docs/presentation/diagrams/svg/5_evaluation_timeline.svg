@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>The evaluation journey — five phases of evaluation work</title>
+<style>
+text { font-family: 'Segoe UI', Arial, sans-serif; }
+</style>
+<defs>
+<marker id="ah" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="22" markerHeight="22" orient="auto-start-reverse" markerUnits="userSpaceOnUse" ><path d="M 0 0 L 12 6 L 0 12 z" fill="#2563EB"/></marker>
+<filter id="sh" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.08"/></filter>
+</defs>
+<rect x="0" y="0" width="1920" height="1080" fill="#F7F8FA"/>
+<text x="80" y="112" font-size="64" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">The evaluation journey</text>
+<rect x="110" y="757" width="1700" height="6" rx="3" fill="#4B5563" stroke="none"/>
+<rect x="110" y="220" width="320" height="440" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="2.5" filter="url(#sh)"/>
+<text x="136" y="312" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Prove the</text>
+<text x="136" y="348.0" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">graders</text>
+<text x="136" y="390.0" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">oracle + flawed-</text>
+<text x="136" y="424.32" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">agent self-test;</text>
+<text x="136" y="458.64" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">no model needed</text>
+<circle cx="156" cy="220" r="20" fill="#2563EB"/>
+<text x="156" y="229" font-size="24" font-weight="700" fill="#FFFFFF" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">1</text>
+<path d="M 270 660 L 270 760" fill="none" stroke="#4B5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="270" cy="760" r="9" fill="#2563EB"/>
+<rect x="170.8" y="790" width="198.4" height="44" rx="22.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="270.0" y="820.64" font-size="24" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="Consolas, 'Courier New', monospace">SELFTEST.md</text>
+<rect x="455" y="220" width="320" height="440" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="481" y="312" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Baseline</text>
+<text x="481" y="354.0" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">3 local models ×</text>
+<text x="481" y="388.32" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">3 cases × 3 reps</text>
+<text x="481" y="422.64" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">at commit 34eb702;</text>
+<text x="481" y="456.96000000000004" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">fingerprints</text>
+<text x="481" y="491.28" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">recorded</text>
+<circle cx="501" cy="220" r="20" fill="#2563EB"/>
+<text x="501" y="229" font-size="24" font-weight="700" fill="#FFFFFF" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">2</text>
+<path d="M 615 660 L 615 760" fill="none" stroke="#4B5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="615" cy="760" r="9" fill="#2563EB"/>
+<rect x="501.4" y="790" width="227.2" height="44" rx="22.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="615.0" y="820.64" font-size="24" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="Consolas, 'Courier New', monospace">results/runs/</text>
+<rect x="800" y="220" width="320" height="440" rx="12" fill="#FFFFFF" stroke="#B45309" stroke-width="2.5" filter="url(#sh)"/>
+<text x="826" y="312" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Iteration loop</text>
+<text x="826" y="348.0" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">bites</text>
+<text x="826" y="390.0" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">recorder bug caught</text>
+<text x="826" y="424.32" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">via fingerprints;</text>
+<text x="826" y="458.64" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">simulated user</text>
+<text x="826" y="492.96000000000004" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">ended 23 of 25</text>
+<text x="826" y="527.28" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">episodes early</text>
+<circle cx="846" cy="220" r="20" fill="#2563EB"/>
+<text x="846" y="229" font-size="24" font-weight="700" fill="#FFFFFF" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">3</text>
+<path d="M 960 660 L 960 760" fill="none" stroke="#4B5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="960" cy="760" r="9" fill="#2563EB"/>
+<rect x="868.0" y="790" width="184.0" height="44" rx="22.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="960.0" y="820.64" font-size="24" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="Consolas, 'Courier New', monospace">PR #19 fix</text>
+<rect x="1145" y="220" width="320" height="440" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1171" y="312" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Second</text>
+<text x="1171" y="348.0" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">harness</text>
+<text x="1171" y="390.0" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">PARS agent judged</text>
+<text x="1171" y="424.32" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">by an LLM on</text>
+<text x="1171" y="458.64" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">frozen datasets</text>
+<circle cx="1191" cy="220" r="20" fill="#2563EB"/>
+<text x="1191" y="229" font-size="24" font-weight="700" fill="#FFFFFF" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">4</text>
+<path d="M 1305 660 L 1305 760" fill="none" stroke="#4B5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1305" cy="760" r="9" fill="#2563EB"/>
+<rect x="1162.6" y="790" width="284.79999999999995" height="44" rx="22.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="1305.0" y="820.64" font-size="24" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="Consolas, 'Courier New', monospace">readiness summary</text>
+<rect x="1490" y="220" width="320" height="440" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1516" y="312" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Docs catch up</text>
+<text x="1516" y="354.0" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">skills and readmes</text>
+<text x="1516" y="388.32" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">synced to the</text>
+<text x="1516" y="422.64" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">harness that ships</text>
+<circle cx="1536" cy="220" r="20" fill="#2563EB"/>
+<text x="1536" y="229" font-size="24" font-weight="700" fill="#FFFFFF" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">5</text>
+<path d="M 1650 660 L 1650 760" fill="none" stroke="#4B5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1650" cy="760" r="9" fill="#2563EB"/>
+<rect x="1478.8" y="790" width="342.4" height="44" rx="22.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="1650.0" y="820.64" font-size="24" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="Consolas, 'Courier New', monospace">EVALUATION_JOURNEY.md</text>
+<rect x="1171" y="560" width="268" height="74" rx="10" fill="#FDF3E7" stroke="#B45309" stroke-width="2"/>
+<text x="1305" y="590" font-size="24" font-weight="700" fill="#B45309" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">reported 100%</text>
+<text x="1305" y="620" font-size="24" font-weight="700" fill="#B45309" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">50/50 · unverified</text>
+<rect x="110" y="870" width="1700" height="64" rx="12" fill="#FFFFFF" stroke="#4B5563" stroke-width="1.5"/>
+<text x="960" y="912" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">Next: re-run the models on the current eval · frontier-model run via the approved client · CI or its documented replacement</text>
+<text x="80" y="1024" font-size="24" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Corrected vs. prompt 5: milestone 4 is amber, since no PARS run output is committed · recorded BLS runs use eval</text>
+<text x="80" y="1056" font-size="24" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">fingerprint f492beb25f0f; the current eval (wider simulated user) is ccdfccfcc1bc, so the scores need a re-run</text>
+</svg>

@@ -1,0 +1,134 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Prompts as Tools
+
+> Expose prompts to tool-only clients
+
+New in version `3.0.0`
+
+Some MCP clients only support tools. They cannot list or get prompts directly because they lack prompt protocol support. The `PromptsAsTools` transform bridges this gap by generating tools that provide access to your server's prompts.
+
+When you add `PromptsAsTools` to a server, it creates two tools that clients can call instead of using the prompt protocol:
+
+* **`list_prompts`** returns JSON describing all available prompts and their arguments
+* **`get_prompt`** renders a specific prompt with provided arguments
+
+This means any client that can call tools can now access prompts, even if the client has no native prompt support.
+
+## Basic Usage
+
+Pass your FastMCP server to `PromptsAsTools` when adding the transform. The generated tools route through the server at runtime, which means all server middleware — auth, visibility, rate limiting — applies to prompt operations automatically, exactly as it would for direct `prompts/get` calls.
+
+> [!NOTE]
+>
+> `PromptsAsTools` (and `ResourcesAsTools`) should be applied to a FastMCP server instance, not a raw Provider. The generated tools call back into the server's middleware chain at runtime, so they need a server to route through. If you want to expose only a subset of prompts, create a dedicated FastMCP server for those prompts and apply the transform there.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.server.transforms import PromptsAsTools
+
+mcp = FastMCP("My Server")
+
+@mcp.prompt
+def analyze_code(code: str, language: str = "python") -> str:
+    """Analyze code for potential issues."""
+    return f"Analyze this {language} code:\n{code}"
+
+@mcp.prompt
+def explain_concept(concept: str) -> str:
+    """Explain a programming concept."""
+    return f"Explain: {concept}"
+
+# Add the transform - creates list_prompts and get_prompt tools
+mcp.add_transform(PromptsAsTools(mcp))
+```
+
+Clients now see the tools you defined directly, plus `list_prompts` and `get_prompt`.
+
+## Listing Prompts
+
+The `list_prompts` tool returns JSON with metadata for each prompt, including its arguments. When a prompt has several versions, only the highest version is listed.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+import json
+
+from fastmcp import Client
+
+async with Client(mcp) as client:
+    result = await client.call_tool("list_prompts", {})
+    prompts = json.loads(result.data)
+
+# [
+#   {
+#     "name": "analyze_code",
+#     "description": "Analyze code for potential issues.",
+#     "arguments": [
+#       {"name": "code", "description": null, "required": true},
+#       {"name": "language", "description": null, "required": false}
+#     ]
+#   },
+#   {
+#     "name": "explain_concept",
+#     "description": "Explain a programming concept.",
+#     "arguments": [
+#       {"name": "concept", "description": null, "required": true}
+#     ]
+#   }
+# ]
+```
+
+Each argument includes:
+
+* `name`: The argument name
+* `description`: Optional description from type hints or docstrings
+* `required`: Whether the argument must be provided
+
+## Getting Prompts
+
+The `get_prompt` tool accepts a prompt name and optional arguments dict. It returns the rendered prompt as JSON with a messages array.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+import json
+
+from fastmcp import Client
+
+async with Client(mcp) as client:
+    result = await client.call_tool(
+        "get_prompt",
+        {
+            "name": "analyze_code",
+            "arguments": {"code": "x = 1\nprint(x)", "language": "python"},
+        },
+    )
+    response = json.loads(result.data)
+
+# {
+#   "messages": [
+#     {
+#       "role": "user",
+#       "content": "Analyze this python code:\nx = 1\nprint(x)"
+#     }
+#   ]
+# }
+```
+
+If a prompt has no arguments, you can omit the `arguments` field or pass an empty dict:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import Client
+
+async with Client(mcp) as client:
+    result = await client.call_tool("get_prompt", {"name": "simple_prompt"})
+```
+
+## Message Format
+
+Rendered prompts return a messages array in prompt order. Each message includes:
+
+* `role`: The message role (`"user"` or `"assistant"`)
+* `content`: The message text as a string, or, for non-text content such as images or embedded resources, the MCP content object serialized as JSON
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

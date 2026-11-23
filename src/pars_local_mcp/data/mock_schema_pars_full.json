@@ -1,0 +1,4593 @@
+{
+  "source": "structure only; no values",
+  "tables": {
+    "bronze_abbreviations": [
+      {
+        "name": "definition",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "abbreviation",
+        "type": "VARCHAR"
+      }
+    ],
+    "bronze_corrections": [
+      {
+        "name": "word",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_\"\"1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_\"\"1_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_\"\"2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_\"\"2_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lowest_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "obs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_1\"\"",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_1\"\"",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_12",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "What should it be?",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_2 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_3 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_4 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_5 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_6 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_7 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_8 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_9_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Lev_10_rev1",
+        "type": "VARCHAR"
+      }
+    ],
+    "bronze_corrections_nnsa": [
+      {
+        "name": "word",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_\"\"1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_\"\"1_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_\"\"2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_\"\"2_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lowest_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "obs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_1\"\"",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_1\"\"",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_12",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "What should it be?",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_2 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_3 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_4 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_5 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_6 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_7 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_8 rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Level_9_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Lev_10_rev1",
+        "type": "VARCHAR"
+      }
+    ],
+    "bronze_ignore_list": [
+      {
+        "name": "word",
+        "type": "VARCHAR"
+      }
+    ],
+    "bronze_spae_data": [
+      {
+        "name": "PARSID",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Project_Name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "CUI_Data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "CPP_Status_Date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Period_Date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Parent_WBS",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "BWC_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "BWC_01_Desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "BWC_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "BWC_02_Desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "EOC",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "EV Method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_BCWS_Dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_BCWP_Dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_ACWP_Dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_ETC_Dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_BCWS_Hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_BCWP_Hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_ACWP_Hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_ETC_Hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_BCWS_FTE",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_BCWP_FTE",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_ACWP_FTE",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_ETC_FTE",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "CV_rpg",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "SV_rpg",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "BAC_rpg",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "CC_ID",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "CC_Description",
+        "type": "VARCHAR"
+      }
+    ],
+    "bronze_spae_data_nnsa": [
+      {
+        "name": "PARSID",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Project_Name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "CUI_Data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "CPP_Status_Date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Period_Date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Parent_WBS",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS Narratives",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "BWC_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "BWC_01_Desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "BWC_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "BWC_02_Desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "EOC",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "EV Method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_BCWS_Dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_BCWP_Dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_ACWP_Dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_ETC_Dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_BCWS_Hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_BCWP_Hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_ACWP_Hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_ETC_Hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_BCWS_FTE",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_BCWP_FTE",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_ACWP_FTE",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "INC_ETC_FTE",
+        "type": "VARCHAR"
+      }
+    ],
+    "bronze_stop_phrases": [
+      {
+        "name": "word",
+        "type": "VARCHAR"
+      }
+    ],
+    "bronze_wbs": [
+      {
+        "name": "PARSID",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "CPP_Status_Date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Parent_WBS",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "OBS",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "CAM",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "K_ref",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "IMP_ID",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Subproject_ID",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_External",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Exit_Criteria",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Narrative",
+        "type": "VARCHAR"
+      }
+    ],
+    "bronze_wbs_nnsa": [
+      {
+        "name": "PARSID",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "CPP_Status_Date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Parent_WBS",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "OBS",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "CAM",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "K_ref",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "IMP_ID",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Subproject_ID",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_External",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "Exit_Criteria",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "WBS_Narrative",
+        "type": "VARCHAR"
+      }
+    ],
+    "gold_concatenated_spae_data_mapped": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_narratives",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "temp_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_10",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_12",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title_1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      }
+    ],
+    "gold_concatenated_spae_data_mapped_nnsa": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_narratives",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "temp_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_10",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_12",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title_1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      }
+    ],
+    "gold_corrections": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lowest_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      }
+    ],
+    "gold_corrections_nnsa": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lowest_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_9",
+        "type": "VARCHAR"
+      }
+    ],
+    "gold_project_descriptions": [
+      {
+        "name": "parsid",
+        "type": "BIGINT"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      }
+    ],
+    "gold_project_descriptions_nnsa": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      }
+    ],
+    "gold_spae_data": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_narratives",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      }
+    ],
+    "gold_spae_data_mapped": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_narratives",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      }
+    ],
+    "gold_spae_data_mapped_nnsa": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_narratives",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      }
+    ],
+    "gold_spae_data_nnsa": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_narratives",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      }
+    ],
+    "gold_wbs": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      }
+    ],
+    "gold_wbs_nnsa": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_cleaned_concat_sample": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lowest_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "temp_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_10",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_cleaned_concat_sample_nnsa": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lowest_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "temp_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_10",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_cleaned_concat_spae": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cv_rpg",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "sv_rpg",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bac_rpg",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cc_id",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cc_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "temp_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_10",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_12",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_cleaned_concat_spae_nnsa": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_narratives",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "temp_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_10",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_12",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_concatenated_sample_data": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lowest_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "temp_level",
+        "type": "BIGINT"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_10",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_concatenated_sample_data_nnsa": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lowest_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "temp_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_10",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_concatenated_spae_data": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cv_rpg",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "sv_rpg",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bac_rpg",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cc_id",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cc_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "temp_level",
+        "type": "BIGINT"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_10",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_12",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_concatenated_spae_data_nnsa": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_narratives",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "temp_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_10",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_12",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_corrections": [
+      {
+        "name": "word",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_\"\"1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_\"\"1_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_\"\"2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_\"\"2_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lowest_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "obs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_1\"\"",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_1\"\"",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_12",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "what_should_it_be_",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_9_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lev_10_rev1",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_corrections_nnsa": [
+      {
+        "name": "word",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_1_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_2_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lowest_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "obs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_units",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "original_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_9",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_11",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_12",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "what_should_it_be_",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_9_rev1",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lev_10_rev1",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_project_descriptions": [
+      {
+        "name": "parsid",
+        "type": "BIGINT"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_project_descriptions_nnsa": [
+      {
+        "name": "parsid",
+        "type": "BIGINT"
+      },
+      {
+        "name": "project_status",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "nuclear_non_nuclear",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_description",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_sample_data": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lowest_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_sample_data_nnsa": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "lowest_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cleaned_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_2",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_3",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_4",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_5",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_6",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_7",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_8",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "level_9",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_spae_data": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cv_rpg",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "sv_rpg",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bac_rpg",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cc_id",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cc_description",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_spae_data_nnsa": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "program",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "project_name",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cui_data",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "cpp_status_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "period_date",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_narratives",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_level",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_01_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "bwc_02_desc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "eoc",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_type",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "ev_method",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_dollars",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_hours",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcws_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_bcwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_acwp_fte",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "inc_etc_fte",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_stop_words": [
+      {
+        "name": "word",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_wbs": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      }
+    ],
+    "silver_wbs_nnsa": [
+      {
+        "name": "parsid",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs_title",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "wbs",
+        "type": "VARCHAR"
+      },
+      {
+        "name": "parent_wbs",
+        "type": "VARCHAR"
+      }
+    ]
+  }
+}

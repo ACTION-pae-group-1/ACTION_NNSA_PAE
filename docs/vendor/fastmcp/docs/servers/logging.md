@@ -1,0 +1,101 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Client Logging
+
+> Send log messages back to MCP clients through the context.
+
+> [!TIP]
+>
+> This documentation covers **MCP client logging**—sending messages from your server to MCP clients. For standard server-side logging (e.g., writing to files, console), use `fastmcp.utilities.logging.get_logger()` or Python's built-in `logging` module.
+
+Server logging allows MCP tools to send debug, info, warning, and error messages back to the client. Unlike standard Python logging, MCP server logging sends messages directly to the client, making them visible in the client's interface or logs.
+
+## Basic Usage
+
+Use the context logging methods within any tool function:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP, Context
+
+mcp = FastMCP("LoggingDemo")
+
+@mcp.tool
+async def analyze_data(data: list[float], ctx: Context) -> dict:
+    """Analyze numerical data with comprehensive logging."""
+    await ctx.debug("Starting analysis of numerical data")
+    await ctx.info(f"Analyzing {len(data)} data points")
+
+    try:
+        if not data:
+            await ctx.warning("Empty data list provided")
+            return {"error": "Empty data list"}
+
+        result = sum(data) / len(data)
+        await ctx.info(f"Analysis complete, average: {result}")
+        return {"average": result, "count": len(data)}
+
+    except Exception as e:
+        await ctx.error(f"Analysis failed: {str(e)}")
+        raise
+```
+
+## Log Levels
+
+| Level | Use Case |
+| - | - |
+| `ctx.debug()` | Detailed execution information for diagnosing problems |
+| `ctx.info()` | General information about normal program execution |
+| `ctx.warning()` | Potentially harmful situations that don't prevent execution |
+| `ctx.error()` | Error events that might still allow the application to continue |
+
+## Structured Logging
+
+All logging methods accept an `extra` parameter for sending structured data to the client. This is useful for creating rich, queryable logs.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+@mcp.tool
+async def process_transaction(transaction_id: str, amount: float, ctx: Context):
+    await ctx.info(
+        f"Processing transaction {transaction_id}",
+        extra={
+            "transaction_id": transaction_id,
+            "amount": amount,
+            "currency": "USD"
+        }
+    )
+```
+
+## Minimum Level
+
+Messages below the minimum level are dropped before they reach the client. Set a server-wide default with `FastMCP(client_log_level=...)` or the `FASTMCP_CLIENT_LOG_LEVEL` [setting](https://gofastmcp.com/docs/more/settings.md). On handshake-era connections a client can override it for its session with the MCP `logging/setLevel` request; the modern protocol has no session to hold that level, so a modern client filters in its own log handler instead. With no minimum set, every level is sent.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+
+mcp = FastMCP("LoggingDemo", client_log_level="warning")
+```
+
+With this server, `ctx.debug()` and `ctx.info()` send nothing, while `ctx.warning()` and `ctx.error()` reach the client.
+
+## Server-Side Logs
+
+Messages sent to clients via `ctx.log()` and its convenience methods are also logged to the server's log at `DEBUG` level. Enable debug logging on the `fastmcp.server.context.to_client` logger to see these messages:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+import logging
+from fastmcp.utilities.logging import get_logger
+
+to_client_logger = get_logger(name="fastmcp.server.context.to_client")
+to_client_logger.setLevel(level=logging.DEBUG)
+```
+
+## Client Handling
+
+Log messages are sent to the client through the MCP protocol. How clients handle these messages depends on their implementation—development clients may display logs in real-time, production clients may store them for analysis, and integration clients may forward them to external logging systems.
+
+See [Client Logging](https://gofastmcp.com/docs/clients/logging.md) for details on how clients handle server log messages.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

@@ -1,0 +1,13 @@
+[
+  "get_project_info",
+  "get_wbs_by_level",
+  "get_wbs_hierarchy",
+  "get_wbs_lineage",
+  "get_leaf_nodes",
+  "get_wbs_project_descriptions",
+  "get_wbs_rows",
+  "get_wbs_run_status",
+  "list_projects",
+  "search_wbs",
+  "validate_wbs_inputs"
+]

@@ -1,0 +1,12 @@
+<section id="example" class="bleed" data-transition="fade">
+<img class="bleed-img" src="/_blob/ffbfb15eff39d167d79689bfc91821b2" alt="One estimate, end to end. The project: an office building renovation estimated in 2014 dollars, target year 2026 (which the agent must ask for), with scope evidence from PARS WBS on synthetic data. The analyst’s split: materials 60 percent, indexed by PPI ready-mix concrete (pc, annual); labor 40 percent, indexed by an ECI-like series (ci, quarterly, resolved from Q04). The analyst states the shares and periods; the server asserts they are honored. Running example: eval case 2, synthetic values.">
+<aside>The running example. Every slide in the story reuses it.
+
+It is eval case 2, “mixed-materials-and-labor”, from eval/bls/cases.py. The values come from the synthetic eval world (eval/bls/world.py), not BLS data, so every expected answer can be worked out by hand.
+
+The user leaves out the target year on purpose. A correct agent has to ask for it (the user then says 2026) rather than assume it.
+
+The labor series publishes quarterly only, like the real Employment Cost Index, so this case also exercises the server’s quarterly-to-annual alignment.
+
+Correction to docs/DIAGRAM_PROMPTS.md prompt 9: it used an illustrative 50/50 split. This version uses the 60/40 basket the eval reproduces exactly.</aside>
+</section>

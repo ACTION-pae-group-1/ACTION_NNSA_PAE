@@ -1,0 +1,34 @@
+{
+  "run_id": "pars-eval-1_v2_tools_20261119T171252Z",
+  "timestamp_utc": "2026-11-19T17:12:52.237117+00:00",
+  "git_sha": "694a59a-dirty",
+  "dataset": "pars-eval-1",
+  "prompt_version": "v2",
+  "mode": "tools",
+  "trials": 3,
+  "agent_endpoint": {
+    "provider": "asksage",
+    "host": "api.nnsa.asksage.ai",
+    "model": "gpt-5.4-gov"
+  },
+  "judge_endpoint": {
+    "provider": "asksage",
+    "host": "api.nnsa.asksage.ai",
+    "model": "gpt-5.4-gov"
+  },
+  "tracing": {
+    "backend": "jsonl",
+    "endpoint": "http://localhost:6006",
+    "jsonl_path": "C:\\Users\\stephen.colodner\\source\\repos\\mcp_group_1\\eval\\phoenix\\results\\pars-eval-1_v2_tools_20261119T171252Z.traces.jsonl",
+    "fallback_reason": "phoenix unreachable at http://localhost:6006"
+  },
+  "summary": {
+    "rows": 180,
+    "scored": 177,
+    "errors": 3,
+    "correctness_rate": 0.5311,
+    "scope_rate": 1.0,
+    "examples": 59,
+    "consistent_examples": 58
+  }
+}

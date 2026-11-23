@@ -1,0 +1,22 @@
+<section id="a-corrections">
+<div class="head">
+<p class="eyebrow">Appendix A6</p>
+<h2>What the diagrams correct in their prompts</h2>
+</div>
+<table class="tbl tbl-mid">
+<tr class="tbl-head"><th style="width:20%">Diagram</th><th style="width:80%">Change from docs/DIAGRAM_PROMPTS.md, and why</th></tr>
+<tr><td>1 · System</td><td>PARS isn’t read-only (9 pipeline tools are allowlisted); cost_intel_app runs in a host; Streamlit isn’t wired to the agent</td></tr>
+<tr><td>2 · Pipeline</td><td>Build reads manifest-pinned files and doesn’t download; the CLI’s rollback step added</td></tr>
+<tr><td>3 · BLS harness</td><td>An in-process MCP client, not stdio; the agent sees all 15 tools</td></tr>
+<tr><td>4 · PARS harness</td><td>The 100% verdict shown as reported, not verified: no run output is committed</td></tr>
+<tr><td>5 · Timeline</td><td>Milestone 4 amber; the recorded runs predate the current eval fingerprint</td></tr>
+<tr><td>6 · Two paths</td><td>No change</td></tr>
+<tr><td>7 · Factor</td><td>The reproducible eval basket (1.5700) replaces an illustrative 1.032 and a CPI-prefixed series</td></tr>
+<tr><td>8 · Demonstrable</td><td>Card 1 is the BLS server’s path; the basket demo computes on synthetic data</td></tr>
+<tr><td>9 · Example</td><td>Eval case 2 (60/40) replaces the illustrative 50/50 split</td></tr>
+</table>
+<div class="pn"></div>
+<aside>Each diagram also carries its correction as a footnote, so the standalone SVGs stay honest when copied into another deck.
+
+The nine SVGs are 1920×1080, inline CSS, real text, and follow the shared render spec in docs/DIAGRAM_PROMPTS.md (palette, 24px minimum, one arrow marker). Every text element also carries its font as an attribute, so the text renders correctly where a style block is stripped.</aside>
+</section>

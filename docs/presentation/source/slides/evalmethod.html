@@ -1,0 +1,42 @@
+<section id="evalmethod">
+<div class="head">
+<p class="eyebrow">Criterion 2 · Evaluation design</p>
+<h2>We tested the graders before we tested the models</h2>
+</div>
+<div class="grid2">
+<div class="col in" style="--i:0">
+<p>Each episode runs the real server against a deterministic snapshot, with a scripted user who discloses a fact only when asked. Every check is a function over the recorded tool calls and the final answer.</p>
+<table class="tbl-small">
+<tr class="tbl-head"><th style="width:28%">Dimension</th><th style="width:72%">Example check</th></tr>
+<tr><td>process</td><td>asked for the target year before calculating</td></tr>
+<tr><td>accuracy</td><td>factor equals an independent recomputation</td></tr>
+<tr><td>format</td><td>cites each series with its own weight</td></tr>
+<tr><td>guardrails</td><td>no index values typed in by the agent</td></tr>
+</table>
+</div>
+<div class="card card-accent in" style="--i:1">
+<p class="card-label">Self-test, no model or network</p>
+<h3>3 oracle agents must pass every check</h3>
+<h3>11 flawed agents must each fail exactly their target check</h3>
+<div class="chips">
+<p class="chip mono">assumes-target-year</p>
+<p class="chip mono">recalls-series-ids</p>
+<p class="chip mono">hides-alignment</p>
+<p class="chip mono">swaps-cited-weights</p>
+<p class="chip mono">skips-confirmation</p>
+<p class="chip mono">bare-number-answer</p>
+</div>
+<p class="chip chip-green">Re-run on a clean clone: SELFTEST PASSED</p>
+</div>
+</div>
+<div class="pn"></div>
+<aside>This is the method’s core claim: the rubric is validated adversarially, not by eye.
+
+Each flawed agent makes one known mistake. The self-test exits non-zero unless the oracles pass everything and each flawed agent fails exactly the checks listed for it in EXPECTED_FAILURES (eval/bls/runner.py). Six of the eleven are shown; the others are misattributes-quarters, changes-basket-after-confirmation, validates-after-calculating, ignores-stated-share and guesses-everything.
+
+Three cases: a known basket missing its target year; materials plus labor with quarterly-to-annual alignment; and a vague project where the basket has to be negotiated.
+
+Results are reported in four separate dimensions so a regression in one isn’t hidden by the others. The “format” dimension is the citation contract.
+
+Run it: uv run --locked poe eval-selftest. Diagram: Appendix A3.</aside>
+</section>

@@ -1,0 +1,26 @@
+{
+  "servers": {
+    "bls_server": {
+      "transport": "stdio",
+      "command": "${MCP_PYTHON}",
+      "args": ["-m", "bls_mcp.app"],
+      "allowed_tools": [
+        "get_bls_access_status",
+        "search_series",
+        "describe_series",
+        "get_series_hierarchy",
+        "get_series_data",
+        "get_cached_series_data",
+        "create_index_spec",
+        "validate_index_spec",
+        "save_index_spec",
+        "get_index_spec",
+        "calculate_index_spec",
+        "calculate_index_from_bls",
+        "calculate_component_escalation",
+        "calculate_labor_locality_factor",
+        "get_index_visualization"
+      ]
+    }
+  }
+}

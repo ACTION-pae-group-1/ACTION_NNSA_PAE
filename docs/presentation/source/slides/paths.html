@@ -1,0 +1,12 @@
+<section id="paths" class="bleed" data-transition="fade">
+<img class="bleed-img" src="/_blob/bdc8b87938b213c3b39111873533f782" alt="Two questions, two evidence paths. The analyst’s question: what will this project cost next year? Left path, understand the work: find the project in PARS, classify scope by WBS, trace lineage to work packages; output: defined scope and evidence links. Right path, measure price change: pick series (pc for materials, ci for labor), the analyst sets weights and periods, validate before calculating; output: a source-backed factor. A dashed proposed-basket line runs from the scope output to the weights step. Both outputs meet in one box: the analyst brings them together and owns the judgment; the server computes the math.">
+<aside>Two questions sit inside “what will this cost?”: what is the work, and how have its prices moved.
+
+Left path: the PARS server (src/pars_local_mcp) answers scope questions over synthetic WBS data: projects, hierarchy, lineage, leaf nodes.
+
+Right path: the BLS server (src/bls_mcp) answers price questions: catalog search, hierarchy checks, specification, validation, calculation.
+
+The dashed line is the analyst’s handoff. Scope informs which series and weights to choose, but no tool turns PARS scope into a BLS basket automatically today. That handoff is a future-work item (slide 20).
+
+No corrections were needed to prompt 6.</aside>
+</section>

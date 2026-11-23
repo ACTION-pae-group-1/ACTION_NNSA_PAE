@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<evaluation>
+  <description>PARS MCP WBS Hierarchy Evaluation Dataset (25 questions)</description>
+  <date>2026-11-11</date>
+  <category>WBS Discovery, Search, Navigation, and Complex Scenarios</category>
+
+  <!-- Discovery Section (4 questions) -->
+  <question id="1" category="discovery">
+    <text>What are all the projects available in the WBS database?</text>
+    <answer>A list of projects with their parsid, project_name, total_elements, and hierarchy_depth</answer>
+    <tools_expected>list_projects</tools_expected>
+    <difficulty>easy</difficulty>
+  </question>
+
+  <question id="2" category="discovery">
+    <text>How many projects are there and what are their total WBS elements?</text>
+    <answer>Multiple projects with element counts and hierarchy depths</answer>
+    <tools_expected>list_projects</tools_expected>
+    <difficulty>easy</difficulty>
+  </question>
+
+  <question id="3" category="discovery">
+    <text>Get information about project PROJ_001 including its size and depth.</text>
+    <answer>Project metadata showing total elements and hierarchy depth</answer>
+    <tools_expected>get_project_info</tools_expected>
+    <difficulty>easy</difficulty>
+  </question>
+
+  <question id="4" category="discovery">
+    <text>What is the total number of WBS elements in PROJ_001?</text>
+    <answer>Total count of WBS elements in the project</answer>
+    <tools_expected>get_project_info</tools_expected>
+    <difficulty>easy</difficulty>
+  </question>
+
+  <!-- Search Section (6 questions) -->
+  <question id="5" category="search">
+    <text>Search for all WBS elements in PROJ_001 that match the pattern '01.01%' (starting with 01.01).</text>
+    <answer>List of WBS elements with codes matching pattern 01.01%, showing title, level, parent, and leaf status</answer>
+    <tools_expected>search_wbs</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+  <question id="6" category="search">
+    <text>Find all WBS elements at level 3 in PROJ_001.</text>
+    <answer>All level 3 elements in the project with their codes and titles</answer>
+    <tools_expected>get_wbs_by_level</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+  <question id="7" category="search">
+    <text>Find all leaf nodes (terminal elements) in PROJ_001.</text>
+    <answer>All terminal WBS elements showing codes, titles, and levels</answer>
+    <tools_expected>get_leaf_nodes</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+  <question id="8" category="search">
+    <text>List all WBS elements at level 2 in PROJ_001.</text>
+    <answer>All level 2 elements with their codes and parent relationships</answer>
+    <tools_expected>get_wbs_by_level</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+  <question id="9" category="search">
+    <text>Find all WBS elements in PROJ_001 that are at levels 3 or higher (3-8).</text>
+    <answer>All elements from level 3 to 8 in the project</answer>
+    <tools_expected>search_wbs</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+  <question id="10" category="search">
+    <text>Search PROJ_001 for elements matching pattern '02%' (starting with 02).</text>
+    <answer>All elements with codes starting with 02</answer>
+    <tools_expected>search_wbs</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+  <!-- Navigation Section (8 questions) -->
+  <question id="11" category="navigation">
+    <text>Get the WBS hierarchy for element '01' in PROJ_001 (show it and its immediate children).</text>
+    <answer>The element 01 with its direct child elements and their hierarchy</answer>
+    <tools_expected>get_wbs_hierarchy</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+  <question id="12" category="navigation">
+    <text>Get the complete lineage (parent chain) for element '01.01.01' in PROJ_001.</text>
+    <answer>Full path from root to element 01.01.01 showing all ancestors</answer>
+    <tools_expected>get_wbs_lineage</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+  <question id="13" category="navigation">
+    <text>What is the parent element of WBS code '01.01.01' in PROJ_001?</text>
+    <answer>The parent element code and title for 01.01.01</answer>
+    <tools_expected>get_wbs_lineage</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+  <question id="14" category="navigation">
+    <text>How deep is the WBS hierarchy for PROJ_001?</text>
+    <answer>The maximum hierarchy depth for the project</answer>
+    <tools_expected>get_project_info</tools_expected>
+    <difficulty>easy</difficulty>
+  </question>
+
+  <question id="15" category="navigation">
+    <text>Get the lineage for the deepest element (highest level) in PROJ_001 if any exist.</text>
+    <answer>Complete parent chain for a deep-level element</answer>
+    <tools_expected>get_wbs_lineage, search_wbs</tools_expected>
+    <difficulty>hard</difficulty>
+  </question>
+
+  <question id="16" category="navigation">
+    <text>Find all leaf nodes at level 5 or higher in PROJ_001.</text>
+    <answer>Terminal elements (leaf nodes) at levels 5-8</answer>
+    <tools_expected>get_leaf_nodes, search_wbs</tools_expected>
+    <difficulty>hard</difficulty>
+  </question>
+
+  <question id="17" category="navigation">
+    <text>What is the direct parent of element '02.01' in PROJ_001?</text>
+    <answer>The parent code and title for element 02.01</answer>
+    <tools_expected>get_wbs_lineage</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+  <question id="18" category="navigation">
+    <text>Get all children (immediate descendants) of WBS element '01.02' in PROJ_001.</text>
+    <answer>The element 01.02 with all its direct child elements</answer>
+    <tools_expected>get_wbs_hierarchy</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+  <!-- Complex Scenarios (4 questions) -->
+  <question id="19" category="complex">
+    <text>Search PROJ_001 for all elements between levels 2 and 4 that match pattern '01%'.</text>
+    <answer>Elements with pattern 01% at levels 2-4</answer>
+    <tools_expected>search_wbs</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+  <question id="20" category="complex">
+    <text>Compare the hierarchies of two different projects by listing their total elements and depths.</text>
+    <answer>Metadata for multiple projects showing size and depth differences</answer>
+    <tools_expected>list_projects, get_project_info</tools_expected>
+    <difficulty>hard</difficulty>
+  </question>
+
+  <question id="21" category="complex">
+    <text>Find the longest path in PROJ_001 by getting the lineage of the deepest leaf node.</text>
+    <answer>Complete lineage from root to a maximum-depth leaf element</answer>
+    <tools_expected>get_leaf_nodes, get_wbs_lineage, search_wbs</tools_expected>
+    <difficulty>hard</difficulty>
+  </question>
+
+  <question id="22" category="complex">
+    <text>List all WBS elements at each level in PROJ_001 from root to bottom.</text>
+    <answer>Elements grouped or listed at each level from 1 to max depth</answer>
+    <tools_expected>get_wbs_by_level, get_project_info</tools_expected>
+    <difficulty>hard</difficulty>
+  </question>
+
+  <!-- Edge Cases (3 questions) -->
+  <question id="23" category="edge_cases">
+    <text>What elements have 'Design' or 'Analysis' in their title at level 3 in PROJ_001?</text>
+    <answer>Elements at level 3 containing design or analysis keywords</answer>
+    <tools_expected>search_wbs</tools_expected>
+    <difficulty>hard</difficulty>
+  </question>
+
+  <question id="24" category="edge_cases">
+    <text>Get all non-leaf nodes (elements with children) at level 2 in PROJ_001.</text>
+    <answer>Level 2 elements where leaf_node is false</answer>
+    <tools_expected>get_wbs_by_level</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+  <question id="25" category="edge_cases">
+    <text>What is the project structure of PROJ_001 starting from any level-1 element?</text>
+    <answer>Hierarchy starting from root showing structure and depth</answer>
+    <tools_expected>get_wbs_hierarchy, search_wbs</tools_expected>
+    <difficulty>medium</difficulty>
+  </question>
+
+</evaluation>

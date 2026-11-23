@@ -1,0 +1,132 @@
+minimum_pre_commit_version: "3.7.0"
+default_stages: [pre-commit]
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=5000"]
+        stages: [pre-commit, pre-push]
+      - id: check-case-conflict
+        stages: [pre-commit, pre-push]
+      - id: check-merge-conflict
+        stages: [pre-commit, pre-push]
+      - id: end-of-file-fixer
+        stages: [pre-commit, pre-push]
+        exclude: '^(?:docs/vendor/|src/bls_mcp/docs/sample_data/|src/bls_mcp/tests/fixtures/)'
+      - id: trailing-whitespace
+        stages: [pre-commit, pre-push]
+        exclude: '^(?:docs/vendor/|src/bls_mcp/docs/sample_data/|src/bls_mcp/tests/fixtures/)'
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  - repo: local
+    hooks:
+      - id: standard-file-checks
+        name: standard repository file checks
+        entry: uv run python scripts/precommit_checks.py
+        language: system
+        pass_filenames: true
+        types: [text]
+        exclude: '^(?:docs/vendor/|src/bls_mcp/docs/sample_data/|src/bls_mcp/tests/fixtures/)'
+
+      - id: detect-secrets
+        name: detect committed secrets
+        entry: uv run --with detect-secrets detect-secrets-hook --baseline .secrets.baseline
+        language: system
+        pass_filenames: true
+        exclude: '^(?:uv\.lock|.*\.sha256|data/manifest\.json|src/bls_mcp/data/manifest\.json|src/bls_mcp/docs/sample_data/[^/]*-input\.json|src/pars_local_mcp/data/PARS_MANIFEST\.json|ontology/docs/SEMANTIC_AUDIT_.*\.json|ontology/build/source_package_inventory\.json|docs/vendor/|src/pars_local_mcp/wbs_port/parity_golden\.json)$'
+
+      # Runs on every commit and push: pre-commit never passes deleted files to a
+      # hook, so a `files:` filter would skip a commit that only deletes a pinned
+      # file or .gitattributes. The check takes about a second.
+      - id: manifest-hashes
+        name: pinned data files match their manifests (sha256 of Git's bytes)
+        entry: uv run python scripts/check_manifest_hashes.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit, pre-push]
+
+      - id: ruff-fix-and-stage
+        name: ruff fix and re-stage
+        entry: uv run python scripts/ruff_fix_and_stage.py
+        language: system
+        types: [python]
+        stages: [pre-commit]
+
+      - id: ruff-check-verify
+        name: ruff lint (verify only)
+        entry: uv run python scripts/ruff_check_committed.py
+        language: system
+        pass_filenames: false
+        types: [python]
+        stages: [pre-push]
+        exclude: '^\.claude/'
+
+      - id: ruff-format-verify
+        name: ruff format verify
+        entry: uv run ruff format --check
+        language: system
+        types: [python]
+        stages: [pre-push]
+        exclude: '^\.claude/'
+
+      # Read-only quality gates. Run once per commit, not once per staged file.
+      - id: ruff-lint-gate
+        name: ruff lint gate
+        entry: uv run --locked poe lint
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+
+      - id: ruff-format-gate
+        name: ruff format gate
+        entry: uv run --locked poe format-check
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+
+      - id: mypy-gate
+        name: mypy typecheck gate
+        entry: uv run --locked poe typecheck
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+
+      - id: pyright-eval-gate
+        name: pyright BLS eval references and typing
+        entry: uv run --locked poe pyright-check
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+
+      - id: pytest-fast
+        name: pytest fast regression suite (changed + companions + affected)
+        entry: uv run python scripts/pytest_smart_runner.py
+        language: system
+        pass_filenames: false
+        types: [python]
+        stages: [pre-commit]
+        exclude: '^(?:\.venv/|__pycache__|\.pytest_cache)'
+
+      - id: pytest-full
+        name: pytest full suite
+        entry: uv run python -m pytest -p no:phoenix --maxfail=1 --disable-warnings
+        language: system
+        pass_filenames: false
+        types: [python]
+        stages: [manual]
+        exclude: '^(?:\.venv/|__pycache__|\.pytest_cache)'
+
+      - id: tdd-companion-gate
+        name: TDD Companion Gate (production code must have matching test)
+        entry: uv run python .claude/hooks/tdd_companion_gate.py
+        language: system
+        stages: [pre-commit]
+        pass_filenames: false
+        require_serial: true

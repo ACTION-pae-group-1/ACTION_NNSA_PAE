@@ -1,0 +1,111 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# filesystem_discovery
+
+# `fastmcp.server.providers.filesystem_discovery`
+
+File discovery and module import utilities for filesystem-based routing.
+
+This module provides functions to:
+
+1. Discover Python files in a directory tree
+2. Import modules (as packages if **init**.py exists, else directly)
+3. Extract decorated components (Tool, Resource, Prompt objects) from imported modules
+
+## Functions
+
+### `discover_files` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/providers/filesystem\_discovery.py#L35](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/providers/filesystem_discovery.py#L35)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+discover_files(root: Path) -> list[Path]
+```
+
+Recursively discover all Python files under a directory.
+
+Excludes **init**.py files (they're for package structure, not components).
+
+**Args:**
+
+* `root`: Root directory to scan.
+
+**Returns:**
+
+* List of .py file paths, sorted for deterministic order.
+
+### `import_module_from_file` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/providers/filesystem\_discovery.py#L142](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/providers/filesystem_discovery.py#L142)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+import_module_from_file(file_path: Path, provider_root: Path | None = None) -> ModuleType
+```
+
+Import a Python file as a module.
+
+If the file is part of a package (directory has **init**.py), imports
+it as a proper package member (relative imports work). Otherwise,
+imports directly using spec\_from\_file\_location.
+
+sys.path is modified only for the duration of the import and restored
+immediately after, so no permanent pollution occurs.
+
+**Args:**
+
+* `file_path`: Path to the Python file.
+* `provider_root`: The provider's root directory. Prevents package root
+  discovery from walking above this boundary into ancestor packages.
+
+**Returns:**
+
+* The imported module.
+
+**Raises:**
+
+* `ImportError`: If the module cannot be imported.
+
+### `extract_components` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/providers/filesystem\_discovery.py#L290](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/providers/filesystem_discovery.py#L290)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+extract_components(module: ModuleType) -> list[FastMCPComponent]
+```
+
+Extract all MCP components from a module.
+
+Scans all module attributes for instances of Tool, Resource,
+ResourceTemplate, or Prompt objects created by standalone decorators,
+or functions decorated with @tool/@resource/@prompt that have **fastmcp** metadata.
+
+**Args:**
+
+* `module`: The imported module to scan.
+
+**Returns:**
+
+* List of component objects (Tool, Resource, ResourceTemplate, Prompt).
+
+### `discover_and_import` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/providers/filesystem\_discovery.py#L410](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/providers/filesystem_discovery.py#L410)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+discover_and_import(root: Path) -> DiscoveryResult
+```
+
+Discover files, import modules, and extract components.
+
+This is the main entry point for filesystem-based discovery.
+
+**Args:**
+
+* `root`: Root directory to scan.
+
+**Returns:**
+
+* DiscoveryResult with components and any failed files.
+
+## Classes
+
+### `DiscoveryResult` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/providers/filesystem\_discovery.py#L27](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/providers/filesystem_discovery.py#L27)</sup>
+
+Result of filesystem discovery.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

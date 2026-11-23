@@ -1,0 +1,147 @@
+{
+  "database": "src/cost_intel_app/demo_assets/caef_stadium/stadium_pars.duckdb",
+  "database_sha256_before": "483175113e148d68d8f66609d5d30294d8ada80b9e30e5dbb41a968b6be3336f",
+  "projects": {
+    "5401": {
+      "discovered_via_mcp": true,
+      "mcp_calls": [
+        {
+          "tool": "get_wbs_by_level",
+          "level": 1,
+          "outcome": "ok",
+          "elements": 7
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 2,
+          "outcome": "ok",
+          "elements": 30
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 3,
+          "outcome": "ok",
+          "elements": 89
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 4,
+          "outcome": "ok",
+          "elements": 0
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 5,
+          "outcome": "ok",
+          "elements": 0
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 6,
+          "outcome": "ok",
+          "elements": 0
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 7,
+          "outcome": "ok",
+          "elements": 0
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 8,
+          "outcome": "ok",
+          "elements": 0
+        }
+      ],
+      "state": "loaded",
+      "coverage": "PARS MCP retrieval, packaged stadium CAEF model release: 119 of 119 WBS elements classified",
+      "classified_rows": 119,
+      "db_elements_level_ge_2": 119,
+      "all_codes_classified": true,
+      "all_rows_carry_project_id": true,
+      "structure_fields_present": true,
+      "level_2_values": [
+        "total estimated cost"
+      ]
+    },
+    "5402": {
+      "discovered_via_mcp": true,
+      "mcp_calls": [
+        {
+          "tool": "get_wbs_by_level",
+          "level": 1,
+          "outcome": "ok",
+          "elements": 7
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 2,
+          "outcome": "ok",
+          "elements": 25
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 3,
+          "outcome": "ok",
+          "elements": 74
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 4,
+          "outcome": "ok",
+          "elements": 0
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 5,
+          "outcome": "ok",
+          "elements": 0
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 6,
+          "outcome": "ok",
+          "elements": 0
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 7,
+          "outcome": "ok",
+          "elements": 0
+        },
+        {
+          "tool": "get_wbs_by_level",
+          "level": 8,
+          "outcome": "ok",
+          "elements": 0
+        }
+      ],
+      "state": "loaded",
+      "coverage": "PARS MCP retrieval, packaged stadium CAEF model release: 99 of 99 WBS elements classified",
+      "classified_rows": 99,
+      "db_elements_level_ge_2": 99,
+      "all_codes_classified": true,
+      "all_rows_carry_project_id": true,
+      "structure_fields_present": true,
+      "level_2_values": [
+        "total estimated cost"
+      ]
+    }
+  },
+  "tool_inventory": 16,
+  "discovery": {
+    "tool": "list_projects",
+    "outcome": "ok",
+    "projects_listed": {
+      "5401": true,
+      "5402": true
+    }
+  },
+  "database_sha256_after": "483175113e148d68d8f66609d5d30294d8ada80b9e30e5dbb41a968b6be3336f",
+  "database_unchanged": true,
+  "protected_pars_database_unchanged": true,
+  "protected_pars_database_sha256": "29502b9e7f125a950b79403c3f08eee20b9bc6d6a65b5261817c8facc8fbe965",
+  "inference_path_reads_crosswalk_or_labels": false,
+  "evidence_category": "newly executed; live PARS MCP stdio via launcher; model-driven predictions; not Phoenix-recorded; not browser-verified"
+}

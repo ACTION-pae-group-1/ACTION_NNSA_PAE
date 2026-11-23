@@ -1,0 +1,76 @@
+{
+  "dataset": "pars-eval-gap-agent",
+  "version": "1",
+  "description": "Tool-call execution through a LOCAL OLLAMA agent (gemma4:12b-mtp) over the 16 PARS MCP tools on the isolated post-incident snapshot copy. Checks are deterministic: the expected tools were called in order, the required arguments were passed, the chained run_id matched, and no tool returned an error where success was expected. Answer quality is not judged, and no LLM judge is used. Training arguments are fixed and bounded in the queries.",
+  "cases": [
+    {
+      "id": "A-01", "expect_tools": ["list_projects"], "expect_success": true,
+      "query": "List all projects in the PARS database. Use the list_projects tool.",
+      "required_args": {}
+    },
+    {
+      "id": "A-02", "expect_tools": ["search_wbs"], "expect_success": true,
+      "query": "Search the WBS elements of project proj_001 whose WBS code matches the pattern 01.01.01% . Use the search_wbs tool with project_id proj_001 and wbs_pattern 01.01.01%.",
+      "required_args": {"search_wbs": {"project_id": "proj_001"}}
+    },
+    {
+      "id": "A-03", "expect_tools": ["get_wbs_hierarchy"], "expect_success": true,
+      "query": "Get the hierarchy of WBS code 01.01 in project proj_001. Use the get_wbs_hierarchy tool.",
+      "required_args": {"get_wbs_hierarchy": {"project_id": "proj_001", "wbs_code": "01.01"}}
+    },
+    {
+      "id": "A-04", "expect_tools": ["get_wbs_lineage"], "expect_success": true,
+      "query": "Get the full lineage from WBS code 01.01.01.01.01.01.01 up to the root in project proj_001. Use the get_wbs_lineage tool.",
+      "required_args": {"get_wbs_lineage": {"project_id": "proj_001", "wbs_code": "01.01.01.01.01.01.01"}}
+    },
+    {
+      "id": "A-05", "expect_tools": ["get_project_info"], "expect_success": true,
+      "query": "Get the project information for proj_001. Use the get_project_info tool.",
+      "required_args": {"get_project_info": {"project_id": "proj_001"}}
+    },
+    {
+      "id": "A-06", "expect_tools": ["get_leaf_nodes"], "expect_success": true,
+      "query": "List all leaf nodes of project proj_002. Use the get_leaf_nodes tool.",
+      "required_args": {"get_leaf_nodes": {"project_id": "proj_002"}}
+    },
+    {
+      "id": "A-07", "expect_tools": ["get_wbs_by_level"], "expect_success": true,
+      "query": "List the WBS elements at level 2 of project proj_001. Use the get_wbs_by_level tool.",
+      "required_args": {"get_wbs_by_level": {"project_id": "proj_001", "level": "2"}}
+    },
+    {
+      "id": "A-08", "expect_tools": ["validate_wbs_inputs"], "expect_success": true,
+      "query": "Check the configured WBS source against the input contract. Use the validate_wbs_inputs tool.",
+      "required_args": {}
+    },
+    {
+      "id": "A-09", "expect_tools": ["get_wbs_project_descriptions"], "expect_success": true,
+      "query": "Show 3 project descriptions from the WBS source. Use the get_wbs_project_descriptions tool with limit 3.",
+      "required_args": {"get_wbs_project_descriptions": {"limit": "3"}}
+    },
+    {
+      "id": "A-10", "expect_tools": ["get_wbs_rows"], "expect_success": true,
+      "query": "Show 3 WBS rows from the WBS source. Use the get_wbs_rows tool with limit 3.",
+      "required_args": {"get_wbs_rows": {"limit": "3"}}
+    },
+    {
+      "id": "A-11", "expect_tools": ["get_wbs_run_status"], "expect_success": false,
+      "query": "Check the status of WBS run r000000000000. Use the get_wbs_run_status tool. If the run does not exist, report that.",
+      "required_args": {"get_wbs_run_status": {"run_id": "r000000000000"}}
+    },
+    {
+      "id": "A-12", "expect_tools": ["clean_wbs_data", "tune_and_train_wbs", "predict_wbs", "write_back_wbs", "get_wbs_run_status"],
+      "expect_success": true, "chain_run_id": true,
+      "query": "Run the WBS chain in this order. (1) Call clean_wbs_data with no arguments and note the run_id it returns. (2) Call tune_and_train_wbs with that run_id, n_iter 2, cv_folds 2, n_jobs 1, search_seed 7, split_seed 7. (3) Call predict_wbs with that run_id and model_variant untuned. (4) Call write_back_wbs with that run_id. (5) Call get_wbs_run_status with that run_id. Use the same run_id in every step.",
+      "required_args": {
+        "tune_and_train_wbs": {"n_iter": "2", "cv_folds": "2", "n_jobs": "1", "search_seed": "7", "split_seed": "7"},
+        "predict_wbs": {"model_variant": "untuned"}
+      }
+    },
+    {
+      "id": "A-13", "expect_tools": ["run_wbs_pipeline"], "expect_success": true,
+      "query": "Run the full WBS pipeline once with run_wbs_pipeline using exactly these arguments: n_iter 2, cv_folds 2, n_jobs 1, search_seed 7, split_seed 7, model_variant untuned. Do not pass a run_id.",
+      "required_args": {"run_wbs_pipeline": {"n_iter": "2", "cv_folds": "2", "n_jobs": "1", "search_seed": "7", "split_seed": "7", "model_variant": "untuned"}}
+    }
+  ]
+}

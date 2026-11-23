@@ -1,0 +1,148 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# http
+
+# `fastmcp.server.http`
+
+## Functions
+
+### `set_http_request` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/http.py#L386](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/http.py#L386)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+set_http_request(request: Request) -> Generator[Request, None, None]
+```
+
+### `create_base_app` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/http.py#L419](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/http.py#L419)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+create_base_app(routes: list[BaseRoute], middleware: list[Middleware], debug: bool = False, lifespan: Callable | None = None) -> StarletteWithLifespan
+```
+
+Create a base Starlette app with common middleware and routes.
+
+**Args:**
+
+* `routes`: List of routes to include in the app
+* `middleware`: List of middleware to include in the app
+* `debug`: Whether to enable debug mode
+* `lifespan`: Optional lifespan manager for the app
+
+**Returns:**
+
+* A Starlette application
+
+### `create_sse_app` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/http.py#L469](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/http.py#L469)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+create_sse_app(server: FastMCP[LifespanResultT], message_path: str, sse_path: str, auth: AuthProvider | None = None, debug: bool = False, routes: list[BaseRoute] | None = None, middleware: list[Middleware] | None = None, host_origin_protection: HostOriginProtection = False, allowed_hosts: Sequence[str] | None = None, allowed_origins: Sequence[str] | None = None) -> StarletteWithLifespan
+```
+
+Return an instance of the SSE server app.
+
+**Args:**
+
+* `server`: The FastMCP server instance
+* `message_path`: Path for SSE messages
+* `sse_path`: Path for SSE connections
+* `auth`: Optional authentication provider (AuthProvider)
+* `debug`: Whether to enable debug mode
+* `routes`: Optional list of custom routes
+* `middleware`: Optional list of middleware
+* `host_origin_protection`: Whether to validate Host and Origin headers
+  before requests reach the SSE connection and message endpoints.
+  Defaults to False for compatibility. "auto" protects
+  localhost-bound servers and explicit host/origin allowlists.
+* `allowed_hosts`: Additional hostnames that may appear in the Host header.
+* `allowed_origins`: Additional browser origins trusted by the request guard.
+  Configure CORS separately when browser JavaScript must read
+  cross-origin responses.
+
+Returns:
+A Starlette application with RequestContextMiddleware
+
+### `create_streamable_http_app` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/http.py#L624](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/http.py#L624)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+create_streamable_http_app(server: FastMCP[LifespanResultT], streamable_http_path: str, event_store: EventStore | None = None, retry_interval: int | None = None, auth: AuthProvider | None = None, json_response: bool = False, stateless_http: bool = False, debug: bool = False, routes: list[BaseRoute] | None = None, middleware: list[Middleware] | None = None, host_origin_protection: HostOriginProtection = False, allowed_hosts: Sequence[str] | None = None, allowed_origins: Sequence[str] | None = None, session_idle_timeout: float | Literal['auto'] | None = 'auto') -> StarletteWithLifespan
+```
+
+Return an instance of the StreamableHTTP server app.
+
+**Args:**
+
+* `server`: The FastMCP server instance
+* `streamable_http_path`: Path for StreamableHTTP connections
+* `event_store`: Optional event store for SSE polling/resumability
+* `retry_interval`: Optional retry interval in milliseconds for SSE polling.
+  Controls how quickly clients should reconnect after server-initiated
+  disconnections. Requires event\_store to be set. Defaults to SDK default.
+* `auth`: Optional authentication provider (AuthProvider)
+* `json_response`: Whether to use JSON response format
+* `stateless_http`: Whether to use stateless mode (new transport per request)
+* `debug`: Whether to enable debug mode
+* `routes`: Optional list of custom routes
+* `middleware`: Optional list of middleware
+* `host_origin_protection`: Whether to validate Host and Origin headers
+  before requests reach the MCP endpoint. Defaults to False for
+  compatibility. "auto" protects localhost-bound servers and explicit
+  host/origin allowlists.
+* `allowed_hosts`: Additional hostnames that may appear in the Host header.
+* `allowed_origins`: Additional browser origins trusted by the request guard.
+  Configure CORS separately when browser JavaScript must read
+  cross-origin responses.
+* `session_idle_timeout`: Maximum time in seconds a session may remain idle
+  before it is terminated. The deadline is pushed forward on every
+  request. Defaults to "auto", which uses the MCP SDK's default
+  (1800 seconds as of SDK 2.2). When None, sessions never expire
+  from inactivity. Only applies to stateful HTTP sessions.
+
+**Returns:**
+
+* A Starlette application with StreamableHTTP support
+
+## Classes
+
+### `FastMCPStreamableHTTPSessionManager` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/http.py#L44](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/http.py#L44)</sup>
+
+Session manager that scopes resumability storage per transport session.
+
+**Methods:**
+
+#### `event_store` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/http.py#L72](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/http.py#L72)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+event_store(self) -> EventStore | None
+```
+
+#### `event_store` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/http.py#L80](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/http.py#L80)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+event_store(self, event_store: EventStore | None) -> None
+```
+
+### `StreamableHTTPASGIApp` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/http.py#L84](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/http.py#L84)</sup>
+
+ASGI application wrapper for Streamable HTTP server transport.
+
+### `HostOriginGuardMiddleware` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/http.py#L231](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/http.py#L231)</sup>
+
+Validate Host and Origin headers before requests reach MCP sessions.
+
+### `StarletteWithLifespan` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/http.py#L379](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/http.py#L379)</sup>
+
+**Methods:**
+
+#### `lifespan` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/http.py#L381](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/http.py#L381)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+lifespan(self) -> Lifespan[Starlette]
+```
+
+### `RequestContextMiddleware` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/http.py#L394](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/http.py#L394)</sup>
+
+Middleware that stores each request in a ContextVar and sets transport type.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

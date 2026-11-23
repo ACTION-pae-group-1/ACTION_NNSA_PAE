@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "internal": {
+      "transport": "streamable_http",
+      "url": "https://mcp.internal.example/mcp",
+      "headers": {"Authorization": "Bearer ${MCP_INTERNAL_TOKEN}"},
+      "allowed_tools": ["search_records"]
+    }
+  }
+}

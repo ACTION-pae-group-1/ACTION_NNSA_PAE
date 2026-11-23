@@ -1,0 +1,27 @@
+{
+  "v": 5,
+  "createdOnFiles": {"v": 1, "at": "2026-11-17T10:58:00Z"},
+  "lists": "css",
+  "format": {"v": 1, "shared": ["project/deck.css"]},
+  "title": "mcp_group_1 — Source-backed cost escalation, built for agents",
+  "cover": "cover",
+  "order": [
+    "cover", "problem", "example", "paths", "factor", "today", "demo",
+    "criteria", "readability", "reliability", "evalmethod", "results",
+    "mcpdesign", "workflow", "innovation", "mission", "lessons",
+    "fix-first", "next-eval", "next-design", "close",
+    "a-system", "a-pipeline", "a-harness-bls", "a-harness-pars", "a-timeline",
+    "a-corrections"
+  ],
+  "sections": {
+    "s1": {"description": "The story: one estimate, from a vague question to a cited factor", "start": "cover"},
+    "s2": {"description": "The evidence, mapped to each judging criterion", "start": "criteria"},
+    "s3": {"description": "Future work that protects and raises the score", "start": "fix-first"},
+    "s4": {"description": "Appendix: architecture, pipeline and evaluation diagrams, and what was corrected", "start": "a-system"}
+  },
+  "faces": {
+    "public-sans": {"family": "Public Sans", "href": "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap"},
+    "jetbrains-mono": {"family": "JetBrains Mono", "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"}
+  },
+  "designSystems": []
+}

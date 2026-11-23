@@ -1,0 +1,456 @@
+{
+  "$defs": {
+    "AdjustmentStep": {
+      "additionalProperties": false,
+      "properties": {
+        "component_id": {
+          "minLength": 1,
+          "title": "Component Id",
+          "type": "string"
+        },
+        "display_order": {
+          "minimum": 0,
+          "title": "Display Order",
+          "type": "integer"
+        },
+        "selected_year_normalized_factor": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+          "title": "Selected Year Normalized Factor",
+          "type": "string"
+        },
+        "index_level_delta": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+          "title": "Index Level Delta",
+          "type": "string"
+        },
+        "adjustment_contribution": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+          "title": "Adjustment Contribution",
+          "type": "string"
+        },
+        "running_adjustment_factor": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+          "title": "Running Adjustment Factor",
+          "type": "string"
+        }
+      },
+      "required": [
+        "component_id",
+        "display_order",
+        "selected_year_normalized_factor",
+        "index_level_delta",
+        "adjustment_contribution",
+        "running_adjustment_factor"
+      ],
+      "title": "AdjustmentStep",
+      "type": "object"
+    },
+    "BaseYearAdjustment": {
+      "additionalProperties": false,
+      "properties": {
+        "source_year": {
+          "minimum": 1,
+          "title": "Source Year",
+          "type": "integer"
+        },
+        "base_year": {
+          "minimum": 1,
+          "title": "Base Year",
+          "type": "integer"
+        },
+        "source_composite_factor": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+          "title": "Source Composite Factor",
+          "type": "string"
+        },
+        "adjustment_factor": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+          "title": "Adjustment Factor",
+          "type": "string"
+        },
+        "adjustment_percent": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+          "title": "Adjustment Percent",
+          "type": "string"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/$defs/AdjustmentStep"
+          },
+          "title": "Steps",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_year",
+        "base_year",
+        "source_composite_factor",
+        "adjustment_factor",
+        "adjustment_percent",
+        "steps"
+      ],
+      "title": "BaseYearAdjustment",
+      "type": "object"
+    },
+    "ComponentDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "component_id": {
+          "minLength": 1,
+          "title": "Component Id",
+          "type": "string"
+        },
+        "display_order": {
+          "minimum": 0,
+          "title": "Display Order",
+          "type": "integer"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "series_id": {
+          "minLength": 1,
+          "title": "Series Id",
+          "type": "string"
+        },
+        "allocation_weight": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+          "title": "Allocation Weight",
+          "type": "string"
+        },
+        "raw_unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Unit"
+        },
+        "raw_reference_basis": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Reference Basis"
+        },
+        "color_hex": {
+          "anyOf": [
+            {
+              "pattern": "^#[0-9A-Fa-f]{6}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Color Hex"
+        }
+      },
+      "required": [
+        "component_id",
+        "display_order",
+        "name",
+        "description",
+        "series_id",
+        "allocation_weight"
+      ],
+      "title": "ComponentDefinition",
+      "type": "object"
+    },
+    "ComponentPoint": {
+      "additionalProperties": false,
+      "properties": {
+        "period": {
+          "minLength": 1,
+          "title": "Period",
+          "type": "string"
+        },
+        "year": {
+          "minimum": 1,
+          "title": "Year",
+          "type": "integer"
+        },
+        "period_kind": {
+          "enum": [
+            "annual_average",
+            "quarter",
+            "month"
+          ],
+          "title": "Period Kind",
+          "type": "string"
+        },
+        "component_id": {
+          "minLength": 1,
+          "title": "Component Id",
+          "type": "string"
+        },
+        "raw_ppi_value": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+          "title": "Raw Ppi Value",
+          "type": "string"
+        },
+        "normalized_factor": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+          "title": "Normalized Factor",
+          "type": "string"
+        },
+        "weighted_level": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+          "title": "Weighted Level",
+          "type": "string"
+        },
+        "observation_id": {
+          "minLength": 1,
+          "title": "Observation Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "period",
+        "year",
+        "period_kind",
+        "component_id",
+        "raw_ppi_value",
+        "normalized_factor",
+        "weighted_level",
+        "observation_id"
+      ],
+      "title": "ComponentPoint",
+      "type": "object"
+    },
+    "CompositePoint": {
+      "additionalProperties": false,
+      "properties": {
+        "period": {
+          "minLength": 1,
+          "title": "Period",
+          "type": "string"
+        },
+        "year": {
+          "minimum": 1,
+          "title": "Year",
+          "type": "integer"
+        },
+        "period_kind": {
+          "enum": [
+            "annual_average",
+            "quarter",
+            "month"
+          ],
+          "title": "Period Kind",
+          "type": "string"
+        },
+        "composite_factor": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+          "title": "Composite Factor",
+          "type": "string"
+        }
+      },
+      "required": [
+        "period",
+        "year",
+        "period_kind",
+        "composite_factor"
+      ],
+      "title": "CompositePoint",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "info",
+            "warning",
+            "error"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "message": {
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "severity",
+        "message"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "IndexIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "index_id": {
+          "minLength": 1,
+          "title": "Index Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "spec_id": {
+          "minLength": 1,
+          "title": "Spec Id",
+          "type": "string"
+        },
+        "spec_revision": {
+          "minimum": 0,
+          "title": "Spec Revision",
+          "type": "integer"
+        },
+        "snapshot_id": {
+          "minLength": 1,
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "methodology_version": {
+          "minLength": 1,
+          "title": "Methodology Version",
+          "type": "string"
+        },
+        "frequency": {
+          "enum": [
+            "annual",
+            "quarterly",
+            "monthly"
+          ],
+          "title": "Frequency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "index_id",
+        "name",
+        "spec_id",
+        "spec_revision",
+        "snapshot_id",
+        "methodology_version",
+        "frequency"
+      ],
+      "title": "IndexIdentity",
+      "type": "object"
+    },
+    "NormalizationBasis": {
+      "additionalProperties": false,
+      "properties": {
+        "base_year": {
+          "minimum": 1,
+          "title": "Base Year",
+          "type": "integer"
+        },
+        "base_factor": {
+          "default": "1.0",
+          "pattern": "^-?\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+          "title": "Base Factor",
+          "type": "string"
+        },
+        "method": {
+          "const": "base_year_annual_average",
+          "title": "Method",
+          "type": "string"
+        }
+      },
+      "required": [
+        "base_year",
+        "method"
+      ],
+      "title": "NormalizationBasis",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Authoritative, long-form UI handoff; schema_version 1.0.\n\nTolerances are validator configuration, intentionally not fields in the\nwire format. Subclasses can override them for a documented methodology.",
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "index_identity": {
+      "$ref": "#/$defs/IndexIdentity"
+    },
+    "normalization": {
+      "$ref": "#/$defs/NormalizationBasis"
+    },
+    "components": {
+      "items": {
+        "$ref": "#/$defs/ComponentDefinition"
+      },
+      "minItems": 1,
+      "title": "Components",
+      "type": "array"
+    },
+    "component_points": {
+      "items": {
+        "$ref": "#/$defs/ComponentPoint"
+      },
+      "minItems": 1,
+      "title": "Component Points",
+      "type": "array"
+    },
+    "composite_points": {
+      "items": {
+        "$ref": "#/$defs/CompositePoint"
+      },
+      "minItems": 1,
+      "title": "Composite Points",
+      "type": "array"
+    },
+    "base_year_adjustment": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/BaseYearAdjustment"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "warnings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "index_identity",
+    "normalization",
+    "components",
+    "component_points",
+    "composite_points"
+  ],
+  "title": "IndexVisualizationData",
+  "type": "object"
+}

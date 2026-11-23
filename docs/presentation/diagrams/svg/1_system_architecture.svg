@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Three MCP servers, one portable client — system architecture of mcp_group_1</title>
+<style>
+text { font-family: 'Segoe UI', Arial, sans-serif; }
+</style>
+<defs>
+<marker id="ah" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="22" markerHeight="22" orient="auto-start-reverse" markerUnits="userSpaceOnUse" ><path d="M 0 0 L 12 6 L 0 12 z" fill="#2563EB"/></marker>
+<filter id="sh" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.08"/></filter>
+</defs>
+<rect x="0" y="0" width="1920" height="1080" fill="#F7F8FA"/>
+<text x="80" y="112" font-size="64" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Three MCP servers, one portable client</text>
+<rect x="60" y="380" width="380" height="290" rx="48" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="250.0" y="450" font-size="32" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">LLM endpoints</text>
+<rect x="87.0" y="478" width="326.0" height="46" rx="23.0" fill="#EFF4FF" stroke="#EFF4FF" stroke-width="1.5"/>
+<text x="250.0" y="510.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">Ask Sage (-gov models)</text>
+<rect x="152.0" y="540" width="196.0" height="46" rx="23.0" fill="#EFF4FF" stroke="#EFF4FF" stroke-width="1.5"/>
+<text x="250.0" y="572.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">Local Ollama</text>
+<text x="250" y="628.0" font-size="24" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">approved hosts only;</text>
+<text x="250" y="659.68" font-size="24" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">others refused at load</text>
+<rect x="620" y="400" width="500" height="250" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="3" filter="url(#sh)"/>
+<text x="870.0" y="470" font-size="34" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">portable_llm_mcp</text>
+<text x="870.0" y="516.8" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">MCP client + agent library</text>
+<text x="870.0" y="551.12" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">MCPAgent · MCPHub · allowlists</text>
+<text x="870.0" y="585.4399999999999" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">shared by the agent and both evals</text>
+<path d="M 440 525 L 620 525" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="457.0" y="480.3" width="146.0" height="33.800000000000004" rx="6" fill="#F7F8FA" stroke="none"/>
+<text x="530" y="505" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">tool calls</text>
+<rect x="650" y="175" width="420" height="120" rx="60" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="860.0" y="227" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">BLS public API</text>
+<text x="860.0" y="269.0" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">optional live path</text>
+<path d="M 1070 235 L 1260 255" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)" stroke-dasharray="10 8"/>
+<rect x="1124.5" y="203.3" width="81.0" height="33.800000000000004" rx="6" fill="#F7F8FA" stroke="none"/>
+<text x="1165" y="228" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">HTTPS</text>
+<rect x="1260" y="165" width="610" height="235" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1288" y="215.8" font-size="34" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">bls_mcp</text>
+<text x="1288" y="262.6" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">BLS cost-escalation MCP server</text>
+<rect x="1288" y="282" width="144.0" height="46" rx="23.0" fill="#EFF4FF" stroke="#EFF4FF" stroke-width="1.5"/>
+<text x="1360.0" y="314.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">15 tools</text>
+<rect x="1446.0" y="282" width="352.0" height="46" rx="23.0" fill="#EFF4FF" stroke="#EFF4FF" stroke-width="1.5"/>
+<text x="1622.0" y="314.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">DuckDB snapshot registry</text>
+<rect x="1288" y="340" width="443.0" height="46" rx="23.0" fill="#EFF4FF" stroke="#EFF4FF" stroke-width="1.5"/>
+<text x="1509.5" y="372.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">live API: fixed origin, env key</text>
+<rect x="1260" y="440" width="610" height="235" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1288" y="490.8" font-size="34" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">pars_local_mcp</text>
+<text x="1288" y="537.6" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">PARS WBS hierarchy + ML pipeline</text>
+<rect x="1288" y="557" width="144.0" height="46" rx="23.0" fill="#EFF4FF" stroke="#EFF4FF" stroke-width="1.5"/>
+<text x="1360.0" y="589.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">16 tools</text>
+<rect x="1446.0" y="557" width="274.0" height="46" rx="23.0" fill="#EFF4FF" stroke="#EFF4FF" stroke-width="1.5"/>
+<text x="1583.0" y="589.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">DuckDB (synthetic)</text>
+<rect x="1288" y="615" width="534.0" height="46" rx="23.0" fill="#EFF4FF" stroke="#EFF4FF" stroke-width="1.5"/>
+<text x="1555.0" y="647.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">7 read + 9 pipeline (incl. write-back)</text>
+<rect x="1260" y="780" width="610" height="165" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1288" y="830.8" font-size="34" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">cost_intel_app</text>
+<text x="1288" y="877.5999999999999" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">MCP App, launched by an MCP host</text>
+<rect x="1288" y="893" width="365.0" height="44" rx="22.0" fill="#EFF4FF" stroke="#EFF4FF" stroke-width="1.5"/>
+<text x="1470.5" y="924.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">PPI basket UI · prefab-ui</text>
+<path d="M 1120 450 L 1260 300" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="1134.5" y="347.3" width="81.0" height="33.800000000000004" rx="6" fill="#F7F8FA" stroke="none"/>
+<text x="1175" y="372" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">stdio</text>
+<path d="M 1120 565 L 1260 560" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="1149.5" y="523.3" width="81.0" height="33.800000000000004" rx="6" fill="#F7F8FA" stroke="none"/>
+<text x="1190" y="548" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">stdio</text>
+<path d="M 1565 780 L 1565 677" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="1238.0" y="713.3" width="315.0" height="33.800000000000004" rx="6" fill="#F7F8FA" stroke="none"/>
+<text x="1545" y="738" font-size="26" font-weight="400" fill="#4B5563" text-anchor="end" font-family="'Segoe UI', Arial, sans-serif">read-only GuardedClient</text>
+<rect x="620" y="770" width="500" height="160" rx="12" fill="#EEF0F3" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="870.0" y="822" font-size="32" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">cost_intel_ui</text>
+<text x="870.0" y="866.4" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">Streamlit UI · demo data source</text>
+<text x="870.0" y="900.72" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">not wired to the agent</text>
+<path d="M 1120 850 L 1260 865" fill="none" stroke="#4B5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 7"/>
+<rect x="60" y="965" width="1810" height="60" rx="12" fill="#FFFFFF" stroke="#4B5563" stroke-width="1.5"/>
+<rect x="84" y="972" width="248.0" height="46" rx="23.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="208.0" y="1004.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">stdio transports</text>
+<rect x="350.0" y="972" width="235.0" height="46" rx="23.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="467.5" y="1004.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">tool allowlists</text>
+<rect x="603.0" y="972" width="352.0" height="46" rx="23.0" fill="#E7F4F2" stroke="#0F766E" stroke-width="1.5"/>
+<text x="779.0" y="1004.36" font-size="26" font-weight="400" fill="#0F766E" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">sanitized error messages</text>
+<rect x="973.0" y="972" width="430.0" height="46" rx="23.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="1188.0" y="1004.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">evals grade “no live BLS call”</text>
+<text x="80" y="1062" font-size="24" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Corrected vs. prompt 1: PARS is not read-only · cost_intel_app runs in an MCP host · the Streamlit UI is not wired to the agent</text>
+</svg>

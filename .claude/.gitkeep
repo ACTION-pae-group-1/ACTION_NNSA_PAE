@@ -1,0 +1,158 @@
+# Claude Code Configuration Templates
+
+Use these templates to configure your `.claude/settings.json` file, which you must create yourself within this (.claude/) directory.
+
+## Option 1: AskSage Integration
+Use this configuration if you are using the enterprise Ask
+Sage API. **Never commit your actual API key to this repository.**
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.nnsa.asksage.ai/server/anthropic",
+    "ANTHROPIC_AUTH_TOKEN": "YOUR_ASKSAGE_API_KEY",
+    "ANTHROPIC_MODEL" : "[insert_local_model]", # recommend Haiku 5.5 as default
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+    "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "1",
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
+  },
+}
+```
+
+## Option 2: Local Model Integration (Ollama)
+Use this configuration to use locally running models via Ollama. There are other ways to do this, but this is the quickest way to get started for now.
+**Prerequisites:** Ollama installed on your host machine and running. Recommended model: `gemma4:12b-it-q4_K_M` for most work; `gemma4:26b` for more complext work. Models must be able to handle context window of at least 64k (Claude Code requirement)
+
+```json
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://host.docker.internal:11434", (if using docker)
+    "ANTHROPIC_BASE_URL": "http://127.0.0.1:11434", (if not using docker)
+    "ANTHROPIC_AUTH_TOKEN": "ollama",
+    "ANTHROPIC_MODEL" : "[insert_local_model]",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "[insert_local_model]",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "[insert_local_model]",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "[insert_local_model]",
+    "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+    "HF_TELEMETRY_DISABLED": "1",
+    "OLLAMA_NO_CLOUD": "1",
+  },
+  "prefersReducedMotion": false,
+  "switchModelsOnFlag": true,
+  "terminalProgressBarEnabled": true
+  "model": "[insert_local_model]" # should match ANTHROPIC_MODEL
+}
+```
+
+## Attributions, Permissions
+Add this block to your `.claude/settings.json` for additional permissions settings . Command paths assume a Linux/WSL2 environment; adjust the path prefix if running in a different container or VM.
+
+```json
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+   "permissions": {
+    "allow": [
+      "Bash(uv run *)",
+      "Bash(* npm run *)"
+    ],
+    "deny": [
+      "Delete",
+      "Bash(git add -A)",
+      "Bash(git add .)",
+      "Bash(git add -all)",
+      "Bash(git add -f)",
+      "Bash(*--no-verify*)",
+      ".env",
+      ".env.local",
+      ".env.*.local",
+      "* ASKSAGE_USER_BASE_URL *",
+      "* docker push *",
+      "* github.com *",
+      "*git push*-f*",
+      "*git push*--force*",
+      "*git push*--force-with-lease*",
+      "*git reset*--hard*",
+      "*git checkout*--*",
+      "*git*-f*commit*",
+      "*git*-f*branch*",
+      "*git*-f*rebase*"
+    ]
+  },
+  "plansDirectory": ".claude/plans",
+  "autoMemoryDirectory": ".claude/memory",
+  "agents": {
+    "slice-orchestrator": {"path": ".claude/agents/slice-orchestrator.md"},
+    "feature-builder": {"path": ".claude/agents/feature-builder.md"},
+    "code-reviewer": {"path": ".claude/agents/code-reviewer.md"},
+    "mcp-workflow": {"path": ".claude/agents/mcp-workflow.md"},
+    "mcp-builder": {"path": ".claude/agents/mcp-builder.md"},
+    "mcp-eval": {"path": ".claude/agents/mcp-eval.md"},
+    "tdd-enforcer": {"path": ".claude/agents/tdd-enforcer.md"},
+    "interrogator": {"path": ".claude/agents/interrogator.md"},
+    "git-safety-constraint-agent": {"path": ".claude/agents/git-safety-constraint-agent.md"},
+    "agentic-minimum-cd-guru": {"path": ".claude/agents/agentic-minimum-cd-guru.md"}
+  },
+}
+```
+
+## Hooks (PreToolUse / PostToolUse)
+Add this `hooks` block to your `.claude/settings.json` to wire all guard hooks and quality checks. Command paths assume a Linux/WSL2 environment; adjust the path prefix if running in a different container or VM.
+
+```json
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -S \"${CLAUDE_PROJECT_DIR}/.claude/hooks/tool_call_context.py\" session",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -S \"${CLAUDE_PROJECT_DIR}/.claude/hooks/tool_call_context.py\" prompt",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read|Edit|Write|Glob|Grep|NotebookEdit|TodoWrite|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -S \"${CLAUDE_PROJECT_DIR}/.claude/hooks/tool_input_preflight.py\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Read|Edit|Write|Glob|Grep|NotebookEdit|TodoWrite|Bash|Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -S \"${CLAUDE_PROJECT_DIR}/.claude/hooks/tool_failure_recovery.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "program": "ci",
+  "files": [
+    {
+      "path": "ci.owner",
+      "role": "owner_mapping",
+      "sha256": "b1179a3c9c9def4781022ae6fab11c7c06a0979e49a22b51fba2aa7477258e78",
+      "size_bytes": 162
+    },
+    {
+      "path": "ci.industry",
+      "role": "industry_mapping",
+      "sha256": "502f597a4e5b259be4e4f7ba67db09faf377c3ab60e2182b4032fc7f96596f69",
+      "size_bytes": 1592
+    },
+    {
+      "path": "ci.occupation",
+      "role": "occupation_mapping",
+      "sha256": "3d722ab5b7c9baeb1d64807cb99d0d61b4b4568745520f7281ff92ad9b1bf2eb",
+      "size_bytes": 1247
+    },
+    {
+      "path": "ci.subcell",
+      "role": "subcell_mapping",
+      "sha256": "b15f01b939c2863afdd7eb9d179c424ebcb8c4128d8f98158bd4f65babb57b86",
+      "size_bytes": 488
+    },
+    {
+      "path": "ci.area",
+      "role": "area_mapping",
+      "sha256": "191a2d4c1bd793b651c261e04ad5488888e7ec3ea72f09e0e4e0256d0a68afb8",
+      "size_bytes": 1507
+    },
+    {
+      "path": "ci.estimate",
+      "role": "estimate_mapping",
+      "sha256": "8c76f531ff7b966afbd4aa0a702a6258d50c312cb1cfa7508952711c8fc1d947",
+      "size_bytes": 173
+    },
+    {
+      "path": "ci.series",
+      "role": "series_metadata",
+      "sha256": "7702bfc0da6f9bcee57b7a1708199262f6180ea3029577b7dcada28ace7d7c02",
+      "size_bytes": 484720
+    },
+    {
+      "path": "ci.data.0.Current",
+      "role": "current",
+      "sha256": "de1f24bc787aea16a4e557375ac4a85804ad67ca574c33c0cc893cd16cb7d6f5",
+      "size_bytes": 4103178
+    }
+  ]
+}

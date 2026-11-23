@@ -1,0 +1,11 @@
+# Runtime dependencies (kept in sync with pyproject.toml [project].dependencies).
+#
+# Needed by buildpack-based hosts that do not read pyproject.toml
+# (e.g. the cloud.gov Python buildpack). Container hosts use the Dockerfile,
+# which installs from pyproject.toml instead.
+duckdb>=1.4,<2
+fastmcp>=3.4.10,<4
+httpx>=0.28,<1
+pydantic>=2.7,<3
+pydantic-settings>=2.0,<3
+pytz

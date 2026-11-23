@@ -1,0 +1,98 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# lifespan
+
+# `fastmcp.server.lifespan`
+
+Composable lifespans for FastMCP servers.
+
+This module provides a `@lifespan` decorator for creating composable server lifespans
+that can be combined using the `|` operator.
+
+Example:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.server.lifespan import lifespan
+
+@lifespan
+async def db_lifespan(server):
+    conn = await connect_db()
+    yield {"db": conn}
+    await conn.close()
+
+@lifespan
+async def cache_lifespan(server):
+    cache = await connect_cache()
+    yield {"cache": cache}
+    await cache.close()
+
+mcp = FastMCP("server", lifespan=db_lifespan | cache_lifespan)
+```
+
+To compose with existing `@asynccontextmanager` lifespans, wrap them explicitly:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from contextlib import asynccontextmanager
+from fastmcp.server.lifespan import lifespan, ContextManagerLifespan
+
+@asynccontextmanager
+async def legacy_lifespan(server):
+    yield {"legacy": True}
+
+@lifespan
+async def new_lifespan(server):
+    yield {"new": True}
+
+# Wrap the legacy lifespan explicitly
+combined = ContextManagerLifespan(legacy_lifespan) | new_lifespan
+```
+
+## Functions
+
+### `lifespan` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/lifespan.py#L182](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/lifespan.py#L182)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+lifespan(fn: LifespanFn) -> Lifespan
+```
+
+Decorator to create a composable lifespan.
+
+Use this decorator on an async generator function to make it composable
+with other lifespans using the `|` operator.
+
+**Args:**
+
+* `fn`: An async generator function that takes a FastMCP server and yields
+  a dict for the lifespan context.
+
+**Returns:**
+
+* A composable Lifespan wrapper.
+
+## Classes
+
+### `Lifespan` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/lifespan.py#L61](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/lifespan.py#L61)</sup>
+
+Composable lifespan wrapper.
+
+Wraps an async generator function and enables composition via the `|` operator.
+The wrapped function should yield a dict that becomes part of the lifespan context.
+
+### `ContextManagerLifespan` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/lifespan.py#L116](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/lifespan.py#L116)</sup>
+
+Lifespan wrapper for already-wrapped context manager functions.
+
+Use this for functions already decorated with @asynccontextmanager.
+
+### `ComposedLifespan` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/lifespan.py#L145](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/lifespan.py#L145)</sup>
+
+Two lifespans composed together.
+
+Enters the left lifespan first, then the right. Exits in reverse order.
+Results are shallow-merged into a single dict.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

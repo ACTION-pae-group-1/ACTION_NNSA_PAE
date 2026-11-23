@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Snapshots are the unit of truth — BLS data pipeline</title>
+<style>
+text { font-family: 'Segoe UI', Arial, sans-serif; }
+</style>
+<defs>
+<marker id="ah" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="22" markerHeight="22" orient="auto-start-reverse" markerUnits="userSpaceOnUse" ><path d="M 0 0 L 12 6 L 0 12 z" fill="#2563EB"/></marker>
+<filter id="sh" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.08"/></filter>
+</defs>
+<rect x="0" y="0" width="1920" height="1080" fill="#F7F8FA"/>
+<text x="80" y="112" font-size="64" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Snapshots are the unit of truth</text>
+<rect x="40" y="255" width="220" height="260" rx="12" fill="#EEF0F3" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="150.0" y="317" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">BLS</text>
+<text x="150.0" y="353.0" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">public files</text>
+<text x="150.0" y="395.0" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">pinned in a</text>
+<text x="150.0" y="429.32" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">SHA-256</text>
+<text x="150.0" y="463.64" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">manifest</text>
+<rect x="296" y="210" width="270" height="350" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="431.0" y="284" font-size="36" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">build</text>
+<text x="431.0" y="333.2" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">ingest pinned</text>
+<text x="431.0" y="367.52" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">pc, ci, cu files</text>
+<text x="431.0" y="401.84" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">into a BUILDING</text>
+<text x="431.0" y="436.15999999999997" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">candidate</text>
+<rect x="312.0" y="490" width="238" height="44" rx="22.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="431.0" y="520.64" font-size="24" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="Consolas, 'Courier New', monospace">bls-data build</text>
+<rect x="602" y="210" width="270" height="350" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="737.0" y="284" font-size="36" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">validate</text>
+<text x="737.0" y="333.2" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">re-check hashes,</text>
+<text x="737.0" y="367.52" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">sizes, schema;</text>
+<text x="737.0" y="401.84" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">write READY</text>
+<text x="737.0" y="436.15999999999997" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">report</text>
+<rect x="618.0" y="490" width="238" height="44" rx="22.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="737.0" y="520.64" font-size="24" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="Consolas, 'Courier New', monospace">bls-data validate</text>
+<rect x="1040" y="210" width="270" height="350" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1175.0" y="284" font-size="36" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">publish</text>
+<text x="1175.0" y="333.2" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">register the</text>
+<text x="1175.0" y="367.52" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">READY candidate</text>
+<text x="1175.0" y="401.84" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">as an immutable</text>
+<text x="1175.0" y="436.15999999999997" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">version</text>
+<rect x="1056.0" y="490" width="238" height="44" rx="22.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="1175.0" y="520.64" font-size="24" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="Consolas, 'Courier New', monospace">bls-data publish</text>
+<rect x="1346" y="210" width="270" height="350" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1481.0" y="284" font-size="36" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">activate</text>
+<text x="1481.0" y="333.2" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">atomically point</text>
+<text x="1481.0" y="367.52" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">the server at one</text>
+<text x="1481.0" y="401.84" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">version; rollback</text>
+<text x="1481.0" y="436.15999999999997" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">restores the last</text>
+<rect x="1362.0" y="490" width="238" height="44" rx="22.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="1481.0" y="520.64" font-size="24" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="Consolas, 'Courier New', monospace">bls-data activate</text>
+<path d="M 260 385.0 L 296 385.0" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M 566 385.0 L 602 385.0" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M 956 327.0 L 1014 385.0 L 956 443.0 L 898 385.0 Z" fill="#FDF3E7" stroke="#B45309" stroke-width="3"/>
+<text x="956" y="395.0" font-size="26" font-weight="700" fill="#B45309" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">gate</text>
+<path d="M 872 385.0 L 898 385.0" fill="none" stroke="#B45309" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 1014 385.0 L 1040 385.0" fill="none" stroke="#B45309" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<text x="956" y="483.0" font-size="26" font-weight="700" fill="#B45309" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">fails</text>
+<text x="956" y="517.32" font-size="26" font-weight="700" fill="#B45309" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">closed</text>
+<path d="M 1616 385.0 L 1652 385.0" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="1690" y="250" width="196" height="130" rx="10" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5"/>
+<rect x="1676" y="266" width="196" height="130" rx="10" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5"/>
+<rect x="1662" y="282" width="196" height="130" rx="10" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<path d="M 1746 338 v -12 a 14 14 0 0 1 28 0 v 12" fill="none" stroke="#1A1D21" stroke-width="5"/><rect x="1738" y="338" width="44" height="34" rx="6" fill="#1A1D21"/>
+<text x="1764" y="462" font-size="28" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">Snapshot</text>
+<text x="1764" y="496" font-size="28" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">registry</text>
+<text x="1764" y="530" font-size="28" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">(DuckDB)</text>
+<text x="1764" y="580" font-size="24" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">versioned ·</text>
+<text x="1764" y="610" font-size="24" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">immutable once</text>
+<text x="1764" y="640" font-size="24" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">published</text>
+<rect x="60" y="660" width="1800" height="112" rx="12" fill="#EEF0F3" stroke="none"/>
+<rect x="60" y="660" width="10" height="112" rx="0" fill="#B45309" stroke="none"/>
+<text x="96" y="706.0" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Fails closed: build stops on any hash or size mismatch, and publish refuses a candidate</text>
+<text x="96" y="740.32" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">without a READY validation report. A published version is never edited in place.</text>
+<rect x="60" y="800" width="1800" height="112" rx="12" fill="#EEF0F3" stroke="none"/>
+<rect x="60" y="800" width="10" height="112" rx="0" fill="#2563EB" stroke="none"/>
+<text x="96" y="846.0" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">The eval harness builds its synthetic world through the same build → validate → publish → activate</text>
+<text x="96" y="880.32" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">functions (snapshot_id = eval_synthetic_world), so eval results inherit the same guarantees.</text>
+<text x="80" y="1056" font-size="24" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Corrected vs. prompt 2: build reads files already pinned in the manifest (it does not download) · rollback added (bls-data rollback)</text>
+</svg>

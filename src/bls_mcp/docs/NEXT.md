@@ -1,0 +1,103 @@
+# Next
+
+- Current goal: a hackathon-ready MVP for the GSA MCP Server Hackathon
+  (kickoff 2026-10-19, halfway check-in 2026-11-03, closing ceremony
+  2026-12-16; the submission deadline is not yet published). Deliverables:
+  this repo aligned to GSA-TTS/mcp-hackathon-template, a slide deck, and an
+  evaluation document. Judges clone and run the server locally with zero
+  setup and no keys; the sandbox deployment uses the IBM watsonx Orchestrate
+  kit's Code Engine build-from-Git option (owner's choice 2026-10-10 — the
+  repo is the build source, no build artifact is published). Plan in
+  `ROADMAP.md`; decisions in `DECISIONS.md` (2026-10-10).
+- Data source: BLS flat files ingested into immutable, published DuckDB
+  snapshots, with per-file provenance (sha256, size, role) pinned in input
+  manifests and recorded in each snapshot, so any device can rebuild one.
+  Build and publication are covered in `docs/bls/OPERATIONS.md`; detailed
+  format findings and cadence live in `bulk_files.md`.
+- Working state: FastMCP 3.4.11 (floor raised to `>=3.4.10,<4` for the
+  post-transform authorization fix, 2026-11-16), typed MCP contracts, lifespan-owned
+  services, client integration tests, and automated type checking are
+  implemented; `poe check` passes (395 tests, on pytest 9.2). The
+  template-aligned shell landed on main (one component per file,
+  `main.py`/`app.py`/`routes.py`, Dockerfile, `manifest.yaml`,
+  `server.json`, QUICKSTART.md, `eval/`). M0 landed in PR #11. M2'
+  groundwork landed in PR #12: PC/PD/CI/WP parsers and a first ingestion
+  pipeline (since replaced by the DuckDB snapshot pipeline), with a catalog of 27,767 series (PC+PD+WP PPI,
+  plus 506 current-dollar ECI index series with all refused families
+  recorded) and 21,041 observations (incl. real construction-labor index
+  levels from `ci.data.0.Current`), all from checked-in/owner-fetched
+  samples, offline.
+- Landmarks (2026-11-15/16): PR #10 conversation evals (deterministic plus
+  negotiated cases, graded on process/accuracy/format/guardrails);
+  PR #11 quarterly-to-annual Q04 alignment with three-place disclosure;
+  PR #12 monthly-to-quarterly containing-quarter alignment (the landmark
+  below); PR #13 recorded eval runs (`eval/bls/results/runs/`) with
+  list/compare reporting (`poe eval-report`); PR #14 the index
+  visualization contract (`docs/UI Handoff schema/`) and the results
+  explorer served at `/ui` (server-backed live mode, same payload the
+  `get_index_visualization` tool returns); PRs #15–17 the Dependabot sweep
+  (46 of 48 alerts cleared by a lock bump, then deliberate floors: fastmcp
+  3.4.10, pytest 9.0.3). Outstanding from the sweep: Copilot review quota
+  was exhausted so #15–17 merged on local verification alone; alert
+  re-scan on main is still pending. The `/ui` page is validated by
+  contract/integration tests and the in-process smoke run but has not been
+  viewed in a browser.
+- Resource/prompt plan: see `mcp_resources_prompts.md` (trimmed
+  2026-10-16). No new components are registered. Add the workflow guide,
+  `bls://snapshot` (shared snapshot-identity service) and a vertical-construction
+  archetype resource, extend the methodology resources, and add the
+  `design_escalation_basket` prompt alongside M2'/M3 preparation. Unregistered
+  stubs exist for these. `calculate_index_from_bls` takes a saved `spec_id`
+  (decided 2026-10-16); `calculate_and_explain_index` follows it.
+- Next action: M2' remainder — the conditional-GET fetcher (verified by
+  the 2026-10-10 header probe: all `pc/` files honor 304; ETag is a
+  per-release stamp, so the manifest sha256 is the revision signal) and one
+  owner-invoked live download of the basket-relevant data partitions.
+  First archetype is **vertical construction** (owner, 2026-10-10):
+  materials through labor. Candidate partitions: 10.Wood, 13.PetroleumCoal
+  (asphalt), 16.NonmetallicMineral (cement/aggregate), 17.PrimaryMetal,
+  18.FabricatedMetal, 19.Machinery (HVAC), 21.ElectricalMachinery,
+  75.Construction. Materials mapping settled 2026-10-10: the `wp`
+  commodity program is the materials layer — series/mappings now ingested
+  (5,312 WP series; catalog total 27,767 series) with materials coverage
+  verified by name (lumber WPS0811, steel WPS1017, ready-mix WPS1333,
+  gypsum, copper scrap, asphalt) and the WP→WD hazard recorded. WP data
+  partitions for the archetype download: 9.Lumber, 11a/11b Metals,
+  14.Minerals, 80.Construction, 80i.ConstructionInputs — land with the
+  owner-invoked fetch run. OEWS (`oe`) localization (mapping and
+  automated wage ratios) is the deferred piece. Then M3 (observation
+  resolution over the snapshot), M4' (eval evidence pack), M5' (Code
+  Engine spike).
+- Owner inputs needed, mostly via the weekly office hours (Tuesdays from
+  2026-10-13) or mcp@gsa.gov: the submission deadline; whether an existing
+  repo may adopt the template's structure or must be based on it; IBM Cloud
+  account tier (Code Engine needs paid) and watsonx Orchestrate access;
+  confirmation the registration is active. Also: basket archetypes for M3
+  verification, and whether/when to make the repo public (required for
+  build-from-Git — do the no-secrets-in-history sweep first; license is in
+  place via PR #10).
+- The key-based live path (client-configured `BLS_API_KEY`, `Depends`
+  provider, live-API readiness) is deferred and optional; see "After the
+  MVP" in `ROADMAP.md`.
+- Parser work — program-specific period encodings including `M13` (annual
+  average; present in both PC and PD despite `pd.txt` saying otherwise),
+  preliminary (`P`) and correction (`C`) footnotes — happens in M2' against
+  fixture slices cut from `docs/sample_data/`. Live-API-only items
+  (retries, rejected-key mapping, quota envelopes) are deferred with the
+  live path.
+- Verification boundary: in-memory MCP and mocked HTTP integration are
+  covered; live BLS calls, the Dockerfile, and network transports have not
+  been validated (M5' scope). The eval harness has run only scripted oracle
+  and deliberately flawed agents (`eval-selftest`, no cost); real-model
+  episodes await the owner's `LLM_*` credentials via `poe eval`. Any
+  download or live call follows `bls_etiquette.md` (owner-invoked,
+  conditional requests, evidence recorded). Snapshots are rebuilt rather
+  than migrated in place; no production migration framework is introduced.
+- Landmark (monthly periodicity), landed after the quarterly-to-annual
+  alignment: a monthly spec period against a quarterly-only series now
+  resolves from the published quarter containing the requested month, with
+  the quarter's value repeating across its three months — disclosed
+  identically to the Q04 alignment (component result periods, ledger
+  warning `monthly-to-quarterly`, provenance
+  `monthly_to_quarterly_alignment=YEAR:CODE`). A quarterly spec period
+  still must match a published quarter exactly.

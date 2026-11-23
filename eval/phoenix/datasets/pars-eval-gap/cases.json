@@ -1,0 +1,258 @@
+{
+  "dataset": "pars-eval-gap",
+  "version": "1",
+  "description": "Deterministic expectations for the 16 registered PARS MCP tools. JSON cases are single calls checked against direct read-only SQL oracles on the isolated synthetic database (proj_001, proj_002) or the isolated synthetic mock copy (source). Scripted scenarios for write-capable, training, prediction, signing, and fixture cases live in eval/phoenix/run_pars_gap_eval.py. No LLM judge is used; every check is deterministic.",
+  "cases": [
+    {
+      "id": "RO-01", "tool": "list_projects", "args": {},
+      "objective": "Project inventory matches the projects and wbs_elements tables.",
+      "checks": [
+        {"check": "ok"},
+        {"check": "keys_present", "keys": ["projects"]},
+        {"check": "rows_match_sql", "path": "projects", "columns": ["parsid", "project_name"],
+         "sql": "SELECT parsid, project_name FROM projects"},
+        {"check": "rows_match_sql", "path": "projects", "columns": ["parsid", "total_elements", "hierarchy_depth"],
+         "sql": "SELECT parsid, count(*), max(level) FROM wbs_elements GROUP BY parsid"}
+      ]
+    },
+    {
+      "id": "RO-02", "tool": "get_project_info", "args": {"project_id": "proj_001"},
+      "objective": "Exact project metadata for proj_001.",
+      "checks": [
+        {"check": "ok"},
+        {"check": "rows_match_sql", "path": null, "columns": ["parsid", "project_name", "total_elements", "hierarchy_depth"],
+         "sql": "SELECT p.parsid, p.project_name, count(e.wbs_code), max(e.level) FROM projects p JOIN wbs_elements e ON e.parsid = p.parsid WHERE p.parsid = 'proj_001' GROUP BY p.parsid, p.project_name"}
+      ]
+    },
+    {
+      "id": "RO-03", "tool": "get_project_info", "args": {"project_id": "PROJ_001"},
+      "objective": "Case-insensitive project ID resolves to the stored proj_001 metadata.",
+      "checks": [
+        {"check": "ok"},
+        {"check": "rows_match_sql", "path": null, "columns": ["parsid", "project_name", "total_elements", "hierarchy_depth"],
+         "sql": "SELECT p.parsid, p.project_name, count(e.wbs_code), max(e.level) FROM projects p JOIN wbs_elements e ON e.parsid = p.parsid WHERE p.parsid = 'proj_001' GROUP BY p.parsid, p.project_name"}
+      ]
+    },
+    {
+      "id": "RO-04", "tool": "get_project_info", "args": {"project_id": "proj_999"},
+      "objective": "Unknown project is refused, not answered with an empty record.",
+      "checks": [{"check": "error_contains", "text": "Project proj_999 not found"}]
+    },
+    {
+      "id": "RO-05", "tool": "get_project_info", "args": {"project_id": ""},
+      "objective": "Blank project ID is refused.",
+      "checks": [{"check": "error_contains", "text": "must not be blank"}]
+    },
+    {
+      "id": "RO-06", "tool": "search_wbs", "args": {"project_id": "proj_001"},
+      "objective": "Full element list for proj_001 equals the wbs_elements rows.",
+      "checks": [
+        {"check": "ok"},
+        {"check": "count_equals_sql", "path": "elements", "sql": "SELECT count(*) FROM wbs_elements WHERE parsid = 'proj_001'"},
+        {"check": "rows_match_sql", "path": "elements", "columns": ["wbs_code", "title", "level", "parent_wbs", "leaf_node"],
+         "sql": "SELECT wbs_code, title, level, parent_wbs, leaf_node FROM wbs_elements WHERE parsid = 'proj_001'"}
+      ]
+    },
+    {
+      "id": "RO-07", "tool": "search_wbs", "args": {"project_id": "proj_001", "wbs_pattern": "01.01.01.%"},
+      "objective": "SQL LIKE pattern filter returns exactly the matching codes.",
+      "checks": [
+        {"check": "ok"},
+        {"check": "count_equals_sql", "path": "elements",
+         "sql": "SELECT count(*) FROM wbs_elements WHERE parsid = 'proj_001' AND wbs_code LIKE '01.01.01.%'"}
+      ]
+    },
+    {
+      "id": "RO-08", "tool": "search_wbs", "args": {"project_id": "proj_001", "min_level": 3, "max_level": 4},
+      "objective": "Level window filter is inclusive on both ends.",
+      "checks": [
+        {"check": "ok"},
+        {"check": "count_equals_sql", "path": "elements",
+         "sql": "SELECT count(*) FROM wbs_elements WHERE parsid = 'proj_001' AND level BETWEEN 3 AND 4"}
+      ]
+    },
+    {
+      "id": "RO-09", "tool": "search_wbs", "args": {"project_id": "proj_001", "min_level": 0},
+      "objective": "min_level outside 1 to 8 is refused.",
+      "checks": [{"check": "error_contains", "text": "min_level must be between 1 and 8"}]
+    },
+    {
+      "id": "RO-10", "tool": "search_wbs", "args": {"project_id": "proj_001", "max_level": 9},
+      "objective": "max_level outside 1 to 8 is refused.",
+      "checks": [{"check": "error_contains", "text": "max_level must be between 1 and 8"}]
+    },
+    {
+      "id": "RO-11", "tool": "search_wbs", "args": {"project_id": "proj_999"},
+      "objective": "Unknown project is refused.",
+      "checks": [{"check": "error_contains", "text": "Project proj_999 not found"}]
+    },
+    {
+      "id": "RO-12", "tool": "search_wbs", "args": {"project_id": "   "},
+      "objective": "Whitespace-only project ID is refused (it would otherwise match every project).",
+      "checks": [{"check": "error_contains", "text": "must not be blank"}]
+    },
+    {
+      "id": "RO-13", "tool": "get_wbs_hierarchy", "args": {"project_id": "proj_001", "wbs_code": "01.01"},
+      "objective": "Element and its immediate children match wbs_elements (parent_wbs link).",
+      "checks": [
+        {"check": "ok"},
+        {"check": "rows_match_sql", "path": "element", "columns": ["wbs_code", "title", "level", "parent_wbs", "leaf_node"],
+         "sql": "SELECT wbs_code, title, level, parent_wbs, leaf_node FROM wbs_elements WHERE parsid = 'proj_001' AND wbs_code = '01.01'"},
+        {"check": "children_codes_match_sql",
+         "sql": "SELECT wbs_code FROM wbs_elements WHERE parsid = 'proj_001' AND parent_wbs = '01.01'"}
+      ]
+    },
+    {
+      "id": "RO-14", "tool": "get_wbs_hierarchy", "args": {"project_id": "proj_001", "wbs_code": "01.01.01.01.01.01.01"},
+      "objective": "A leaf has no children.",
+      "checks": [
+        {"check": "ok"},
+        {"check": "children_codes_match_sql",
+         "sql": "SELECT wbs_code FROM wbs_elements WHERE parsid = 'proj_001' AND parent_wbs = '01.01.01.01.01.01.01'"},
+        {"check": "field_equals", "path": "element.leaf_node", "value": true}
+      ]
+    },
+    {
+      "id": "RO-15", "tool": "get_wbs_hierarchy", "args": {"project_id": "proj_001", "wbs_code": "99.99"},
+      "objective": "Unknown WBS code must not return a fabricated element.",
+      "checks": [{"check": "has_error_key"}]
+    },
+    {
+      "id": "RO-16", "tool": "get_wbs_lineage", "args": {"project_id": "proj_001", "wbs_code": "01.01.01.01.01.01.01"},
+      "objective": "Lineage runs from the element to the root through every dot-prefix ancestor.",
+      "checks": [{"check": "ok"}, {"check": "lineage_is_root_path"}]
+    },
+    {
+      "id": "RO-17", "tool": "get_wbs_lineage", "args": {"project_id": "proj_001", "wbs_code": "01"},
+      "objective": "A root element's lineage is itself.",
+      "checks": [{"check": "ok"}, {"check": "lineage_is_root_path"}]
+    },
+    {
+      "id": "RO-18", "tool": "get_wbs_lineage", "args": {"project_id": "proj_001", "wbs_code": "99.99"},
+      "objective": "Unknown code yields no fabricated ancestors (empty list or an error).",
+      "checks": [{"check": "lineage_empty_or_error"}]
+    },
+    {
+      "id": "RO-19", "tool": "get_leaf_nodes", "args": {"project_id": "proj_001"},
+      "objective": "Leaf set equals rows with leaf_node true (11 for proj_001).",
+      "checks": [
+        {"check": "ok"},
+        {"check": "count_equals_sql", "path": "leaf_nodes",
+         "sql": "SELECT count(*) FROM wbs_elements WHERE parsid = 'proj_001' AND leaf_node"},
+        {"check": "rows_match_sql", "path": "leaf_nodes", "columns": ["wbs_code", "title", "level"],
+         "sql": "SELECT wbs_code, title, level FROM wbs_elements WHERE parsid = 'proj_001' AND leaf_node"}
+      ]
+    },
+    {
+      "id": "RO-20", "tool": "get_leaf_nodes", "args": {"project_id": "proj_002"},
+      "objective": "Leaf set equals rows with leaf_node true for proj_002.",
+      "checks": [
+        {"check": "ok"},
+        {"check": "rows_match_sql", "path": "leaf_nodes", "columns": ["wbs_code", "title", "level"],
+         "sql": "SELECT wbs_code, title, level FROM wbs_elements WHERE parsid = 'proj_002' AND leaf_node"}
+      ]
+    },
+    {
+      "id": "RO-21", "tool": "get_leaf_nodes", "args": {"project_id": "proj_999"},
+      "objective": "Unknown project is refused.",
+      "checks": [{"check": "error_contains", "text": "Project proj_999 not found"}]
+    },
+    {
+      "id": "RO-22", "tool": "get_wbs_by_level", "args": {"project_id": "proj_001", "level": 1},
+      "objective": "Level 1 contains only the root element.",
+      "checks": [
+        {"check": "ok"},
+        {"check": "count_equals_sql", "path": "elements",
+         "sql": "SELECT count(*) FROM wbs_elements WHERE parsid = 'proj_001' AND level = 1"},
+        {"check": "rows_match_sql", "path": "elements", "columns": ["wbs_code", "title", "parent_wbs", "leaf_node"],
+         "sql": "SELECT wbs_code, title, parent_wbs, leaf_node FROM wbs_elements WHERE parsid = 'proj_001' AND level = 1"}
+      ]
+    },
+    {
+      "id": "RO-23", "tool": "get_wbs_by_level", "args": {"project_id": "proj_001", "level": 7},
+      "objective": "Level 7 count equals the SQL count (deepest level).",
+      "checks": [
+        {"check": "ok"},
+        {"check": "count_equals_sql", "path": "elements",
+         "sql": "SELECT count(*) FROM wbs_elements WHERE parsid = 'proj_001' AND level = 7"}
+      ]
+    },
+    {
+      "id": "RO-24", "tool": "get_wbs_by_level", "args": {"project_id": "proj_001", "level": 0},
+      "objective": "Level 0 is refused.",
+      "checks": [{"check": "error_contains", "text": "level must be between 1 and 8"}]
+    },
+    {
+      "id": "RO-25", "tool": "get_wbs_by_level", "args": {"project_id": "proj_001", "level": 9},
+      "objective": "Level 9 is refused.",
+      "checks": [{"check": "error_contains", "text": "level must be between 1 and 8"}]
+    },
+    {
+      "id": "RO-26", "tool": "get_wbs_by_level", "args": {"project_id": "", "level": 1},
+      "objective": "Blank project ID is refused before the level is used.",
+      "checks": [{"check": "error_contains", "text": "must not be blank"}]
+    },
+    {
+      "id": "RO-27", "tool": "validate_wbs_inputs", "args": {},
+      "objective": "Mock source passes the contract, reports synthetic_mock, and row counts match the source copy.",
+      "checks": [
+        {"check": "ok"},
+        {"check": "field_equals", "path": "ok", "value": true},
+        {"check": "field_equals", "path": "data_origin", "value": "synthetic_mock"},
+        {"check": "field_equals", "path": "problems", "value": []},
+        {"check": "value_equals_sql", "path": "tables.silver_spae_data.rows", "db": "source",
+         "sql": "SELECT count(*) FROM silver_spae_data"}
+      ]
+    },
+    {
+      "id": "RO-28", "tool": "get_wbs_rows", "args": {},
+      "objective": "Default limit 20 returns 20 rows with the documented columns; total equals the source row count.",
+      "checks": [
+        {"check": "ok"},
+        {"check": "field_equals", "path": "returned", "value": 20},
+        {"check": "field_equals", "path": "columns", "value": ["parsid", "program", "project_name", "wbs", "wbs_level", "wbs_title"]},
+        {"check": "value_equals_sql", "path": "total_rows", "db": "source", "sql": "SELECT count(*) FROM silver_spae_data"}
+      ]
+    },
+    {
+      "id": "RO-29", "tool": "get_wbs_rows", "args": {"limit": 2},
+      "objective": "Limit is honoured exactly.",
+      "checks": [{"check": "ok"}, {"check": "field_equals", "path": "returned", "value": 2}]
+    },
+    {
+      "id": "RO-30", "tool": "get_wbs_rows", "args": {"limit": 0},
+      "objective": "Limit 0 is refused.",
+      "checks": [{"check": "error_contains", "text": "limit must be between 1 and 500"}]
+    },
+    {
+      "id": "RO-31", "tool": "get_wbs_rows", "args": {"limit": 501},
+      "objective": "Limit above 500 is refused.",
+      "checks": [{"check": "error_contains", "text": "limit must be between 1 and 500"}]
+    },
+    {
+      "id": "RO-32", "tool": "get_wbs_project_descriptions", "args": {},
+      "objective": "Default limit returns 20 description rows; total equals the source table.",
+      "checks": [
+        {"check": "ok"},
+        {"check": "field_equals", "path": "returned", "value": 20},
+        {"check": "value_equals_sql", "path": "total_rows", "db": "source",
+         "sql": "SELECT count(*) FROM silver_project_descriptions"}
+      ]
+    },
+    {
+      "id": "RO-33", "tool": "get_wbs_project_descriptions", "args": {"limit": 0},
+      "objective": "Limit 0 is refused.",
+      "checks": [{"check": "error_contains", "text": "limit must be between 1 and 500"}]
+    },
+    {
+      "id": "RO-34", "tool": "get_wbs_run_status", "args": {"run_id": "r000000000000"},
+      "objective": "Unknown run is refused.",
+      "checks": [{"check": "error_contains", "text": "Run not found"}]
+    },
+    {
+      "id": "RO-35", "tool": "get_wbs_run_status", "args": {"run_id": "../../etc"},
+      "objective": "A path-like run ID is refused by the format check before any file access.",
+      "checks": [{"check": "error_contains", "text": "run_id must look like"}]
+    }
+  ]
+}

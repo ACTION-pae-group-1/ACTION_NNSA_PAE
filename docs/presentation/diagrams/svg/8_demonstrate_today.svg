@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>What we can demonstrate today — capabilities map</title>
+<style>
+text { font-family: 'Segoe UI', Arial, sans-serif; }
+</style>
+<defs>
+<marker id="ah" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="22" markerHeight="22" orient="auto-start-reverse" markerUnits="userSpaceOnUse" ><path d="M 0 0 L 12 6 L 0 12 z" fill="#2563EB"/></marker>
+<filter id="sh" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.08"/></filter>
+</defs>
+<rect x="0" y="0" width="1920" height="1080" fill="#F7F8FA"/>
+<text x="80" y="112" font-size="64" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">What we can demonstrate today</text>
+<rect x="80" y="180" width="560" height="520" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="108" y="242" font-size="32" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Source-backed calculation</text>
+<text x="108" y="286.4" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">calculate_index_from_bls reads</text>
+<text x="108" y="323.35999999999996" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">both index levels from the</text>
+<text x="108" y="360.32" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">published snapshot and returns</text>
+<text x="108" y="397.28" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">the factor with a ledger of</text>
+<text x="108" y="434.24" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">series, periods and values;</text>
+<text x="108" y="471.2" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">get_index_visualization charts</text>
+<text x="108" y="508.15999999999997" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">a saved spec (/ui over HTTP)</text>
+<rect x="108" y="626" width="334.84000000000003" height="46" rx="23.0" fill="#E7F4F2" stroke="#0F766E" stroke-width="1.5"/>
+<text x="275.42" y="658.36" font-size="26" font-weight="700" fill="#0F766E" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">works today · offline</text>
+<rect x="680" y="180" width="560" height="520" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="708" y="242" font-size="32" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Synthetic basket demo</text>
+<text x="708" y="286.4" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">cost_intel_app renders a PPI</text>
+<text x="708" y="323.35999999999996" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">basket inside an MCP host:</text>
+<text x="708" y="360.32" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">include, weight, normalize,</text>
+<text x="708" y="397.28" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">approve. PARS context panels</text>
+<text x="708" y="434.24" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">are read-only. Data is the</text>
+<text x="708" y="471.2" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">synthetic DEMO-ANNUAL-</text>
+<text x="708" y="508.15999999999997" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">2021-2026-v1 set</text>
+<rect x="708" y="626" width="236.56" height="46" rx="23.0" fill="#FDF3E7" stroke="#B45309" stroke-width="1.5"/>
+<text x="826.28" y="658.36" font-size="26" font-weight="700" fill="#B45309" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">demo data only</text>
+<rect x="1280" y="180" width="560" height="520" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1308" y="242" font-size="32" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Optional agent</text>
+<text x="1308" y="286.4" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">the portable client drives the</text>
+<text x="1308" y="323.35999999999996" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">same tools in conversation.</text>
+<text x="1308" y="360.32" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Guardrails 100% in 5 of 6</text>
+<text x="1308" y="397.28" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">scored runs (worst 26/27);</text>
+<text x="1308" y="434.24" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">0 of 32 scored episodes</text>
+<text x="1308" y="471.2" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">passed every check: observed,</text>
+<text x="1308" y="508.15999999999997" font-size="28" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">not verified at scale</text>
+<rect x="1308" y="626" width="503.32000000000005" height="46" rx="23.0" fill="#FDF3E7" stroke="#B45309" stroke-width="1.5"/>
+<text x="1559.66" y="658.36" font-size="26" font-weight="700" fill="#B45309" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">demo-grade · frontier run pending</text>
+<rect x="80" y="760" width="1760" height="120" rx="12" fill="#EEF0F3" stroke="none"/>
+<rect x="80" y="760" width="10" height="120" rx="0" fill="#B45309" stroke="none"/>
+<text x="116" y="810.0" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Not yet claimed: live BLS numbers in a demo · frontier-model results · scores on the current eval version ·</text>
+<text x="116" y="844.32" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">automated CI (disabled; local hooks and recorded runs today)</text>
+<text x="80" y="1024" font-size="24" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Corrected vs. prompt 8: card 1 is the BLS server's source-backed path (the basket demo computes on synthetic data,</text>
+<text x="80" y="1056" font-size="24" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">per README “Boundaries”) · card 3 quotes the recorded runs in eval/bls/results/runs/</text>
+</svg>

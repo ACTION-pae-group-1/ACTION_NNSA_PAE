@@ -1,0 +1,8 @@
+<section id="a-pipeline" class="bleed">
+<img class="bleed-img" src="/_blob/77166b12348627caa20b94da5923aabb" alt="Appendix A2. Snapshots are the unit of truth. BLS public files, pinned in a SHA-256 manifest, flow through four stages: build (ingest pinned pc, ci, cu files into a BUILDING candidate), validate (re-check hashes, sizes and schema; write a READY report), a gate that fails closed, publish (register the READY candidate as an immutable version) and activate (atomically point the server at one version; rollback restores the last). Output: a versioned snapshot registry in DuckDB, immutable once published. Build stops on any hash or size mismatch and publish refuses a candidate without a READY report. The eval harness builds its synthetic world through the same functions, snapshot_id eval_synthetic_world.">
+<aside>Appendix A2, prompt 2. Corrections: build reads files already pinned in the manifest (it does not download; acquisition is a separate step in docs/bls/OPERATIONS.md), and the CLI’s rollback verb was added.
+
+The fail-closed gate is real and observable: on a fresh clone today, bls-data build stops with “SHA-256 mismatch for pc.industry.txt” (future-work fix 1), and publish refuses a candidate with “Missing or invalid READY validation report”.
+
+Evidence: src/bls_mcp/ingestion/cli.py, lifecycle.py, publish.py; eval/bls/world.py uses build_candidate, validate_candidate, publish_candidate and activate_snapshot.</aside>
+</section>

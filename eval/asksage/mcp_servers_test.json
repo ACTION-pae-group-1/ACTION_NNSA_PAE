@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "bls_server": {
+      "transport": "stdio",
+      "command": "${MCP_PYTHON}",
+      "args": ["-m", "bls_mcp.app"],
+      "env": {"MCP_TRANSPORT": "stdio"},
+      "allowed_tools": ["search_series", "describe_series", "get_series_hierarchy"]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "gov.doe.nnsa/bls-mcp",
+  "description": "Bureau of Labor Statistics MCP server supporting series discovery, cached observations, live BLS data retrieval, and escalation index management.",
+  "repository": {
+    "url": "https://github.doe.gov/NNSA-MB-90/mcp_group_1",
+    "source": "DOE GitHub"
+  },
+  "version": "0.1.0"
+}

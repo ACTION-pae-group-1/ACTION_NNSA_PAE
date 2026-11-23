@@ -1,0 +1,30 @@
+# BLS snapshot files have manifest-recorded byte hashes. Prevent Git from
+# changing their line endings on Windows (or other platforms).
+# `poe manifest-check` (also a pre-commit hook and a test) fails if a pinned
+# file loses this protection, or if a manifest records hashes of anything but
+# the bytes Git stores. Run `poe manifest-fix` after changing a pinned file.
+src/bls_mcp/docs/sample_data/** -text
+
+# Keep text files normalized to LF across Windows and other platforms.
+*.py text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+
+# Preserve Windows command scripts.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Never normalize binary files.
+*.duckdb binary
+*.xlsx binary
+*.png binary
+*.jpg binary
+*.pdf binary
+*.zip binary
+
+# Large demo CAEF artifacts stored with Git LFS (exceed the 5000 KB pre-commit limit).
+src/cost_intel_app/demo_assets/caef/r8fec4416f3d5/working.duckdb filter=lfs diff=lfs merge=lfs -text
+src/cost_intel_app/demo_assets/caef/r8fec4416f3d5/bundles/untuned/fitted_pipeline_sgd.joblib filter=lfs diff=lfs merge=lfs -text

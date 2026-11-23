@@ -1,0 +1,182 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Notifications
+
+> Handle server-sent notifications for list changes and other events.
+
+New in version `2.9.1`
+
+Use this when you need to react to server-side changes like tool list updates or resource modifications.
+
+MCP servers can send notifications to inform clients about state changes. The message handler provides a unified way to process these notifications.
+
+## Handling Notifications
+
+The simplest approach is a function that receives all messages and filters for the notifications you care about:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from pathlib import Path
+
+from fastmcp import Client
+
+async def message_handler(message):
+    """Handle MCP notifications from the server."""
+    if hasattr(message, 'method'):
+        method = message.method
+
+        if method == "notifications/tools/list_changed":
+            print("Tools have changed - refresh tool cache")
+        elif method == "notifications/resources/list_changed":
+            print("Resources have changed")
+        elif method == "notifications/prompts/list_changed":
+            print("Prompts have changed")
+        elif method == "notifications/resources/updated":
+            print("A resource was updated")
+
+client = Client(
+    Path("my_mcp_server.py"),
+    message_handler=message_handler,
+)
+```
+
+## MessageHandler Class
+
+For fine-grained targeting, subclass `MessageHandler` to use specific hooks:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from pathlib import Path
+
+from fastmcp import Client
+from fastmcp.client.messages import MessageHandler
+import mcp_types
+
+class MyMessageHandler(MessageHandler):
+    async def on_tool_list_changed(
+        self, notification: mcp_types.ToolListChangedNotification
+    ) -> None:
+        """Handle tool list changes."""
+        print("Tool list changed - refreshing available tools")
+
+    async def on_resource_list_changed(
+        self, notification: mcp_types.ResourceListChangedNotification
+    ) -> None:
+        """Handle resource list changes."""
+        print("Resource list changed")
+
+    async def on_prompt_list_changed(
+        self, notification: mcp_types.PromptListChangedNotification
+    ) -> None:
+        """Handle prompt list changes."""
+        print("Prompt list changed")
+
+client = Client(
+    Path("my_mcp_server.py"),
+    message_handler=MyMessageHandler(),
+)
+```
+
+### Handler Template
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp.client.messages import MessageHandler
+import mcp_types
+
+class MyMessageHandler(MessageHandler):
+    async def on_message(self, message) -> None:
+        """Called for every notification and transport exception."""
+        pass
+
+    async def on_exception(self, exception: Exception) -> None:
+        """Called for transport-level exceptions."""
+        pass
+
+    async def on_notification(
+        self, notification: mcp_types.ServerNotification
+    ) -> None:
+        """Called for notifications (fire-and-forget)."""
+        pass
+
+    async def on_tool_list_changed(
+        self, notification: mcp_types.ToolListChangedNotification
+    ) -> None:
+        """Called when the server's tool list changes."""
+        pass
+
+    async def on_resource_list_changed(
+        self, notification: mcp_types.ResourceListChangedNotification
+    ) -> None:
+        """Called when the server's resource list changes."""
+        pass
+
+    async def on_prompt_list_changed(
+        self, notification: mcp_types.PromptListChangedNotification
+    ) -> None:
+        """Called when the server's prompt list changes."""
+        pass
+
+    async def on_progress(
+        self, notification: mcp_types.ProgressNotification
+    ) -> None:
+        """Called for progress updates during long-running operations."""
+        pass
+
+    async def on_resource_updated(
+        self, notification: mcp_types.ResourceUpdatedNotification
+    ) -> None:
+        """Called when a specific resource changes."""
+        pass
+
+    async def on_cancelled(
+        self, notification: mcp_types.CancelledNotification
+    ) -> None:
+        """Called when a request is cancelled."""
+        pass
+
+    async def on_logging_message(
+        self, notification: mcp_types.LoggingMessageNotification
+    ) -> None:
+        """Called for log messages from the server."""
+        pass
+```
+
+## List Change Notifications
+
+A practical example of maintaining a tool cache that refreshes when tools change:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from pathlib import Path
+from fastmcp import Client
+from fastmcp.client.messages import MessageHandler
+import mcp_types
+
+class ToolCacheHandler(MessageHandler):
+    def __init__(self):
+        self.cached_tools = []
+
+    async def on_tool_list_changed(
+        self, notification: mcp_types.ToolListChangedNotification
+    ) -> None:
+        """Clear tool cache when tools change."""
+        print("Tools changed - clearing cache")
+        self.cached_tools = []  # Force refresh on next access
+
+client = Client(Path("server.py"), message_handler=ToolCacheHandler())
+```
+
+## Server Requests
+
+The message handler receives only notifications and transport exceptions; server-initiated requests never reach it. Answer those through the client's dedicated parameters:
+
+* **Sampling requests**: Use [`sampling_handler`](https://gofastmcp.com/docs/clients/sampling)
+* **Elicitation requests**: Use [`elicitation_handler`](https://gofastmcp.com/docs/clients/elicitation)
+* **Roots requests**: Use [`roots`](https://gofastmcp.com/docs/clients/roots)
+
+Progress and log notifications reach the message handler as well, but their dedicated callbacks are simpler to use:
+
+* **Progress updates**: Use [`progress_handler`](https://gofastmcp.com/docs/clients/progress)
+* **Log messages**: Use [`log_handler`](https://gofastmcp.com/docs/clients/logging)
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

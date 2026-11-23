@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>An LLM judges the PARS agent — PARS Phoenix LLM-as-judge harness</title>
+<style>
+text { font-family: 'Segoe UI', Arial, sans-serif; }
+</style>
+<defs>
+<marker id="ah" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="22" markerHeight="22" orient="auto-start-reverse" markerUnits="userSpaceOnUse" ><path d="M 0 0 L 12 6 L 0 12 z" fill="#2563EB"/></marker>
+<filter id="sh" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.08"/></filter>
+</defs>
+<rect x="0" y="0" width="1920" height="1080" fill="#F7F8FA"/>
+<text x="80" y="112" font-size="64" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">An LLM judges the PARS agent</text>
+<rect x="1100" y="158" width="760" height="46" rx="23.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="1480.0" y="190.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">approved endpoints only (Ask Sage -gov / local Ollama)</text>
+<text x="60" y="280" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Question datasets</text>
+<rect x="60" y="305" width="440" height="105" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="88" y="347" font-size="28" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="Consolas, 'Courier New', monospace">pars-eval-0</text>
+<text x="88" y="386.6" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">25 questions · frozen</text>
+<rect x="60" y="430" width="440" height="105" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="88" y="472" font-size="28" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="Consolas, 'Courier New', monospace">pars-eval-1</text>
+<text x="88" y="511.6" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">60 questions</text>
+<text x="60" y="580" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">built from evaluation.xml</text>
+<path d="M 500 420 L 560 420" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="560" y="290" width="500" height="290" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="588" y="338.8" font-size="32" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">PARSAgent</text>
+<text x="588" y="383.2" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">portable MCPAgent + MCPHub</text>
+<text x="588" y="417.52" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">no LangChain (a test enforces it)</text>
+<rect x="588" y="452" width="352.0" height="46" rx="23.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="764.0" y="484.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">prompt v1: basic analyst</text>
+<rect x="588" y="510" width="261.0" height="46" rx="23.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="718.5" y="542.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">prompt v2: scoped</text>
+<rect x="1180" y="270" width="680" height="220" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1208" y="318.8" font-size="32" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">PARS MCP server</text>
+<text x="1208" y="363.2" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">the eval exposes 7 read-only tools of 16</text>
+<rect x="1208" y="400" width="456.0" height="46" rx="23.0" fill="#EEF0F3" stroke="#EEF0F3" stroke-width="1.5"/>
+<text x="1436.0" y="432.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">WBS hierarchy · synthetic DuckDB</text>
+<path d="M 1060 380 L 1180 380" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="1079.5" y="337.3" width="81.0" height="33.800000000000004" rx="6" fill="#F7F8FA" stroke="none"/>
+<text x="1120" y="362" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">stdio</text>
+<rect x="1180" y="540" width="680" height="250" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1208" y="590" font-size="32" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">LLM judges</text>
+<text x="1208" y="640" font-size="26" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="Consolas, 'Courier New', monospace">match_expected_response</text>
+<text x="1208" y="674" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">→ correct / incorrect</text>
+<text x="1208" y="718" font-size="26" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="Consolas, 'Courier New', monospace">check_answer_scope</text>
+<text x="1208" y="752" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">→ within / out of scope</text>
+<text x="1840" y="590" font-size="24" font-weight="400" fill="#4B5563" text-anchor="end" font-family="'Segoe UI', Arial, sans-serif">temperature 0</text>
+<path d="M 1060 520 L 1120 520 L 1120 660 L 1180 660" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="1066.5" y="587.3" width="107.0" height="33.800000000000004" rx="6" fill="#F7F8FA" stroke="none"/>
+<text x="1120" y="612" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">answers</text>
+<rect x="60" y="620" width="440" height="170" rx="12" fill="#FDF3E7" stroke="#B45309" stroke-width="2"/>
+<text x="84" y="662" font-size="26" font-weight="400" fill="#B45309" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Reported 2026-11-11:</text>
+<text x="84" y="695" font-size="26" font-weight="400" fill="#B45309" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">100% correctness + scope,</text>
+<text x="84" y="728" font-size="26" font-weight="400" fill="#B45309" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">50/50 (25 Q × 2 prompts)</text>
+<text x="84" y="761" font-size="26" font-weight="400" fill="#B45309" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">run output not in the repo</text>
+<rect x="60" y="840" width="1800" height="110" rx="12" fill="#EEF0F3" stroke="none"/>
+<text x="90" y="906" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Tracing</text>
+<path d="M 220 896 L 268 896" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="280" y="873" width="378.0" height="46" rx="23.0" fill="#FFFFFF" stroke="#4B5563" stroke-width="1.5"/>
+<text x="469.0" y="905.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">Phoenix UI · loopback only</text>
+<text x="688.0" y="905" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">or</text>
+<rect x="738.0" y="873" width="222.0" height="46" rx="23.0" fill="#FFFFFF" stroke="#4B5563" stroke-width="1.5"/>
+<text x="849.0" y="905.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">JSONL fallback</text>
+<text x="1120" y="885.0" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">every agent and judge call is traced;</text>
+<text x="1120" y="919.32" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">nothing leaves the loopback</text>
+<text x="80" y="1056" font-size="24" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Corrected vs. prompt 4: verdict shown as reported, not verified (no run output in the repo) · the server now has 16 tools</text>
+</svg>

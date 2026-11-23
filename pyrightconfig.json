@@ -1,0 +1,8 @@
+{
+  "include": ["eval/bls", "tests/evals"],
+  "exclude": ["**/__pycache__", "**/results"],
+  "typeCheckingMode": "basic",
+  "reportMissingImports": "error",
+  "reportAttributeAccessIssue": "error",
+  "reportUndefinedVariable": "error"
+}

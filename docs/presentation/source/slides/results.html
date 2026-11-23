@@ -1,0 +1,37 @@
+<section id="results">
+<div class="head">
+<p class="eyebrow">Criterion 2 · First model results</p>
+<h2>Guardrails held; the workflow did not, yet</h2>
+</div>
+<table class="tbl">
+<tr class="tbl-head"><th style="width:28%">Local model (Ollama)</th><th style="width:14%">Episodes</th><th style="width:14%">Process</th><th style="width:14%">Accuracy</th><th style="width:14%">Format</th><th style="width:16%">Guardrails</th></tr>
+<tr><td>gpt-oss 20b</td><td>7</td><td>26%</td><td>0%</td><td>0%</td><td>100%</td></tr>
+<tr><td>qwen3 14b</td><td>9</td><td>26%</td><td>0%</td><td>0%</td><td>96% (26/27)</td></tr>
+<tr><td>gemma4 12b</td><td>9</td><td>38%</td><td>11%</td><td>12%</td><td>100%</td></tr>
+</table>
+<div class="grid3">
+<div class="card card-green in" style="--i:0">
+<p class="card-label label-green">Safe failure, measured</p>
+<p class="card-small">No answer used typed-in index values or an uncatalogued series. The one miss was a live-API attempt the server refused.</p>
+</div>
+<div class="card in" style="--i:1">
+<p class="card-label">Tool ergonomics, exposed</p>
+<p class="card-small">20 of 29 tool errors were “PPI” or “ECI” passed where pc or ci was required; models calculated before saving.</p>
+</div>
+<div class="card card-amber in" style="--i:2">
+<p class="card-label label-amber">A harness limit, found</p>
+<p class="card-small">23 of 25 early episodes ended on requests the scripted user didn’t recognise. It has since been widened.</p>
+</div>
+</div>
+<p class="foot">Latest 3 cases × 3 repetitions per model, commit 34eb702, eval fingerprint f492beb25f0f. Re-run on the current eval is pending.</p>
+<div class="pn"></div>
+<aside>Read these as a harness test, not a model verdict. No episode passed every check (0 of 32 scored episodes across all seven runs), and that is expected for small local models on a strict contract.
+
+Table rows are the latest full run per model: gpt-oss 20261116T020812Z (7 scored, 2 infrastructure errors excluded), qwen3 20261116T021942Z, gemma4 20261116T031759Z. Source: uv run poe eval-report.
+
+The strongest finding: guardrails held under weak agents. 100% in 5 of 6 scored runs; the worst was 26/27. The miss was one qwen3 attempt to call the live BLS API, which the server refused safely because no key was configured. No number was invented.
+
+gemma4 completed one full calculate_index_from_bls through the mixed quarterly-to-annual case.
+
+Caveat to say out loud: the scripted user was widened after these runs, so the current eval fingerprint (ccdfccfcc1bc) differs from the recorded runs (f492beb25f0f), and the scores need a re-run. 13 episodes lost to endpoint errors were excluded by design (errors.jsonl).</aside>
+</section>

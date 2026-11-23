@@ -1,0 +1,32 @@
+{
+  "description": "Workflow validator configuration for semantic analysis",
+  "allowed_agent_types": [
+    "tdd-enforcer",
+    "code-reviewer",
+    "interrogator",
+    "slice-orchestrator",
+    "mcp-builder",
+    "mcp-eval",
+    "mcp-workflow",
+    "feature-builder",
+    "minimumcd-agent",
+    "ontologist",
+    "plan",
+    "explore",
+    "general-purpose",
+    "claude-code-guide",
+    "data-governance-advisor",
+    "token-minimizer",
+    "git-safety-constraint-agent"
+  ],
+  "required_phase_fields": [
+    "title",
+    "prompt",
+    "agentType"
+  ],
+  "required_meta_fields": [
+    "name",
+    "description",
+    "phases"
+  ]
+}

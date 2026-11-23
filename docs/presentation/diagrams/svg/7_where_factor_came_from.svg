@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Where the factor came from — composition of one escalation factor</title>
+<style>
+text { font-family: 'Segoe UI', Arial, sans-serif; }
+</style>
+<defs>
+<marker id="ah" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="22" markerHeight="22" orient="auto-start-reverse" markerUnits="userSpaceOnUse" ><path d="M 0 0 L 12 6 L 0 12 z" fill="#2563EB"/></marker>
+<filter id="sh" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.08"/></filter>
+</defs>
+<rect x="0" y="0" width="1920" height="1080" fill="#F7F8FA"/>
+<text x="80" y="112" font-size="64" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Where the factor came from</text>
+<rect x="60" y="190" width="700" height="220" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="88" y="242" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="Consolas, 'Courier New', monospace">PCU327320327320</text>
+<text x="88" y="284.0" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">PPI ready-mix concrete (materials)</text>
+<text x="88" y="318.32" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">weight 0.60 · annual 2014 → 2026</text>
+<text x="88" y="352.64" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">200.0 → 310.0 · relative 1.5500</text>
+<rect x="60" y="440" width="700" height="220" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="88" y="492" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="Consolas, 'Courier New', monospace">CIU1010000000000I</text>
+<text x="88" y="534.0" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">ECI-like labor index (labor)</text>
+<text x="88" y="568.32" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">weight 0.40 · quarterly only</text>
+<text x="88" y="602.64" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">2014-Q04 140 → 2026-Q04 224 · 1.6000</text>
+<text x="60" y="712.0" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">weights are the analyst's call —</text>
+<text x="60" y="746.32" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">the server never invents them</text>
+<text x="830" y="440" font-size="96" font-weight="700" fill="#2563EB" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">+</text>
+<path d="M 890 390 L 1010 390 L 1050 430 L 1010 470 L 890 470 L 930 430 Z" fill="#EFF4FF" stroke="#2563EB" stroke-width="2.5"/>
+<text x="960" y="520.0" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">fixed-weight</text>
+<text x="960" y="554.32" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">composite,</text>
+<text x="960" y="588.64" font-size="26" font-weight="400" fill="#4B5563" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">server-side</text>
+<rect x="1090" y="190" width="770" height="340" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="3" filter="url(#sh)"/>
+<text x="1120" y="240" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Composite escalation factor</text>
+<text x="1120" y="320" font-size="60" font-weight="700" fill="#2563EB" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">1.5700  (+57.00%)</text>
+<text x="1120" y="372" font-size="26" font-weight="400" fill="#4B5563" text-anchor="start" font-family="Consolas, 'Courier New', monospace">= 0.60 × 1.5500 + 0.40 × 1.6000</text>
+<rect x="1120" y="400" width="352.0" height="46" rx="23.0" fill="#E7F4F2" stroke="#0F766E" stroke-width="1.5"/>
+<text x="1296.0" y="432.36" font-size="26" font-weight="400" fill="#0F766E" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">graded: weights sum to 1</text>
+<rect x="1120" y="458" width="612.0" height="46" rx="23.0" fill="#E7F4F2" stroke="#0F766E" stroke-width="1.5"/>
+<text x="1426.0" y="490.36" font-size="26" font-weight="400" fill="#0F766E" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">graded: matches an independent recomputation</text>
+<path d="M 1475 530 L 1475 586" fill="none" stroke="#4B5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 1455 586 L 1495 586" stroke="#4B5563" stroke-width="2.5"/>
+<rect x="1090" y="590" width="770" height="260" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="1120" y="636" font-size="28" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">source record (ledger)</text>
+<text x="1120" y="684" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="start" font-family="Consolas, 'Courier New', monospace">snapshot_id = eval_synthetic_world</text>
+<text x="1120" y="724" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="start" font-family="Consolas, 'Courier New', monospace">series IDs + periods per component</text>
+<text x="1120" y="764" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="start" font-family="Consolas, 'Courier New', monospace">warning: CIU… resolved from Q04</text>
+<text x="1120" y="804" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="start" font-family="Consolas, 'Courier New', monospace">no zero-fill · no interpolation</text>
+<text x="80" y="1024" font-size="24" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Synthetic values from the eval world (eval/bls/README.md, case 2), not BLS data · reproduced by poe eval-selftest</text>
+<text x="80" y="1056" font-size="24" font-weight="400" fill="#4B5563" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Corrected vs. prompt 7: the illustrative 1.032 and a CUSR… series (a CPI prefix, not ECI) replaced with this basket</text>
+</svg>

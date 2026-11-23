@@ -1,0 +1,394 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Code Mode
+
+> Let LLMs write Python to orchestrate tools in a sandbox
+
+New in version `3.1.0`
+
+> [!WARNING]
+>
+> CodeMode is experimental. The core interface is stable, but the specific discovery tools and their parameters may evolve as we learn more about what works best in practice.
+
+Standard MCP tool usage has two scaling problems. First, every tool in the catalog is loaded into the LLM's context upfront — with hundreds of tools, that's tens of thousands of tokens spent before the LLM even reads the user's request. Second, every tool call is a round-trip: the LLM calls a tool, the result passes back through the context window, the LLM reasons about it, calls another tool, and so on. Intermediate results that only exist to feed the next step still burn tokens flowing through the model.
+
+CodeMode solves both problems. Instead of seeing your entire tool catalog, the LLM gets meta-tools for discovering what's available and for writing and executing code that calls the tools it needs. It discovers on demand, writes a script that chains tool calls in a sandbox, and gets back only the final answer.
+
+The approach was introduced by Cloudflare in [Code Mode](https://blog.cloudflare.com/code-mode/) and explored further by Anthropic in [Code Execution with MCP](https://www.anthropic.com/engineering/code-execution-with-mcp).
+
+## Getting Started
+
+> [!TIP]
+>
+> CodeMode requires the `code-mode` extra for sandbox support. Install it with `pip install "fastmcp[code-mode]"`.
+
+You take a normal server with normally registered tools and add a `CodeMode` transform. The transform wraps your existing tools in the code mode machinery — your tool functions don't change at all:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.experimental.transforms.code_mode import CodeMode
+
+mcp = FastMCP("Server", transforms=[CodeMode()])
+
+@mcp.tool
+def add(x: int, y: int) -> int:
+    """Add two numbers."""
+    return x + y
+
+@mcp.tool
+def multiply(x: int, y: int) -> int:
+    """Multiply two numbers."""
+    return x * y
+```
+
+Clients connecting to this server no longer see `add` and `multiply` directly. Instead, they see the meta-tools that CodeMode provides — tools for discovering what's available and executing code against it. The original tools are still there, but they're accessed through the CodeMode layer.
+
+## Discovery
+
+Before the LLM can write code that calls your tools, it needs to know what tools exist and how to call them. This is the **discovery** process — the LLM uses meta-tools to learn about your tool catalog, then writes code against what it finds.
+
+The fundamental tradeoff is **tokens vs. round-trips**. Each discovery step is an LLM round-trip: the model calls a tool, waits for the response, reasons about it, then decides what to do next. More steps mean less wasted context (each step is targeted) but more latency and API calls. Fewer steps mean the LLM gets information upfront but pays for detail it might not need.
+
+By default, CodeMode gives the LLM three tools — `search`, `get_schema`, and `execute` — creating a three-stage discovery flow:
+
+**1. Search for tools**
+
+First, the LLM uses the `search` meta-tool to find tools by keyword.
+
+For example, it might do `search(query="math numbers")` and receive the following response:
+
+```text theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+- add: Add two numbers.
+- multiply: Multiply two numbers.
+```
+
+This lets the LLM know which tools are available and what they do, significantly reducing the surface area it needs to consider.
+
+**2. Get parameter details for the tools**
+
+Next, the LLM calls `get_schema` to get parameter details for the tools it found in the previous step.
+
+For example, it might do `get_schema(tools=["add", "multiply"])` and receive the following response:
+
+```text theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+### add
+
+Add two numbers.
+
+**Parameters**
+- `x` (integer, required)
+- `y` (integer, required)
+
+**Returns**
+- `result` (integer, required)
+
+### multiply
+
+Multiply two numbers.
+
+**Parameters**
+- `x` (integer, required)
+- `y` (integer, required)
+
+**Returns**
+- `result` (integer, required)
+```
+
+Now the LLM knows the parameters for the tools it found, and can write code that chains the tool calls. If it needed more detail, it could have called `get_schema` with `detail="full"` to get the complete JSON schema.
+
+**3. Write and execute code that chains the tool calls**
+
+Finally, the LLM writes and executes code that chains the tool calls in a Python sandbox. Inside the sandbox, `call_tool(name, params)` is the only function available. The LLM uses this to compose tools into a workflow and return a final result.
+
+For example, it might write the following code and call the `execute` tool with it:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+a = await call_tool("add", {"x": 3, "y": 4})
+b = await call_tool("multiply", {"x": a["result"], "y": 2})
+return b["result"]
+```
+
+`call_tool` returns the tool's structured content when the tool has an output schema, and its text otherwise. A tool that returns a bare value such as an `int` has its output wrapped as `{"result": ...}`, which is why the code reads `a["result"]`; the Returns section from `get_schema` shows that shape. The value of the block's `return` is returned to the LLM.
+
+This three-stage flow works well for most servers — each step pulls in only the information needed for the next one, keeping context usage minimal. But CodeMode's discovery surface is fully configurable. The sections below explain each built-in discovery tool and how to combine them into different patterns.
+
+## Discovery Tools
+
+CodeMode ships with four built-in discovery tools: `Search`, `GetSchemas`, `GetTags`, and `ListTools`. By default, only `Search` and `GetSchemas` are enabled. Each tool supports a `default_detail` parameter that sets the default verbosity level, and the LLM can override the detail level on any individual call.
+
+### Detail Levels
+
+`Search` and `GetSchemas` share the same three detail levels, so the same `detail` value produces the same output format regardless of which tool the LLM calls:
+
+| Level | Output | Token cost |
+| - | - | - |
+| `"brief"` | Tool names and one-line descriptions | Cheapest — good for scanning |
+| `"detailed"` | Compact markdown with parameter names, types, literal values, defaults, required markers, and the field names one level inside any object-valued parameter or return | Medium — often enough to write code |
+| `"full"` | Complete JSON schema | Most expensive — everything |
+
+`Search` defaults to `"brief"` and `GetSchemas` defaults to `"detailed"`.
+
+### Search
+
+`Search` finds tools by natural-language query using BM25 ranking. At its default `"brief"` detail, results include just tool names and descriptions — enough to decide which tools are worth inspecting further. The LLM can request `"detailed"` to get parameter schemas inline, or `"full"` for the complete JSON.
+
+Search results include an annotation like `"2 of 10 tools:"` when the result set is smaller than the full catalog, so the LLM knows there are more tools to discover with different queries. Results at `"full"` detail are plain JSON and omit it.
+
+By default, `Search` returns all matching tools (`default_limit=None`). You can cap the result count with `default_limit` to keep large catalogs focused. The LLM can override this limit per call, including requesting more results or passing `limit=None` to return all matches:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+Search(default_limit=5)  # return at most 5 results per search
+```
+
+If your tools use [tags](https://gofastmcp.com/docs/servers/visibility.md#tags), Search also accepts a `tags` parameter so the LLM can narrow results to specific categories before searching. The tag `"untagged"` matches tools with no tags.
+
+To replace BM25 ranking, pass `search_fn`, an async callable that takes the candidate tools and the query string and returns the matching tools in ranked order.
+
+### GetSchemas
+
+`GetSchemas` returns parameter details for specific tools by name. At its default `"detailed"` level, it renders compact markdown with parameter names, types, literal values, defaults, and required markers. Object-valued parameters and return values also list their own field names one level down, following `$ref`s into `$defs`, so a tool returning `list[Card]` renders as ``- `items` (object[]): `id`, `url`, `title`, …`` rather than an opaque `object[]`. At `"full"`, it returns the complete JSON schema — useful when tools have deeply nested parameters that the compact format doesn't capture.
+
+For example, a parameter declared as `sort: Literal["top", "recent"] = "recent"` appears as:
+
+```text theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+- `sort` (string, one of "top"/"recent", default "recent")
+```
+
+Single-value literals also show their allowed value. Literal value lists are included up to eight values; parameter descriptions and complete constraints remain available at `"full"` detail.
+
+### GetTags
+
+`GetTags` lets the LLM browse tools by category using [tag](https://gofastmcp.com/docs/servers/visibility.md#tags) metadata. It supports only `"brief"` and `"full"` detail. At brief detail, the LLM sees tag names with counts; at full detail, it sees tools listed under each tag. Tools without tags are grouped under `untagged`:
+
+```text theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+- math (3 tools)
+- text (2 tools)
+- untagged (1 tool)
+```
+
+`GetTags` isn't included in the defaults — add it when browsing by category would help the LLM orient itself in a large catalog. The LLM can browse tags first, then pass specific tags into Search to narrow results.
+
+### ListTools
+
+`ListTools` dumps the entire catalog at whatever detail level the LLM requests. It supports the same three detail levels as `Search` and `GetSchemas`, defaulting to `"brief"`.
+
+`ListTools` isn't included in the defaults — for large catalogs, search-based discovery is more token-efficient. But for smaller catalogs (under \~20 tools), letting the LLM see everything upfront can be faster than multiple search round-trips:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp.experimental.transforms.code_mode import CodeMode, ListTools, GetSchemas
+
+code_mode = CodeMode(
+    discovery_tools=[ListTools(), GetSchemas()],
+)
+```
+
+## Discovery Patterns
+
+The right discovery configuration depends on your server — how many tools you have and how complex their parameters are. It may be tempting to minimize round-trips by collapsing everything into fewer steps, but for the complex servers that benefit most from CodeMode, our experience is that staged discovery leads to better results. Flooding the LLM with detailed schemas for tools it doesn't end up using can hurt more than the extra round-trip costs. Each pattern below is a complete, copyable configuration.
+
+### Three-Stage
+
+The default. The LLM searches for candidates, inspects schemas for the ones it wants, then writes code. Best for **large or complex tool sets** where you want to minimize context usage — the LLM only pays for schemas it actually needs.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.experimental.transforms.code_mode import CodeMode
+
+mcp = FastMCP("Server", transforms=[CodeMode()])
+```
+
+If your tools use [tags](https://gofastmcp.com/docs/servers/visibility.md#tags), add `GetTags` so the LLM can browse by category before searching — giving it four stages of progressive disclosure:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.experimental.transforms.code_mode import CodeMode
+from fastmcp.experimental.transforms.code_mode import GetTags, Search, GetSchemas
+
+code_mode = CodeMode(
+    discovery_tools=[GetTags(), Search(), GetSchemas()],
+)
+
+mcp = FastMCP("Server", transforms=[code_mode])
+```
+
+### Two-Stage
+
+Search returns parameter schemas inline, so the LLM can go straight from search to execute. Best for **smaller catalogs** where the extra tokens per search result are a reasonable price for one fewer round-trip.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.experimental.transforms.code_mode import CodeMode
+from fastmcp.experimental.transforms.code_mode import Search, GetSchemas
+
+code_mode = CodeMode(
+    discovery_tools=[Search(default_detail="detailed"), GetSchemas()],
+)
+
+mcp = FastMCP("Server", transforms=[code_mode])
+```
+
+`GetSchemas` is still available as a fallback — the LLM can call it with `detail="full"` if it encounters a tool with complex nested parameters where the compact markdown isn't enough.
+
+### Single-Stage
+
+Skip discovery entirely and bake tool instructions into the execute tool's description. Best for **very simple servers** where the LLM already knows what tools are available — maybe there are only a few, or they're described in the system prompt.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.experimental.transforms.code_mode import CodeMode
+
+code_mode = CodeMode(
+    discovery_tools=[],
+    execute_description=(
+        "Available tools:\n"
+        "- add(x: int, y: int) -> int: Add two numbers\n"
+        "- multiply(x: int, y: int) -> int: Multiply two numbers\n\n"
+        "Write Python using `await call_tool(name, params)` and `return` the result."
+    ),
+)
+
+mcp = FastMCP("Server", transforms=[code_mode])
+```
+
+## Custom Discovery Tools
+
+Discovery tools are composable — you can mix the built-ins with your own. Each discovery tool is a callable that receives catalog access and returns a `Tool`. The catalog accessor is a function (not the catalog itself) because the catalog is request-scoped — different users may see different tools based on auth.
+
+Here's a minimal example:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp.experimental.transforms.code_mode import CodeMode
+from fastmcp.experimental.transforms.code_mode import GetToolCatalog, GetSchemas
+from fastmcp.server.context import Context
+from fastmcp.tools import Tool
+
+def list_all_tools(get_catalog: GetToolCatalog) -> Tool:
+    async def list_tools(ctx: Context) -> str:
+        """List all available tool names."""
+        tools = await get_catalog(ctx)
+        return ", ".join(t.name for t in tools)
+
+    return Tool.from_function(fn=list_tools, name="list_tools")
+
+code_mode = CodeMode(discovery_tools=[list_all_tools, GetSchemas()])
+```
+
+The LLM sees the docstring of each discovery tool's inner function as its description — that's how it learns what each tool does and when to use it. Write docstrings that explain what the tool returns and when the LLM should call it.
+
+Discovery tools and the execute tool can also have custom names:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.experimental.transforms.code_mode import CodeMode, GetSchemas, Search
+
+code_mode = CodeMode(
+    discovery_tools=[
+        Search(name="find_tools"),
+        GetSchemas(name="describe"),
+    ],
+    execute_tool_name="run_workflow",
+)
+
+mcp = FastMCP("Server", transforms=[code_mode])
+```
+
+## Sandbox Configuration
+
+The sandbox controls the Python environment used by the code submitted to `execute`. Calls to `call_tool()` dispatch registered tools through FastMCP in the current request context, with the same authorization checks as a normal tool call. Those tool functions run in the server environment and retain their configured access to files, networks, and other resources.
+
+### Resource Limits
+
+The default `MontySandboxProvider` enforces execution limits — timeouts, memory caps, recursion depth, and more.
+
+Constructed with no arguments, it applies a conservative baseline so the out-of-box configuration is not unbounded: `max_feed_duration_secs=30` and `max_memory=100_000_000` (100 MB). Pass an explicit `limits` dict to override it, or `limits=None` to disable the configurable time, memory, and GC limits. Monty's standard recursion limit still applies:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp.experimental.transforms.code_mode import MontySandboxProvider
+
+MontySandboxProvider()                  # baseline: 30s, 100 MB
+MontySandboxProvider(limits={...})      # your own limits
+MontySandboxProvider(limits=None)       # no time, memory, or GC limits
+```
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.experimental.transforms.code_mode import CodeMode
+from fastmcp.experimental.transforms.code_mode import MontySandboxProvider
+
+sandbox = MontySandboxProvider(
+    limits={"max_feed_duration_secs": 10, "max_memory": 50_000_000},
+)
+
+mcp = FastMCP("Server", transforms=[CodeMode(sandbox_provider=sandbox)])
+```
+
+Time, memory, and GC limits are optional; omit a key to disable that limit. Recursion depth defaults to Monty's standard maximum of 1,000:
+
+| Key | Type | Description |
+| - | - | - |
+| `max_feed_duration_secs` | `float` | Maximum sandbox execution time for the entire code block |
+| `max_turn_duration_secs` | `float` | Maximum sandbox execution time between host round trips |
+| `max_memory` | `int` | Memory ceiling in bytes |
+| `max_recursion_depth` | `int` | Maximum recursion depth |
+| `gc_interval` | `int` | Garbage collection frequency |
+
+Duration limits exclude time spent waiting for host tools. The feed limit covers the entire code block; the turn limit resets after each host round trip. To bound the total time an `execute` call takes, including tool calls, use a [wall-clock limit](#wall-clock-limit).
+
+Unsupported keys raise `ValueError` rather than being silently ignored. Replace `max_duration_secs` with `max_feed_duration_secs` in existing configurations. Monty no longer supports `max_allocations`; use `max_memory` to cap memory usage.
+
+### Tool Call Limits
+
+A single `execute` block can issue many `call_tool()` invocations — a loop in LLM-generated code can fan out into a large number of backend operations from one request. `CodeMode` caps this at `max_tool_calls` (default `50`); exceeding it raises a `ToolError`. Pass `None` for no cap:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp.experimental.transforms.code_mode import CodeMode
+
+CodeMode()                      # default: 50 call_tool() calls per execute()
+CodeMode(max_tool_calls=200)    # raise the cap
+CodeMode(max_tool_calls=None)   # no cap
+```
+
+### Wall-Clock Limit
+
+Sandbox duration limits stop counting while the code waits on `call_tool()`, so a slow or hanging backend tool can keep an `execute` call open indefinitely. Set `wall_clock_timeout_secs` to cap the total elapsed time of each `execute` call, sandbox and tool calls together. When the limit is reached, the sandbox and any in-flight tool calls are cancelled and `execute` raises a `ToolError`. It applies to any sandbox provider and defaults to `None` (no limit):
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp.experimental.transforms.code_mode import CodeMode
+
+CodeMode(wall_clock_timeout_secs=60)
+```
+
+### Custom Sandbox Providers
+
+You can replace the default sandbox with any object implementing the `SandboxProvider` protocol. The `code` it receives is untrusted, LLM-generated Python: run it in an isolated sandbox, never with plain `exec()`.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from collections.abc import Callable
+from typing import Any
+
+from fastmcp import FastMCP
+from fastmcp.experimental.transforms.code_mode import CodeMode
+
+class RemoteSandboxProvider:
+    async def run(
+        self,
+        code: str,
+        *,
+        inputs: dict[str, Any] | None = None,
+        external_functions: dict[str, Callable[..., Any]] | None = None,
+    ) -> Any:
+        # Send code to your remote sandbox runtime
+        ...
+
+mcp = FastMCP(
+    "Server",
+    transforms=[CodeMode(sandbox_provider=RemoteSandboxProvider())],
+)
+```
+
+The `external_functions` dict contains async callables injected into the sandbox scope — `execute` uses this to provide `call_tool`.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

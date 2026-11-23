@@ -1,0 +1,15 @@
+datasets:
+  pars-eval-0:
+    csv_path: datasets/pars-eval-0/examples/pars-eval-0.csv
+    input_keys:
+      - query
+    output_keys:
+      - responses
+    description: "25 WBS hierarchy queries covering discovery, search, navigation, and complex scenarios (frozen; earlier results refer to it)"
+  pars-eval-1:
+    csv_path: datasets/pars-eval-1/examples/pars-eval-1.csv
+    input_keys:
+      - query
+    output_keys:
+      - responses
+    description: "60 synthetic WBS queries: pars-eval-0 plus 35 more across both projects, edge cases, and out-of-scope requests"

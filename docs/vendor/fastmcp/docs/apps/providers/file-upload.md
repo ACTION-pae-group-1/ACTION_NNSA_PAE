@@ -1,0 +1,170 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# File Upload
+
+> Drag-and-drop file upload for any MCP server
+
+New in version `3.2.0`
+
+`FileUpload` adds drag-and-drop file upload to any server. Users upload files through an interactive UI, bypassing the LLM context window entirely. The LLM can then list and read uploaded files through model-visible tools.
+
+![The FileUpload provider shown in Goose, with a drag-and-drop zone for uploading files](https://mintcdn.com/fastmcp/qxtzRAUiJsjdoWFw/apps/images/app-file-upload.png?fit=max\&auto=format\&n=qxtzRAUiJsjdoWFw\&q=85\&s=844653a18265bbf6fa4c74be254cc8bd)
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.apps.file_upload import FileUpload
+
+mcp = FastMCP("My Server")
+mcp.add_provider(FileUpload())
+```
+
+This registers four tools:
+
+| Tool | Visibility | Purpose |
+| - | - | - |
+| `file_manager` | Model | Opens the drag-and-drop upload UI |
+| `store_files` | App only | Called by the UI when the user clicks Upload |
+| `list_files` | Model | Returns metadata for all uploaded files |
+| `read_file` | Model | Returns a file's contents by name |
+
+The LLM sees `file_manager`, `list_files`, and `read_file`. It calls `file_manager` to show the upload interface, then uses `list_files` and `read_file` to work with whatever the user uploaded. `store_files` is app-only — the UI calls it directly and the LLM never needs to know about it.
+
+## Configuration
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+FileUpload(
+    name="Files",                    # App name (used in tool routing)
+    max_file_size=10 * 1024 * 1024,  # 10 MB default, enforced server-side
+    title="File Upload",             # Heading shown in the UI
+    description="Drop files to...",  # Description text below the heading
+    drop_label="Drop files here",    # Label inside the drop zone
+)
+```
+
+The `max_file_size` limit is enforced both in the UI (the DropZone rejects oversized files) and on the server (the `store_files` tool validates before calling `on_store`).
+
+### Retention in memory
+
+Set `max_total_size` to cap the combined decoded file bytes in the default in-memory store across every session. A batch is accepted in full or rejected; replacing a filename uses the size of its final contents. This limit counts file contents, rather than base64 encoding overhead or file metadata.
+
+Set `file_ttl_seconds` to expire files after a fixed age since upload. Replacing a file starts a new expiry period; reading it does not. Expired files are removed across all scopes when the default storage methods store, list, or read files. Cleanup runs on these operations, without a background timer.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.apps.file_upload import FileUpload
+
+mcp = FastMCP("My Server")
+mcp.add_provider(FileUpload(
+    max_total_size=50 * 1024 * 1024,
+    file_ttl_seconds=3600,
+))
+```
+
+Both options default to `None`, keeping files for the server process's lifetime without an aggregate size limit. `max_total_size` accepts a nonnegative integer; `file_ttl_seconds` accepts a positive, finite duration. These controls apply to the default in-memory methods. If you override the storage methods, your implementation sets its own retention policy.
+
+## Storage scoping
+
+By default, files are stored in memory and scoped to the client that uploaded them, so one client's files aren't visible to another. How FastMCP identifies that client depends on the protocol version the connection negotiated.
+
+On a handshake-era connection (`mode="legacy"`, or a client that predates MCP 2026-07-28), files are scoped by MCP session ID. This works with **stdio**, **SSE**, and **stateful HTTP** transports, where sessions persist across requests.
+
+MCP 2026-07-28 connections, which FastMCP clients negotiate by default, have no session. Files are scoped to the authenticated user instead, the same identity [`UserSession`](https://gofastmcp.com/docs/servers/sessions) uses. Without authentication, stdio servers keep one store for the process, because a stdio server serves a single client. An unauthenticated HTTP request carries nothing that identifies its client between requests, so the default storage rejects it with an error rather than sharing files across clients. Add [authentication](https://gofastmcp.com/docs/servers/auth/authentication.md) to the server, or override `_get_scope_key`.
+
+> [!WARNING]
+>
+> On handshake-era connections to a **stateless HTTP** server, each request creates a new session with a new ID. Files stored during one request (e.g. the UI upload) are invisible to the next request (e.g. the LLM calling `list_files`). For these clients you **must** override `_get_scope_key` to use a stable identifier, such as a user ID from your auth token.
+
+To scope files by a stable identifier of your own, override `_get_scope_key`. To scope files by authenticated user, read the caller from `get_access_token()`.
+
+Reject the request when there is no subject to key on. `get_access_token()` returns `None` on an unauthenticated request, and `subject` is optional even on a valid token, since not every verifier populates it. Returning a fallback in either case would put every such caller in one shared bucket, so they would see each other's uploads.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp.apps.file_upload import FileUpload
+from fastmcp.server.dependencies import get_access_token
+
+class UserScopedUpload(FileUpload):
+    def _get_scope_key(self, ctx):
+        token = get_access_token()
+        if token is None or not token.subject:
+            raise ValueError("File scoping requires an authenticated user with a subject")
+        return token.subject
+```
+
+If your provider carries the user identity in a different claim, read it from `token.claims` and validate it the same way.
+
+For process-wide shared storage (all users see all files):
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp.apps.file_upload import FileUpload
+
+class SharedUpload(FileUpload):
+    def _get_scope_key(self, ctx):
+        return "__shared__"
+```
+
+## Custom storage
+
+The default implementation stores files in memory for the lifetime of the server process. For persistent storage, subclass `FileUpload` and override three methods. Each receives the current `Context`, giving you access to session IDs, auth tokens, and request metadata for partitioning and authorization.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+import base64
+
+import boto3
+
+from fastmcp.apps.file_upload import FileUpload
+from fastmcp.server.dependencies import get_access_token
+
+s3 = boto3.client("s3")
+
+class S3Upload(FileUpload):
+    def _get_scope_key(self, ctx):
+        token = get_access_token()
+        if token is None or not token.subject:
+            raise ValueError("File scoping requires an authenticated user with a subject")
+        return token.subject
+
+    def on_store(self, files, ctx):
+        user_id = self._get_scope_key(ctx)
+        for f in files:
+            s3.put_object(
+                Bucket="uploads",
+                Key=f"{user_id}/{f['name']}",
+                Body=base64.b64decode(f["data"]),
+            )
+        return self.on_list(ctx)
+
+    def on_list(self, ctx):
+        user_id = self._get_scope_key(ctx)
+        objects = s3.list_objects(Bucket="uploads", Prefix=f"{user_id}/")
+        return [
+            {
+                "name": obj["Key"].split("/", 1)[1],
+                "type": "application/octet-stream",
+                "size": obj["Size"],
+                "size_display": f"{obj['Size']} B",
+                "uploaded_at": obj["LastModified"].isoformat(),
+            }
+            for obj in objects.get("Contents", [])
+        ]
+
+    def on_read(self, name, ctx):
+        user_id = self._get_scope_key(ctx)
+        obj = s3.get_object(Bucket="uploads", Key=f"{user_id}/{name}")
+        content = obj["Body"].read()
+        return {
+            "name": name,
+            "size": obj["ContentLength"],
+            "type": obj["ContentType"],
+            "uploaded_at": obj["LastModified"].isoformat(),
+            "content": content.decode("utf-8"),
+        }
+```
+
+Each file dict passed to `on_store` contains `name`, `size`, `type`, and `data` (base64-encoded content). The return value from `on_store` and `on_list` should be a list of summary dicts with `name`, `type`, `size`, `size_display`, and `uploaded_at` fields — these populate the file list in the UI.
+
+`on_read` returns a dict with file metadata and either `content` (decoded text) or `content_base64` (a base64 preview for binary files).
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

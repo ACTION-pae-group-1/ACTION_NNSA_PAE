@@ -1,0 +1,44 @@
+<section id="workflow">
+<div class="head">
+<p class="eyebrow">Criterion 3 · Tools around user goals</p>
+<h2>Tools follow the analyst’s workflow, not the API</h2>
+</div>
+<div class="grid2">
+<div class="card in" style="--i:0">
+<p class="card-label">1 · Discover</p>
+<p class="tool">search_series</p>
+<p class="tool">describe_series</p>
+<p class="tool">get_series_hierarchy</p>
+<p class="tool">get_cached_series_data</p>
+</div>
+<div class="card in" style="--i:1">
+<p class="card-label">2 · Specify</p>
+<p class="tool">create_index_spec</p>
+<p class="tool">validate_index_spec</p>
+<p class="tool">save_index_spec</p>
+<p class="tool">get_index_spec</p>
+</div>
+<div class="card card-accent in" style="--i:2">
+<p class="card-label">3 · Calculate</p>
+<p class="tool-key">calculate_index_from_bls</p>
+<p class="tool">calculate_index_spec</p>
+<p class="tool">calculate_component_escalation</p>
+<p class="tool">calculate_labor_locality_factor</p>
+</div>
+<div class="card in" style="--i:3">
+<p class="card-label">4 · Explain and access</p>
+<p class="tool">get_index_visualization</p>
+<p class="tool">get_bls_access_status</p>
+<p class="tool">get_series_data <span class="code-dim">(live, opt-in)</span></p>
+</div>
+</div>
+<p class="foot">Only get_series_data calls the BLS REST API. calculate_index_from_bls replaces a spec lookup, two reads per component, alignment and arithmetic.</p>
+<div class="pn"></div>
+<aside>The judges asked whether each tool is a real agent-facing action rather than a thin wrapper around one REST call. Here, 14 of the 15 tools never touch the BLS API at all.
+
+calculate_index_from_bls is the clearest goal-level tool: one call loads the saved spec, resolves base and target observations for every component from the snapshot, applies the quarterly-to-annual rule where needed, computes the composite, and returns a ledger.
+
+get_series_hierarchy exists because a series title doesn’t show what an index includes. For example, PPI “Sawmills” includes hardwood lumber, softwood lumber and wood chips, so a framing-lumber component is better matched by “Softwood lumber”.
+
+Honest gap: the specify step takes four calls (create, validate, save, calculate), and in the recorded runs models calculated before saving and never validated unprompted. A single goal tool that validates and calculates an inline spec is in future work (slide 20).</aside>
+</section>

@@ -1,0 +1,93 @@
+{
+  "created_at": "2026-11-15T23:18:26+00:00",
+  "data_origin": "synthetic_mock",
+  "run_id": "r8fec4416f3d5",
+  "stages": {
+    "clean": {
+      "cleaned_sample_rows": 16680,
+      "cleaned_spae_rows": 16720,
+      "concatenated_sample_rows": 49820,
+      "concatenated_spae_rows": 49940,
+      "data_origin": "synthetic_mock",
+      "finished_at": "2026-11-15T23:18:30+00:00",
+      "source_database": "mock_pars_full.duckdb",
+      "status": "ok"
+    },
+    "predict": {
+      "distinct_labels_per_level": {
+        "level_2": 5,
+        "level_3": 19,
+        "level_4": 30,
+        "level_5": 63,
+        "level_6": 72,
+        "level_7": 70,
+        "level_8": 47
+      },
+      "finished_at": "2026-11-20T04:28:22+00:00",
+      "model_variant": "untuned",
+      "predicted_rows": 16720,
+      "predictions_file": "predictions\\predicted_levels.parquet",
+      "status": "ok"
+    },
+    "tune_train": {
+      "best_params": {
+        "model__local_classifier__alpha": 1e-06,
+        "model__local_classifier__early_stopping": false,
+        "model__local_classifier__eta0": 0.01,
+        "model__local_classifier__l1_ratio": 0.85,
+        "model__local_classifier__learning_rate": "adaptive",
+        "model__local_classifier__loss": "hinge",
+        "model__local_classifier__max_iter": 5000,
+        "model__local_classifier__n_iter_no_change": 5,
+        "model__local_classifier__penalty": "elasticnet",
+        "model__local_classifier__tol": 0.0001,
+        "vectorizer__max_df": 0.85,
+        "vectorizer__min_df": 1,
+        "vectorizer__ngram_range": [
+          1,
+          2
+        ],
+        "vectorizer__sublinear_tf": true
+      },
+      "bundle_dirs": {
+        "tuned": "bundles\\tuned",
+        "untuned": "bundles\\untuned"
+      },
+      "bundles": {
+        "tuned": "bundles\\tuned",
+        "untuned": "bundles\\untuned"
+      },
+      "cv_folds": 3,
+      "finished_at": "2026-11-15T23:19:30+00:00",
+      "n_iter": 2,
+      "n_jobs": 1,
+      "rare_filter_kept": 13340,
+      "rare_filter_original": 13340,
+      "search_seed": null,
+      "split_seed": null,
+      "status": "ok",
+      "test_rows": 3340,
+      "train_rows": 13340,
+      "tuned_cv_best_score": 0.8575689719187477,
+      "tuned_test_f1": 0.8502994011976048,
+      "untuned_f1_scorer": 0.8485885372112917,
+      "untuned_test_f1": 0.8485885372112917
+    },
+    "write_back": {
+      "export_file": "predictions\\mapped_spae_2026-11-15.parquet",
+      "export_sha256": "48ef5fa37dde050907aa8cf48d492700d9a8126925d2da1e6929927e04bdb8ce",
+      "finished_at": "2026-11-15T23:19:38+00:00",
+      "mapped_rows": 49940,
+      "mapped_table": "gold_concatenated_spae_data_mapped",
+      "matched_rows": 16720,
+      "read_back_checks": {
+        "matched_rows_equal_predictions": true,
+        "predicted_values_equal": true,
+        "rows_table_equals_export": true
+      },
+      "read_back_verified": true,
+      "reason": "predict re-run",
+      "status": "stale"
+    }
+  }
+}

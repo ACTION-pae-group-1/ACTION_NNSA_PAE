@@ -1,0 +1,70 @@
+{
+  "servers": {
+    "bls_server": {
+      "transport": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "--no-sync",
+        "python",
+        "-m",
+        "bls_mcp.app"
+      ],
+      "allowed_tools": [
+        "search_series",
+        "describe_series",
+        "get_series_hierarchy",
+        "get_series_data",
+        "create_index_spec",
+        "get_bls_access_status",
+        "validate_index_spec",
+        "save_index_spec",
+        "calculate_index_from_bls",
+        "get_cached_series_data",
+        "calculate_component_escalation",
+        "calculate_index_spec",
+        "get_index_spec",
+        "get_index_visualization"
+      ],
+      "allowed_resources": [
+        "guide://escalation-workflow",
+        "methodology://composite-index",
+        "methodology://locality-adjustment",
+        "setup://bls-api",
+        "bls://series/{series_id}"
+      ],
+      "allowed_prompts": [
+        "design_escalation_basket"
+      ]
+    },
+    "pars_mcp": {
+      "transport": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "--no-sync",
+        "python",
+        "-m",
+        "src.pars_local_mcp.server"
+      ],
+      "allowed_tools": [
+        "list_projects",
+        "search_wbs",
+        "get_wbs_hierarchy",
+        "get_wbs_lineage",
+        "get_project_info",
+        "get_leaf_nodes",
+        "get_wbs_by_level",
+        "validate_wbs_inputs",
+        "clean_wbs_data",
+        "tune_and_train_wbs",
+        "predict_wbs",
+        "write_back_wbs",
+        "run_wbs_pipeline",
+        "get_wbs_run_status",
+        "get_wbs_project_descriptions",
+        "get_wbs_rows"
+      ]
+    }
+  }
+}

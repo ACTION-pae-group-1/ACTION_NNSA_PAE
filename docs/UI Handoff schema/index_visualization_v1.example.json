@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0",
+  "index_identity": {
+    "index_id": "courthouse-renovation",
+    "name": "Courthouse Renovation Escalation Index",
+    "spec_id": "courthouse-renovation",
+    "spec_revision": 3,
+    "snapshot_id": "sha256:example",
+    "methodology_version": "composite-index/1.0",
+    "frequency": "annual"
+  },
+  "normalization": {
+    "base_year": 2024,
+    "base_factor": "1.0",
+    "method": "base_year_annual_average"
+  },
+  "components": [
+    {
+      "component_id": "steel",
+      "display_order": 0,
+      "name": "Steel mill products",
+      "description": "Producer prices for selected steel mill products.",
+      "series_id": "WPU1017",
+      "allocation_weight": "0.400000",
+      "raw_unit": "index",
+      "raw_reference_basis": "BLS published basis",
+      "color_hex": "#4C78A8"
+    },
+    {
+      "component_id": "electrical",
+      "display_order": 1,
+      "name": "Electrical equipment",
+      "description": "Producer prices for selected electrical equipment.",
+      "series_id": "WPU117",
+      "allocation_weight": "0.600000",
+      "raw_unit": "index",
+      "raw_reference_basis": "BLS published basis",
+      "color_hex": "#F58518"
+    }
+  ],
+  "component_points": [
+    {
+      "period": "2023",
+      "year": 2023,
+      "period_kind": "annual_average",
+      "component_id": "steel",
+      "raw_ppi_value": "94.0",
+      "normalized_factor": "0.940000",
+      "weighted_level": "0.376000",
+      "observation_id": "obs:steel:2023"
+    },
+    {
+      "period": "2023",
+      "year": 2023,
+      "period_kind": "annual_average",
+      "component_id": "electrical",
+      "raw_ppi_value": "97.0",
+      "normalized_factor": "0.970000",
+      "weighted_level": "0.582000",
+      "observation_id": "obs:electrical:2023"
+    },
+    {
+      "period": "2024",
+      "year": 2024,
+      "period_kind": "annual_average",
+      "component_id": "steel",
+      "raw_ppi_value": "100.0",
+      "normalized_factor": "1.000000",
+      "weighted_level": "0.400000",
+      "observation_id": "obs:steel:2024"
+    },
+    {
+      "period": "2024",
+      "year": 2024,
+      "period_kind": "annual_average",
+      "component_id": "electrical",
+      "raw_ppi_value": "100.0",
+      "normalized_factor": "1.000000",
+      "weighted_level": "0.600000",
+      "observation_id": "obs:electrical:2024"
+    }
+  ],
+  "composite_points": [
+    {
+      "period": "2023",
+      "year": 2023,
+      "period_kind": "annual_average",
+      "composite_factor": "0.958000"
+    },
+    {
+      "period": "2024",
+      "year": 2024,
+      "period_kind": "annual_average",
+      "composite_factor": "1.000000"
+    }
+  ],
+  "base_year_adjustment": {
+    "source_year": 2023,
+    "base_year": 2024,
+    "source_composite_factor": "0.958000",
+    "adjustment_factor": "1.0438413361",
+    "adjustment_percent": "0.0438413361",
+    "steps": [
+      {
+        "component_id": "steel",
+        "display_order": 0,
+        "selected_year_normalized_factor": "0.940000",
+        "index_level_delta": "0.024000",
+        "adjustment_contribution": "0.0250521921",
+        "running_adjustment_factor": "1.0250521921"
+      },
+      {
+        "component_id": "electrical",
+        "display_order": 1,
+        "selected_year_normalized_factor": "0.970000",
+        "index_level_delta": "0.018000",
+        "adjustment_contribution": "0.0187891441",
+        "running_adjustment_factor": "1.0438413362"
+      }
+    ]
+  },
+  "warnings": []
+}

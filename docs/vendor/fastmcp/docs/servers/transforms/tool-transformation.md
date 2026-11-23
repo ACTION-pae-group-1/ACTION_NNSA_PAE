@@ -1,0 +1,237 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Tool Transformation
+
+> Modify tool schemas - rename, reshape arguments, and customize behavior
+
+New in version `3.0.0`
+
+Tool transformation lets you modify tool schemas - renaming tools, changing descriptions, adjusting tags, and reshaping argument schemas. FastMCP provides two mechanisms that differ in timing and in the options they accept.
+
+**Deferred transformation** with `ToolTransform` applies modifications when tools flow through a transform chain. Use this for tools from mounted servers, proxies, or other providers where you don't control the source directly.
+
+**Immediate transformation** with `Tool.from_tool()` creates a modified tool object right away. Use this when you have direct access to a tool and want to transform it before registration.
+
+## ToolTransform
+
+The `ToolTransform` class is a transform that modifies tools as they flow through a provider. Provide a dictionary mapping original tool names to their transformation configuration.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.server.transforms import ToolTransform
+from fastmcp.tools.tool_transform import ToolTransformConfig
+
+mcp = FastMCP("Server")
+
+@mcp.tool
+def verbose_internal_data_fetcher(query: str) -> str:
+    """Fetches data from the internal database."""
+    return f"Results for: {query}"
+
+# Rename the tool to something simpler
+mcp.add_transform(ToolTransform({
+    "verbose_internal_data_fetcher": ToolTransformConfig(
+        name="search",
+        description="Search the database.",
+    )
+}))
+
+# Clients see "search" with the cleaner description
+```
+
+`ToolTransform` is useful when you want to modify tools from mounted or proxied servers without changing the original source.
+
+## Tool.from\_tool()
+
+Use `Tool.from_tool()` when you have the tool object and want to create a transformed version for registration.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.tools import Tool, tool
+from fastmcp.tools.tool_transform import ArgTransform
+
+# Define a tool without registering it
+@tool
+def search(q: str, limit: int = 10) -> list[str]:
+    """Search for items."""
+    return [f"Result {i} for {q}" for i in range(limit)]
+
+# Transform it before registration
+better_search = Tool.from_tool(
+    search,
+    name="find_items",
+    description="Find items matching your search query.",
+    transform_args={
+        "q": ArgTransform(
+            name="query",
+            description="The search terms to look for.",
+        ),
+    },
+)
+
+mcp = FastMCP("Server")
+mcp.add_tool(better_search)
+```
+
+The standalone `@tool` decorator (from `fastmcp.tools`) attaches tool metadata to a function without registering it to any server; `Tool.from_tool()` accepts the decorated function directly. This separates creation from registration, letting you transform tools before deciding where they go.
+
+## Modification Options
+
+The two mechanisms overlap but are not identical. Only `ToolTransformConfig` sets `version` and `enabled`; only `Tool.from_tool()` accepts annotations, output schemas, and a custom function.
+
+**Tool-level options:**
+
+| Option | Description | `ToolTransformConfig` | `Tool.from_tool()` |
+| - | - | :-: | :-: |
+| `name` | New name for the tool | Yes | Yes |
+| `description` | New description | Yes | Yes |
+| `title` | Human-readable title | Yes | Yes |
+| `tags` | Set of tags for categorization | Yes | Yes |
+| `meta` | Custom metadata dictionary | Yes | Yes |
+| `version` | New version for the tool | Yes | No |
+| `enabled` | Whether the tool is visible to clients (default `True`) | Yes | No |
+| `annotations` | MCP `ToolAnnotations` | No | Yes |
+| `output_schema` | Output schema for structured results | No | Yes |
+| `transform_fn` | Custom function that wraps execution (see below) | No | Yes |
+
+Argument transforms go in `arguments` on `ToolTransformConfig` (as `ArgTransformConfig`) and in `transform_args` on `Tool.from_tool()` (as `ArgTransform`).
+
+**Argument-level options:**
+
+| Option | Description | `ArgTransformConfig` | `ArgTransform` |
+| - | - | :-: | :-: |
+| `name` | Rename the argument | Yes | Yes |
+| `description` | New description for the argument | Yes | Yes |
+| `default` | New default value (`ArgTransformConfig` accepts only strings, numbers, booleans, and `None`) | Yes | Yes |
+| `hide` | Remove from client-visible schema | Yes | Yes |
+| `required` | Make an optional argument required (only `True` is accepted) | Yes | Yes |
+| `examples` | Example values for the argument | Yes | Yes |
+| `default_factory` | Callable that generates a default (requires `hide=True`) | No | Yes |
+| `type` | Change the argument's type | No | Yes |
+
+## Hiding Arguments
+
+Hide arguments to simplify the interface or inject values the client shouldn't control.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp.tools.tool_transform import ArgTransform
+
+# Hide with a constant value
+transform_args = {
+    "api_key": ArgTransform(hide=True, default="secret-key"),
+}
+
+# Hide with a dynamic value
+import uuid
+transform_args = {
+    "request_id": ArgTransform(hide=True, default_factory=lambda: str(uuid.uuid4())),
+}
+```
+
+Hidden arguments disappear from the tool's schema. The client never sees them, but the underlying function receives the configured value.
+
+> [!WARNING]
+>
+> `default_factory` requires `hide=True`. Visible arguments need static defaults that can be represented in JSON Schema. A hidden argument also cannot be `required`, and `required=True` cannot be combined with a default.
+
+## Renaming Arguments
+
+Rename arguments to make them more intuitive for LLMs or match your API conventions.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp.tools import Tool, tool
+from fastmcp.tools.tool_transform import ArgTransform
+
+@tool
+def search(q: str, n: int = 10) -> list[str]:
+    """Search for items."""
+    return []
+
+better_search = Tool.from_tool(
+    search,
+    transform_args={
+        "q": ArgTransform(name="query", description="Search terms"),
+        "n": ArgTransform(name="max_results", description="Maximum results to return"),
+    },
+)
+```
+
+## Custom Transform Functions
+
+For advanced scenarios, provide a `transform_fn` that intercepts tool execution. The function can validate inputs, modify outputs, or add custom logic while still calling the original tool via `forward()`.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.tools import Tool, tool
+from fastmcp.tools.tool_transform import forward, ArgTransform
+
+@tool
+def divide(a: float, b: float) -> float:
+    """Divide a by b."""
+    return a / b
+
+async def safe_divide(numerator: float, denominator: float) -> float:
+    if denominator == 0:
+        raise ValueError("Cannot divide by zero")
+    return await forward(numerator=numerator, denominator=denominator)
+
+safe_division = Tool.from_tool(
+    divide,
+    name="safe_divide",
+    transform_fn=safe_divide,
+    transform_args={
+        "a": ArgTransform(name="numerator"),
+        "b": ArgTransform(name="denominator"),
+    },
+)
+
+mcp = FastMCP("Server")
+mcp.add_tool(safe_division)
+```
+
+The `forward()` function handles argument mapping automatically. Call it with the transformed argument names, and it maps them back to the original function's parameters.
+
+For direct access to the original function without mapping, use `forward_raw()` with the original parameter names.
+
+## Context-Aware Tool Factories
+
+You can write functions that act as "factories," generating specialized versions of a tool for different contexts. For example, create a `get_my_data` tool for the current user by hiding the `user_id` parameter and providing it automatically.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP
+from fastmcp.tools import Tool, tool
+from fastmcp.tools.tool_transform import ArgTransform
+
+# A generic tool that requires a user_id
+@tool
+def get_user_data(user_id: str, query: str) -> str:
+    """Fetch data for a specific user."""
+    return f"Data for user {user_id}: {query}"
+
+
+def create_user_tool(user_id: str) -> Tool:
+    """Factory that creates a user-specific version of get_user_data."""
+    return Tool.from_tool(
+        get_user_data,
+        name="get_my_data",
+        description="Fetch your data. No need to specify a user ID.",
+        transform_args={
+            "user_id": ArgTransform(hide=True, default=user_id),
+        },
+    )
+
+
+# Create a server with a tool customized for the current user
+mcp = FastMCP("User Server")
+current_user_id = "user-123"  # e.g., from auth context
+mcp.add_tool(create_user_tool(current_user_id))
+
+# Clients see "get_my_data(query: str)" — user_id is injected automatically
+```
+
+This pattern is useful for multi-tenant servers where each connection gets tools pre-configured with their identity, or for wrapping generic tools with environment-specific defaults.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

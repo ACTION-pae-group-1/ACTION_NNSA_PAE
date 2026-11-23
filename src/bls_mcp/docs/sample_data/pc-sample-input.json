@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "program": "pc",
+  "files": [
+    {
+      "path": "pc.industry.txt",
+      "role": "industry_mapping",
+      "sha256": "bfc35bf49c5384b3a151a3ee5094e743bb4b868eb8337b04f08d5f285c83fe0f",
+      "size_bytes": 41555
+    },
+    {
+      "path": "pc.product",
+      "role": "product_mapping",
+      "sha256": "65c1fe7bb5b36a6e588df472c01fe4f2d42ca39c5bc95bc60c2d03927ce71a13",
+      "size_bytes": 244353
+    },
+    {
+      "path": "pc.series",
+      "role": "series_metadata",
+      "sha256": "b9885bb502f1e32cb060123ab74e5b13dfbcb0df40c143ed64e2bc436829c5c9",
+      "size_bytes": 848710
+    },
+    {
+      "path": "pc.data.20.ComputerProduct.sample",
+      "role": "current",
+      "sha256": "06e9697060ffd9f6d34bc912a6c05ca2dfadbbdc5e99dc74c88707c31dad8fbb",
+      "size_bytes": 1911
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+model,case,repeat,status,elapsed_seconds,tool_calls,tool_errors,tools_used,final_answer,error
+gpt-5.4-gov,steel,1,timeout,120.02,1,0,bls_server__search_series,,Exceeded 120s
+gpt-5.6-luna-gov,steel,1,completed,11.97,9,0,bls_server__search_series; bls_server__search_series; bls_server__search_series; bls_server__search_series; bls_server__search_series; bls_server__search_series; bls_server__get_series_hierarchy; bls_server__get_series_hierarchy; bls_server__get_series_hierarchy,"No active commodity-based PPI matches were found in the local catalog. The following industry-based PPI series are relevant:
+
+- **PCU3311103311107** — PPI industry data for Iron and steel mills and ferroalloy mfg—Hot rolled steel bars, plates, and structural shapes, not seasonally adjusted
+- **PCU33231233231212** — PPI industry data for Fabricated structural metal mfg—Fabricated structural iron & steel for commercial, residential, institutional, & public bldgs., not seasonally adjusted
+- **PCU33231233231211** — PPI industry data for Fabricated structural metal mfg—Fabricated structural iron and steel for industrial buildings metal bar joists, short span, not seasonally adjusted",

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "manifest_version": "1.0.0",
+  "created_at": "2026-11-10T12:24:00Z",
+  "description": "PARS WBS (Work Breakdown Structure) synthetic data and reference hierarchy manifest",
+  "files": [
+    {
+      "file_id": "wbs/caef_2_0_standard",
+      "program": "pars_wbs",
+      "kind": "reference_hierarchy",
+      "format": "xlsx",
+      "path_in_repo": "src/pars_local_mcp/data/CAEF 2.0 Standard WBS.xlsx",
+      "size_bytes": 87743,
+      "sha256": "e23146ee888594b9ac38abf385ef108975a1a5fe916588bfc211f10f7c09d0c6",
+      "rows": 837,
+      "columns": [
+        "wbs_code",
+        "title",
+        "level",
+        "parent_wbs",
+        "description"
+      ],
+      "description": "CAEF 2.0 standard WBS hierarchy reference with 837 elements across 8 levels",
+      "purpose": "Ground truth for WBS classification, hierarchy validation, label generation",
+      "created_at": "2025-12-09T00:00:00Z",
+      "source": "CAEF (Consolidated Acquisition Environment Framework) 2.0 standard",
+      "status": "active",
+      "notes": "Official procurement WBS hierarchy standard; used to validate fake data generation"
+    }
+  ],
+  "artifacts": {
+    "description": "Model artifacts and bundles (generated during training)",
+    "bundle_structure": {
+      "fitted_pipeline_sgd.joblib": "Trained sklearn pipeline (TfidfVectorizer + LocalClassifierPerParentNode + SGDClassifier)",
+      "label_encoder.joblib": "MultiColumnLabelEncoder for decoding predictions (7-level hierarchy)",
+      "manifest.json": "Bundle metadata with checksums and training run info"
+    },
+    "generated_by": "src/pars_local_mcp/wbs/artifacts.py",
+    "default_location": "artifacts/"
+  },
+  "validation": {
+    "integrity_check": "All files verified with SHA256 checksums",
+    "encoding": "UTF-8 for CSV files, XLSX binary for Excel files",
+    "date_format": "ISO 8601",
+    "hierarchy_validation": "All synthetic labels validated against CAEF 2.0 standard"
+  },
+  "metadata": {
+    "project": "PARS MCP",
+    "version": "1.0.0",
+    "ml_pipeline": "TF-IDF + hiClass LocalClassifierPerParentNode + SGDClassifier",
+    "hierarchy_levels": 7
+  }
+}

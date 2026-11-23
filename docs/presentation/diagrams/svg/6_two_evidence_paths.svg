@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Two questions, two evidence paths — scope evidence and price evidence</title>
+<style>
+text { font-family: 'Segoe UI', Arial, sans-serif; }
+</style>
+<defs>
+<marker id="ah" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="22" markerHeight="22" orient="auto-start-reverse" markerUnits="userSpaceOnUse" ><path d="M 0 0 L 12 6 L 0 12 z" fill="#2563EB"/></marker>
+<filter id="sh" x="-5%" y="-5%" width="110%" height="120%"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.08"/></filter>
+</defs>
+<rect x="0" y="0" width="1920" height="1080" fill="#F7F8FA"/>
+<text x="80" y="112" font-size="64" font-weight="700" fill="#1A1D21" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif">Two questions, two evidence paths</text>
+<rect x="560" y="160" width="800" height="130" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="3" filter="url(#sh)"/>
+<text x="960.0" y="210" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">The analyst's question:</text>
+<text x="960.0" y="252.0" font-size="30" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">what will this project cost next year?</text>
+<path d="M 960 290 L 960 330 L 490 330 L 490 358" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M 960 330 L 1430 330 L 1430 358" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<text x="490" y="398" font-size="32" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">Understand the work</text>
+<rect x="170.0" y="430" width="640" height="62" rx="31.0" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5"/>
+<text x="490.0" y="470.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">find the project (PARS)</text>
+<rect x="170.0" y="530" width="640" height="62" rx="31.0" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5"/>
+<text x="490.0" y="570.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">classify scope (WBS)</text>
+<path d="M 490 492 L 490 528" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="170.0" y="630" width="640" height="62" rx="31.0" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5"/>
+<text x="490.0" y="670.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">trace lineage to work packages</text>
+<path d="M 490 592 L 490 628" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M 490 692 L 490 728" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="170.0" y="730" width="640" height="62" rx="31.0" fill="#E7F4F2" stroke="#0F766E" stroke-width="1.5"/>
+<text x="490.0" y="770.36" font-size="26" font-weight="700" fill="#0F766E" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">output: defined scope + evidence links</text>
+<path d="M 490 792 L 490 868" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<text x="1430" y="398" font-size="32" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">Measure price change</text>
+<rect x="1110.0" y="430" width="640" height="62" rx="31.0" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5"/>
+<text x="1430.0" y="470.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">pick series: pc materials, ci labor</text>
+<rect x="1110.0" y="530" width="640" height="62" rx="31.0" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5"/>
+<text x="1430.0" y="570.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">analyst sets weights + periods</text>
+<path d="M 1430 492 L 1430 528" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="1110.0" y="630" width="640" height="62" rx="31.0" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5"/>
+<text x="1430.0" y="670.36" font-size="26" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">validate before calculating</text>
+<path d="M 1430 592 L 1430 628" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M 1430 692 L 1430 728" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<rect x="1110.0" y="730" width="640" height="62" rx="31.0" fill="#E7F4F2" stroke="#0F766E" stroke-width="1.5"/>
+<text x="1430.0" y="770.36" font-size="26" font-weight="700" fill="#0F766E" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">output: a source-backed factor</text>
+<path d="M 1430 792 L 1430 868" fill="none" stroke="#4B5563" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)"/>
+<path d="M 810 761 L 1110 561" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ah)" stroke-dasharray="12 9"/>
+<rect x="854.5" y="647.3" width="211.0" height="33.800000000000004" rx="6" fill="#F7F8FA" stroke="none"/>
+<text x="960" y="672" font-size="26" font-weight="400" fill="#2563EB" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">proposed basket</text>
+<rect x="400" y="870" width="1120" height="120" rx="12" fill="#FFFFFF" stroke="#1A1D21" stroke-width="1.5" filter="url(#sh)"/>
+<text x="960.0" y="918" font-size="30" font-weight="700" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">The analyst brings them together —</text>
+<text x="960.0" y="960.0" font-size="28" font-weight="400" fill="#1A1D21" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif">owns the judgment; the server computes the math</text>
+</svg>

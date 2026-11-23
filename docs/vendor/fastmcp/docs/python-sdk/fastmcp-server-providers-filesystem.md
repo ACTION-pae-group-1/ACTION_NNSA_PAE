@@ -1,0 +1,72 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# filesystem
+
+# `fastmcp.server.providers.filesystem`
+
+FileSystemProvider for filesystem-based component discovery.
+
+FileSystemProvider scans a directory for Python files, imports them, and
+registers any Tool, Resource, ResourceTemplate, or Prompt objects found.
+
+Components are created using the standalone decorators from fastmcp.tools,
+fastmcp.resources, and fastmcp.prompts:
+
+Example:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+# In mcp/tools.py
+from fastmcp.tools import tool
+
+@tool
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
+
+# In main.py
+from pathlib import Path
+
+from fastmcp import FastMCP
+from fastmcp.server.providers import FileSystemProvider
+
+mcp = FastMCP("MyServer", providers=[FileSystemProvider(Path(__file__).parent / "mcp")])
+```
+
+## Classes
+
+### `FileSystemProvider` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/providers/filesystem.py#L50](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/providers/filesystem.py#L50)</sup>
+
+Provider that discovers components from the filesystem.
+
+Scans a directory for Python files and registers any Tool, Resource,
+ResourceTemplate, or Prompt objects found. Components are created using
+the standalone decorators:
+
+* @tool from fastmcp.tools
+* @resource from fastmcp.resources
+* @prompt from fastmcp.prompts
+
+**Args:**
+
+* `root`: Root directory to scan. Defaults to current directory.
+* `reload`: If True, re-scan files on every request (dev mode).
+  Defaults to False (scan once at init, cache results).
+
+**Methods:**
+
+#### `failed_files` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/providers/filesystem.py#L169](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/providers/filesystem.py#L169)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+failed_files(self) -> Mapping[Path, str]
+```
+
+Files that failed to import or register during the most recent load.
+
+The returned mapping is a snapshot. Import failures are also logged as
+warnings and registration failures as errors, but applications that
+need a strict startup policy can inspect this property without
+importing the modules again.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

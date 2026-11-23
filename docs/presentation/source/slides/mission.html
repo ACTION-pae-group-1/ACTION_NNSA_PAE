@@ -1,0 +1,31 @@
+<section id="mission">
+<div class="head">
+<p class="eyebrow">Mission alignment</p>
+<h2>Factors an estimator can defend in review</h2>
+</div>
+<div class="grid3">
+<div class="card in" style="--i:0">
+<p class="card-label">Traceable</p>
+<p class="card-text">Every factor carries its series, periods, raw values and snapshot ID. Ledger warnings are kept, never smoothed away.</p>
+</div>
+<div class="card in" style="--i:1">
+<p class="card-label">Reproducible</p>
+<p class="card-text">Published snapshots never change and eval runs are fingerprinted, so a reviewer can recompute the same number.</p>
+</div>
+<div class="card in" style="--i:2">
+<p class="card-label">Controlled</p>
+<p class="card-text">Local-first, approved model endpoints only. PARS data is synthetic and handled as CUI until a marking review.</p>
+</div>
+</div>
+<p class="statement in" style="--i:3">The analyst keeps the judgment. The server keeps the math honest.</p>
+<div class="pn"></div>
+<aside>Tie it to service delivery and oversight: escalation is a recurring step in cost estimating, and reviewers need to see where each factor came from. This server makes that trail automatic instead of something rebuilt by hand.
+
+Evidence:
+• Ledger and provenance: src/bls_mcp/models/provenance.py; calculate_index_from_bls returns both.
+• Immutability: published snapshots in the registry are selected by ID (activate, rollback); a published version is never edited.
+• Data handling: docs/DATA_HANDLING.md: synthetic data only, handled as CUI until marking review; no PII or real project data may be loaded.
+• Read-only boundaries: the PARS panels in the MCP App only accept a GuardedClient limited to read-only tools.
+
+Keep the claim modest: today the demo runs on sample and synthetic data. Live BLS refresh and real project data are future work.</aside>
+</section>

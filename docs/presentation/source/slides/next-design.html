@@ -1,0 +1,42 @@
+<section id="next-design">
+<div class="head">
+<p class="eyebrow">Future work · next iteration</p>
+<h2>Sharpen the design: MCP principles and code</h2>
+</div>
+<div class="grid2">
+<div class="card card-accent in" style="--i:0">
+<p class="card-label">MCP design</p>
+<ul class="list-small">
+<li>extra="forbid" on request models, and errors that name the fix (valid codes, “save the spec first”)</li>
+<li>One goal-level tool that validates and calculates an inline spec in a single call</li>
+<li>PARS: Pydantic inputs, tool annotations, and ToolError instead of {"error"} dicts</li>
+<li>Split PARS read tools from pipeline tools; ask for approval before write_back_wbs</li>
+</ul>
+</div>
+<div class="card in" style="--i:1">
+<p class="card-label">Code and innovation</p>
+<ul class="list-small">
+<li>One PARS entry point instead of two server.py files</li>
+<li>Per-server packages and dependencies, as docs/MCP_CONSOLIDATION.md plans</li>
+<li>Register or remove the stub resources; bls://snapshot would expose provenance directly</li>
+<li>A scope-to-basket tool that turns PARS WBS evidence into a proposed BLS basket</li>
+</ul>
+</div>
+</div>
+<div class="pn"></div>
+<aside>Mapped to criteria 1, 3 and innovation.
+
+MCP design:
+• extra="forbid": today only the visualization model forbids extra fields; lesson 2 shows why it matters.
+• Error text: lesson 3. The search_series description already says to use lowercase codes; the error should say it too.
+• A goal-level tool: lesson 4. Models struggled with create → validate → save → calculate. A tool such as escalate_basket(spec) that validates and calculates in one call, returning the same ledger, removes the ordering trap.
+• PARS tools return dict[str, Any] with {"error": …} on failure, so MCP clients see a success result; raising ToolError sets isError.
+• write_back_wbs is on the general PARS allowlist; the UI already blocks it. MCP elicitation can ask the user before any write.
+
+Code:
+• src/pars_local_mcp/server.py and src/pars_local_mcp/mcp/server.py both assemble the server, with different instructions text.
+• The root pyproject installs scikit-learn, hiclass and other PARS model dependencies for the BLS server too.
+• src/bls_mcp/mcp/resources/snapshot_resource.py and archetype_resource.py are unregistered stubs.
+
+Innovation: the dashed “proposed basket” handoff on slide 4 is manual today; a tool could turn WBS scope into a draft basket for the analyst to confirm.</aside>
+</section>

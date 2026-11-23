@@ -1,0 +1,25 @@
+<section id="demo">
+<div class="head">
+<p class="eyebrow">Demo · about six minutes</p>
+<h2>From a clean checkout to a cited factor</h2>
+</div>
+<div class="steps">
+<div class="step in" style="--i:0"><p class="step-n">1</p><p class="step-cmd">uv run poe sample-snapshot</p><p class="step-what">Builds an offline DuckDB snapshot from checked-in BLS files: 506 real ECI series, about 21,000 observations</p></div>
+<div class="step in" style="--i:1"><p class="step-n">2</p><p class="step-cmd">uv run poe verify</p><p class="step-what">In-process smoke check: 15 tools, 4 resources, PASS, no network</p></div>
+<div class="step in" style="--i:2"><p class="step-n">3</p><p class="step-cmd">MCP client: “escalate labor, 2015 → 2025”</p><p class="step-what">Real ECI: 2015-Q04 125.1 → 2025-Q04 173.642, factor 1.3880, Q04 alignment disclosed in the ledger</p></div>
+<div class="step in" style="--i:3"><p class="step-n">4</p><p class="step-cmd">uv run poe eval-selftest</p><p class="step-what">The running example graded at 1.5700; all 11 flawed agents caught</p></div>
+<div class="step in" style="--i:4"><p class="step-n">5</p><p class="step-cmd">eval.bls.runner --agent model</p><p class="step-what">A live model (Ask Sage -gov or local Ollama) held to the same contract</p></div>
+<div class="step in" style="--i:5"><p class="step-n">6</p><p class="step-cmd">fastmcp dev apps …/server.py:mcp</p><p class="step-what">The MCP App basket UI inside a host, on synthetic demo data</p></div>
+</div>
+<div class="pn"></div>
+<aside>Before presenting, apply future-work fix 1 (slide 18). On a fresh clone of main today, step 1 stops with “SHA-256 mismatch for pc.industry.txt”, because the manifest hashes were computed on Windows CRLF copies of files committed with LF endings.
+
+Values checked on 2026-11-17 on a clean Linux clone, with the manifest hashes regenerated in a scratch copy:
+• Step 2 printed “PASS discovery: 15 tools, 4 resources, 1 resource templates … PASS smoke check complete; no BLS requests or specification writes”.
+• Step 3, run through an in-process MCP client: CIU1010000000000I, annual spec 2015 → 2025, resolved from 2015-Q04 = 125.1 and 2025-Q04 = 173.642, composite 1.388025…, with two ledger warnings disclosing the Q04 alignment.
+• Step 4 printed “SELFTEST PASSED: oracles pass; every flawed agent is caught”.
+
+Step 5 needs LLM_* settings in src/portable_llm_mcp/.env. Run one case first: python -m eval.bls.runner --agent model --case mixed-materials-and-labor.
+
+Step 6, in full: fastmcp dev apps src/cost_intel_app/server.py:mcp. It needs the apps dependency group (prefab-ui).</aside>
+</section>

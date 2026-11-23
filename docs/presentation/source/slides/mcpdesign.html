@@ -1,0 +1,24 @@
+<section id="mcpdesign">
+<div class="head">
+<p class="eyebrow">Criterion 3 · MCP design principles</p>
+<h2>Built for an agent, not a browser</h2>
+</div>
+<table class="tbl-roomy">
+<tr class="tbl-head"><th style="width:28%">Principle</th><th style="width:72%">How bls_mcp does it</th></tr>
+<tr><td>Validated inputs</td><td>Pydantic request models: program codes limited to pc, ci, pd, wp; bounded limits; typed periods</td></tr>
+<tr><td>Structured outputs</td><td>Every tool returns a typed model; a calculation returns its result and its ledger together</td></tr>
+<tr><td>Descriptions an LLM can act on</td><td>Docstrings say when to call, what to check, and what never to claim</td></tr>
+<tr><td>Honest annotations</td><td>14 tools read-only; save_index_spec marked destructive; only get_series_data is open-world</td></tr>
+<tr><td>Guidance beyond tools</td><td>Server instructions, guide://escalation-workflow, methodology resources, a basket-design prompt</td></tr>
+<tr><td>Safe errors</td><td>Domain errors become a clear ToolError; anything unexpected is masked</td></tr>
+</table>
+<div class="pn"></div>
+<aside>Examples worth quoting if asked:
+• SeriesSearchRequest (src/bls_mcp/models/series.py): programs is a list of Literal["pc","ci","pd","wp"], with a description that says to use lowercase codes; limit is bounded 1–100.
+• calculate_index_from_bls returns SourceBackedCalculationResponse(result, ledger).
+• get_series_hierarchy’s docstring tells the model to check status (complete, partial or unknown) and not to claim what a series includes when relationships could not be identified.
+• save_index_spec carries readOnlyHint false and destructiveHint true, because it replaces a spec with the same ID.
+• Resources: methodology://composite-index, methodology://locality-adjustment, setup://bls-api, guide://escalation-workflow and the bls://series/{series_id} template. Prompt: design_escalation_basket.
+
+Gaps, in future work: request models don’t yet set extra="forbid", so invented fields are silently accepted; PARS tools take bare arguments and return {"error": …} dicts instead of raising ToolError.</aside>
+</section>

@@ -1,0 +1,107 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://127.0.0.1:11434",
+    "ANTHROPIC_AUTH_TOKEN": "ollama",
+    "ANTHROPIC_MODEL": "gemma4:12b-mtp",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "gemma4:12b-mtp",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "gemma4:12b-mtp",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "gemma4:12b-mtp",
+    "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "1",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "0",
+    "HF_TELEMETRY_DISABLED": "1",
+    "OLLAMA_NO_CLOUD": "1"
+  },
+  "prefersReducedMotion": false,
+  "switchModelsOnFlag": true,
+  "terminalProgressBarEnabled": true,
+  "model": "[insert_local_model]",
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "allow": [
+      "Bash(uv run *)",
+      "Bash(* npm run *)"
+    ],
+    "deny": [
+      "Delete",
+      "*--no-verify*",
+      "* ASKSAGE_USER_BASE_URL *",
+      "* docker push *",
+      "* github.com *"
+    ]
+  },
+  "plansDirectory": ".claude/plans",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -S \"${CLAUDE_PROJECT_DIR}/.claude/hooks/tool_call_context.py\" session",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -S \"${CLAUDE_PROJECT_DIR}/.claude/hooks/tool_call_context.py\" prompt",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read|Edit|Write|Glob|Grep|NotebookEdit|TodoWrite|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -S \"${CLAUDE_PROJECT_DIR}/.claude/hooks/tool_input_preflight.py\"",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "graphify hook-guard search",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "graphify hook-guard read",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Read|Edit|Write|Glob|Grep|NotebookEdit|TodoWrite|Bash|Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -S \"${CLAUDE_PROJECT_DIR}/.claude/hooks/tool_failure_recovery.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

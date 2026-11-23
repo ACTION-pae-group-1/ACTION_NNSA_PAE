@@ -1,0 +1,14 @@
+# Streamlit configuration for the NNSA cost-intelligence UI.
+# Must stay in sync with cost_intel_ui.theme.streamlit_config(); a test enforces it.
+
+[browser]
+# Usage telemetry is off. Do not enable.
+gatherUsageStats = false
+
+[theme]
+base = "dark"
+primaryColor = "#8be6c9"
+backgroundColor = "#171d24"
+secondaryBackgroundColor = "#10151b"
+textColor = "#ecf4f5"
+font = "sans serif"

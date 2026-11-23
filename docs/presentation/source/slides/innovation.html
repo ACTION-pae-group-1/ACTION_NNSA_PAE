@@ -1,0 +1,43 @@
+<section id="innovation">
+<div class="head">
+<p class="eyebrow">Innovation</p>
+<h2>What to look at first</h2>
+</div>
+<div class="grid3">
+<div class="card card-accent in" style="--i:0">
+<h3>A citation contract</h3>
+<p class="card-text">A right answer still fails unless it cites each series with its weight, the periods and the snapshot ID.</p>
+</div>
+<div class="card card-accent in" style="--i:1">
+<h3>Graders proven adversarially</h3>
+<p class="card-text">Eleven flawed agents must each fail exactly the check they target before any model is scored.</p>
+</div>
+<div class="card in" style="--i:2">
+<h3>Quarters never faked</h3>
+<p class="card-text">ECI publishes quarters only. The server uses Q04 and discloses it, instead of inventing an annual average.</p>
+</div>
+<div class="card in" style="--i:3">
+<h3>Fingerprinted runs</h3>
+<p class="card-text">Each run records hashes of the eval, the tool schemas and the prompt, so comparisons stay honest.</p>
+</div>
+<div class="card in" style="--i:4">
+<h3>An MCP App in the host</h3>
+<p class="card-text">cost_intel_app renders an interactive basket inside the chat host, with read-only PARS panels.</p>
+</div>
+<div class="card in" style="--i:5">
+<h3>Approved endpoints, enforced</h3>
+<p class="card-text">The client refuses any model host except Ask Sage -gov models and local Ollama, at config load.</p>
+</div>
+</div>
+<div class="pn"></div>
+<aside>Lead with the top two: they are what makes the evaluation trustworthy.
+
+• Citation contract: the “format” dimension in eval/bls/graders.py. A numerically right answer fails if it doesn’t say where the numbers came from.
+• Adversarial grader validation: eval/bls/agents.py (scripted oracle and flawed agents) and EXPECTED_FAILURES in eval/bls/runner.py.
+• Quarterly-to-annual alignment: QUARTERLY_ANNUAL_ANCHOR = "Q04" in src/bls_mcp/services/source_calculation.py.
+• Fingerprints: eval/bls/recording.py hashes the eval sources, every tool’s name, description and input schema, and the system prompt. They exposed a recorder bug (fixed in PR #19).
+• MCP App: src/cost_intel_app/server.py uses FastMCPApp and prefab-ui; the model sees one entry tool, ppi_basket, and the UI calls UI-only backend tools.
+• Endpoint enforcement: src/portable_llm_mcp/config.py (APPROVED_HOSTS; Ask Sage model names must end in -gov).
+
+Also worth a mention if time allows: the repo’s own agentic development setup (.claude/agents and hooks such as the TDD companion gate and the git-safety preflight) that the team used to build and review the servers.</aside>
+</section>

@@ -1,0 +1,6 @@
+<section id="a-harness-pars" class="bleed">
+<img class="bleed-img" src="/_blob/9917a7e436ad97fce377edc5e95f3800" alt="Appendix A4. An LLM judges the PARS agent. Question datasets pars-eval-0 (25 questions, frozen) and pars-eval-1 (60 questions), built from evaluation.xml, drive PARSAgent (the portable MCPAgent and MCPHub, no LangChain, enforced by a test) with prompt v1 (basic analyst) and v2 (scoped). It calls the PARS MCP server over stdio; the eval exposes 7 read-only tools of 16. LLM judges at temperature 0: match_expected_response (correct or incorrect) and check_answer_scope (within or out of scope). Tracing goes to a loopback-only Phoenix UI or a JSONL fallback; nothing leaves the loopback. Approved endpoints only. Reported 2026-11-11: 100 percent correctness and scope, 50 of 50, with run output not in the repo.">
+<aside>Appendix A4, prompt 4. Corrections: the 100% verdict is shown in amber as reported, not verified, because no Phoenix run output is committed; the PARS server now registers 16 tools, of which the eval exposes 7 (READ_ONLY_TOOLS in eval/phoenix/agent.py).
+
+The harness itself is real and tested offline: eval/phoenix/tests and eval/phoenix/judges/tests, including test_approved_imports.py, which fails if LangChain is ever imported.</aside>
+</section>

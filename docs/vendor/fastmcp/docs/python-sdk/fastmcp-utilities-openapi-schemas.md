@@ -1,0 +1,46 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/docs/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# schemas
+
+# `fastmcp.utilities.openapi.schemas`
+
+Schema manipulation utilities for OpenAPI operations.
+
+## Functions
+
+### `clean_schema_for_display` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/utilities/openapi/schemas.py#L15](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/utilities/openapi/schemas.py#L15)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+clean_schema_for_display(schema: JsonSchema | None) -> JsonSchema | None
+```
+
+Clean up a schema dictionary for display by removing internal/complex fields.
+
+### `extract_output_schema_from_responses` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/utilities/openapi/schemas.py#L787](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/utilities/openapi/schemas.py#L787)</sup>
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+extract_output_schema_from_responses(responses: dict[str, ResponseInfo], schema_definitions: dict[str, Any] | None = None, openapi_version: str | None = None) -> dict[str, Any] | None
+```
+
+Extract output schema from OpenAPI responses for use as MCP tool output schema.
+
+This function finds the first successful response (200, 201, 202, 204) with a
+JSON-compatible content type and extracts its schema. If the schema is not an
+object type, it wraps it to comply with MCP requirements. When any successful
+response has no content, there is no output schema, since the operation may
+answer without a body.
+
+**Args:**
+
+* `responses`: Dictionary of ResponseInfo objects keyed by status code
+* `schema_definitions`: Optional schema definitions to include in the output schema
+* `openapi_version`: OpenAPI version string, used to optimize nullable field handling
+
+**Returns:**
+
+* MCP-compliant output schema with potential wrapping, or None if no suitable schema found
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

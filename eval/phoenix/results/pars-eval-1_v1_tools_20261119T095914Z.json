@@ -1,0 +1,34 @@
+{
+  "run_id": "pars-eval-1_v1_tools_20261119T095914Z",
+  "timestamp_utc": "2026-11-19T09:59:14.276922+00:00",
+  "git_sha": "4e719ac-dirty",
+  "dataset": "pars-eval-1",
+  "prompt_version": "v1",
+  "mode": "tools",
+  "trials": 1,
+  "agent_endpoint": {
+    "provider": "asksage",
+    "host": "api.nnsa.asksage.ai",
+    "model": "gpt-5.6-luna-gov"
+  },
+  "judge_endpoint": {
+    "provider": "asksage",
+    "host": "api.nnsa.asksage.ai",
+    "model": "gpt-5.6-luna-gov"
+  },
+  "tracing": {
+    "backend": "jsonl",
+    "endpoint": "http://localhost:6006",
+    "jsonl_path": "C:\\Users\\maura.lapoff\\Software\\GitLocal\\mcp_group_1-pars-integration\\eval\\phoenix\\results\\pars-eval-1_v1_tools_20261119T095914Z.traces.jsonl",
+    "fallback_reason": "phoenix disabled"
+  },
+  "summary": {
+    "rows": 15,
+    "scored": 15,
+    "errors": 0,
+    "correctness_rate": 0.8,
+    "scope_rate": 0.9333,
+    "examples": 15,
+    "consistent_examples": 15
+  }
+}

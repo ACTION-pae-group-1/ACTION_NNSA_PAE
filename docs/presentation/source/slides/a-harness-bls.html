@@ -1,0 +1,6 @@
+<section id="a-harness-bls" class="bleed">
+<img class="bleed-img" src="/_blob/faa4a357a6e0d6bc79199a301fa196b8" alt="Appendix A3. Graded by contract, not vibes. A simulated user (scripted, deterministic, discloses a fact only when asked) talks with the agent under test (an LLM via the portable client, Ask Sage -gov or local Ollama), which calls the real BLS server in-process through a real MCP client with all 15 tools, on the eval_synthetic_world snapshot with no mocks. Three cases feed programmatic graders in four dimensions: process, accuracy, answer format and guardrails. Each run records run.json, summary.md, episodes.jsonl (local) and errors.jsonl (infrastructure failures, not scored). Rubric self-test: 3 oracle agents must pass every check and 11 flawed agents must each fail exactly the check they target; re-run on a clean clone: PASS.">
+<aside>Appendix A3, prompt 3. Corrections: the server runs through an in-process FastMCP client (Client(create_server(...)) in eval/bls/runner.py), not stdio; the agent sees all 15 tools from list_tools, not an allowlist.
+
+episodes.jsonl and errors.jsonl are git-ignored; run.json and summary.md are committed for all seven recorded runs.</aside>
+</section>

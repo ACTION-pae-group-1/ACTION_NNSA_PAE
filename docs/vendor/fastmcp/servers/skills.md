@@ -1,0 +1,118 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Skills over MCP
+
+> Serve agent skills from a FastMCP server so every agent reads the same copy.
+
+New in version `4.2.0`
+
+A skill is a `SKILL.md` of instructions plus whatever files it points to. Most agents load skills from a local folder, which means every laptop has its own copy and none of them agree. Put the skills on an MCP server instead: one copy, and an update ships when you deploy.
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import FastMCP, Skill
+from fastmcp.skills.provider import SkillCatalogProvider
+
+release_notes = Skill(
+    name="release-notes",
+    description="Write release notes from merged pull requests.",
+    instructions="# Release notes\n\nGroup changes by theme. Follow template.md.\n",
+    files={"template.md": "## Highlights\n\n## Fixes\n"},
+)
+
+mcp = FastMCP("Team Skills")
+mcp.add_provider(SkillCatalogProvider([release_notes]))
+```
+
+That's a skills server. Every client can read `skill://release-notes/SKILL.md` and `template.md` as ordinary resources. Clients that speak the [Skills extension](https://modelcontextprotocol.io/seps/2640-skills-extension) can also call `skills/list` and get each skill's description and a hashed manifest of its files, so a host can offer the skill without an install step. Few hosts do yet, and FastMCP's support is experimental, but you get both from the same provider. Run `fastmcp list server.py --skills` to see what you're serving.
+
+## Where skills come from
+
+A `Skill` is a value: a name, a description, instructions, and any supporting files. Build one in Python as above, or load one from a folder, a package, or a mapping of files:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import Skill
+
+deploy = Skill.from_directory("skills/deploy")
+review = Skill.from_package("my_package", "skills/review")
+triage = Skill.from_files({"SKILL.md": "---\nname: triage\ndescription: Triage issues.\n---\n"})
+```
+
+Skills are validated when you build them and never change afterward. The `description` is what an agent reads to decide whether to use the skill, so make it say when.
+
+If your skills change while the server runs, override `load_skills()`. FastMCP calls it once per request, so a database row or a folder you're still editing shows up on the next request:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from pathlib import Path
+
+from fastmcp import Skill
+from fastmcp.skills.provider import SkillCatalogProvider
+
+ROWS = [{"name": "triage", "description": "Triage issues.", "body": "# Triage\n"}]
+
+
+class StoredSkills(SkillCatalogProvider):
+    async def load_skills(self) -> list[Skill]:
+        return [
+            Skill(name=row["name"], description=row["description"], instructions=row["body"])
+            for row in ROWS
+        ]
+
+
+class LiveFolder(SkillCatalogProvider):
+    async def load_skills(self) -> list[Skill]:
+        return [Skill.from_directory(p) for p in Path("skills").iterdir() if p.is_dir()]
+```
+
+`SkillsDirectoryProvider` and presets like `ClaudeSkillsProvider` also serve folders straight from disk; pass `experimental_skills=True` to make them discoverable.
+
+## Access control
+
+Discovery never shows a skill the caller can't read. If any of its files is hidden, denied by `check_resource_access` (what [`AuthMiddleware`](https://gofastmcp.com/servers/authorization) uses), or shadowed by another resource, the skill drops out of `skills/list`.
+
+## Mounted servers
+
+Skills come along when you [mount](https://gofastmcp.com/servers/composition.md) a server, at the URIs the parent serves them at: `mount(child, namespace="team")` turns `skill://review/` into `skill://team/review/`. If you'd rather choose exactly which providers are discoverable, register the extension yourself with `mcp.add_extension(SkillsExtension(providers=[...]))` from `fastmcp.skills.extension`.
+
+## Read skills from a client
+
+### Discover and read skills
+
+Opt the client into the extension, list what the server offers, and read a whole skill with `read_skill()`:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from fastmcp import Client
+from fastmcp.skills import SkillsClientExtension
+
+client = Client("http://localhost:8000/mcp", extensions=[SkillsClientExtension()])
+async with client:
+    for entry in await client.list_skills():
+        print(entry.uri, entry.frontmatter.description)
+    skill = await client.read_skill("skill://release-notes/SKILL.md")
+```
+
+`list_skills()` returns metadata only. `read_skill()` reads every file in the skill's manifest, checks each against its digest, and returns a `Skill`, so you can inspect it or serve it again with `SkillCatalogProvider([skill])`. [`ClientGroup.list_skills()`](https://gofastmcp.com/clients/client-groups) lists skills across several servers.
+
+### Install skills into a local agent
+
+Most agents still only read skills from disk. `sync_skills()` copies a server's skills into a local folder, and works with any server that serves skills as resources, with or without the extension:
+
+```python theme={"theme":{"light":"snazzy-light","dark":"dark-plus"}}
+from pathlib import Path
+
+from fastmcp import Client
+from fastmcp.utilities.skills import sync_skills
+
+async with Client("http://localhost:8000/mcp") as client:
+    await sync_skills(client, Path.home() / ".claude" / "skills", overwrite=True)
+```
+
+## Current limits
+
+* Skills behind a proxy are readable as resources but don't show up in `skills/list`.
+* A provider added with a namespace or other transforms isn't discoverable; mount a server instead.
+* `directoryRead` isn't implemented.
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

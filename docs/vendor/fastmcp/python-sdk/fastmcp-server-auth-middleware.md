@@ -1,0 +1,33 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://gofastmcp.com/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# middleware
+
+# `fastmcp.server.auth.middleware`
+
+Enhanced authentication middleware with better error messages.
+
+This module provides enhanced versions of MCP SDK authentication middleware
+that return more helpful error messages for developers troubleshooting
+authentication issues.
+
+Implements RFC 6750 §3.1 compliance by distinguishing between missing
+authentication (no error attribute) and invalid authentication (with error).
+
+## Classes
+
+### `RequireAuthMiddleware` <sup>[https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp\_slim/fastmcp/server/auth/middleware.py#L27](https://github.com/PrefectHQ/fastmcp/blob/main/fastmcp_slim/fastmcp/server/auth/middleware.py#L27)</sup>
+
+Enhanced authentication middleware with detailed error messages.
+
+Extends the SDK's RequireAuthMiddleware to provide more actionable
+error messages when authentication fails. This helps developers
+understand what went wrong and how to fix it.
+
+Also implements RFC 6750 §3.1 compliance by distinguishing between
+missing authentication (initial discovery) and invalid authentication
+(token validation failure).
+
+
+This documentation is built and hosted on [Mintlify](https://mintlify.com), a developer documentation platform.

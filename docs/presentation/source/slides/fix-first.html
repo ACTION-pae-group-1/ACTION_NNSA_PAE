@@ -1,0 +1,24 @@
+<section id="fix-first" class="dark" data-transition="fade">
+<div class="head">
+<p class="eyebrow">Future work · before judging</p>
+<h2>Six fixes that protect the score</h2>
+</div>
+<table class="tbl tbl-mid" style="color:#EEF2F8">
+<tr style="background:#1D3150"><th style="width:40%">Fix</th><th style="width:46%">Why it matters</th><th style="width:14%">Effort</th></tr>
+<tr><td>Regenerate the sample-data hashes from the committed LF files</td><td>Quick Start step 2 stops with “SHA-256 mismatch” on a fresh clone</td><td>Minutes</td></tr>
+<tr><td>Update 3 tests for strict program codes; fix the “data” import clash</td><td>4 failures and 6 errors on a clean Linux run</td><td>Under an hour</td></tr>
+<tr><td>Allowlist save_index_spec and calculate_index_from_bls</td><td>The bundled agent can’t run the core calculation</td><td>Minutes</td></tr>
+<tr><td>Reconcile the PARS readiness summary</td><td>Marked WITHDRAWN at the top, but its body still reports 7 tools and 100% with no run output; the server has 16 tools</td><td>Under an hour</td></tr>
+<tr><td>Make ruff clean</td><td>27 lint errors and 5 unformatted files, mostly eval/asksage</td><td>Minutes</td></tr>
+<tr><td>Refresh deploy/README.md</td><td>It names src/example_server and a databricks/ kit that isn’t there</td><td>Minutes</td></tr>
+</table>
+<div class="pn"></div>
+<aside>These are the gaps a judge will hit by cloning the repo and following the README. Effort is my estimate.
+
+1. src/bls_mcp/docs/sample_data/pc-sample-input.json and ci-sample-input.json record SHA-256 hashes and sizes of CRLF copies (for example pc.industry.txt: manifest 716bce1a…, committed file bfc35bf4…; the manifest hash equals the file with CRLF endings). .gitattributes marks the folder -text, so the files stay LF everywhere. Regenerating both fields from the committed bytes let the full sample pipeline and poe verify pass in a scratch copy. Add a test that rebuilds from the manifest.
+2. tests/bls/unit/test_catalog_service_duckdb.py (2 tests) and tests/integration/test_phase1_duckdb_server.py expect unknown program codes to return empty results, but SeriesSearchRequest now rejects them. test_manual_bls_*.py pass alone but fail in the full run because another module named “data” is imported first.
+3. src/mcp_servers.json allows 10 BLS tools; the eval harness uses all 15.
+4. eval/DEPLOYMENT_READINESS_SUMMARY.md says "production-ready" and "DEPLOY" with 7 tools; no Phoenix run output is committed, and the PARS allowlist now includes the training, prediction and write_back_wbs tools.
+5. uv run ruff check . and uv run ruff format --check .
+6. deploy/README.md describes src/example_server and deploy/databricks/, which isn’t in the repo.</aside>
+</section>

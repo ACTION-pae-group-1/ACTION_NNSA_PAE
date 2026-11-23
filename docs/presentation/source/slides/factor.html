@@ -1,0 +1,12 @@
+<section id="factor" class="bleed" data-transition="fade">
+<img class="bleed-img" src="/_blob/caf5126266c506fff1d4b90348c1babf" alt="Where the factor came from. Component one: PCU327320327320, PPI ready-mix concrete, materials, weight 0.60, annual 2014 to 2026, 200.0 to 310.0, relative 1.5500. Component two: CIU1010000000000I, an ECI-like labor index, weight 0.40, quarterly only, 2014-Q04 140 to 2026-Q04 224, relative 1.6000. Combined server-side as a fixed-weight composite: 1.5700, plus 57.00 percent, equal to 0.60 times 1.5500 plus 0.40 times 1.6000. Graded: weights sum to 1; matches an independent recomputation. Source record: snapshot_id eval_synthetic_world, series IDs and periods per component, a warning that the labor series resolved from Q04, no zero-fill and no interpolation.">
+<aside>This is the heart of the design. The model never supplies an index value. calculate_index_from_bls loads the saved specification, reads both index levels for each component from the snapshot, and returns the result together with a ledger: observations used, provenance and warnings.
+
+The arithmetic: relative = level at target ÷ level at base; composite = sum of weight × relative. 0.60 × 310/200 + 0.40 × 224/140 = 0.93 + 0.64 = 1.5700.
+
+The labor series has no annual average, so the server takes its Q04 value for each year and says so in the component result, the ledger warnings and the provenance. It never averages quarters BLS didn’t publish.
+
+The two green chips are real grader checks: “weights sum to 1” and “composite matches an independent recomputation”. The oracle agent passes both in poe eval-selftest.
+
+Correction to prompt 7: the prompt’s illustrative 1.032 and a “CUSR…” series (a CPI prefix, not ECI) were replaced with this reproducible basket.</aside>
+</section>

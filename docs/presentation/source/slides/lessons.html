@@ -1,0 +1,40 @@
+<section id="lessons">
+<div class="head">
+<p class="eyebrow">Lessons learned</p>
+<h2>What the first runs taught us</h2>
+</div>
+<div class="grid3">
+<div class="card in" style="--i:0">
+<h3>Test the test user</h3>
+<p class="card-text">The scripted user missed real model phrasing and ended 23 of 25 early episodes.</p>
+</div>
+<div class="card in" style="--i:1">
+<h3>Strict schemas teach</h3>
+<p class="card-text">A model invented fields (keywords, class, year) that were silently accepted.</p>
+</div>
+<div class="card in" style="--i:2">
+<h3>Errors must say how to recover</h3>
+<p class="card-text">20 of 29 tool errors were “PPI” or “ECI” where pc or ci was required.</p>
+</div>
+<div class="card in" style="--i:3">
+<h3>Make the order visible</h3>
+<p class="card-text">Models calculated before saving the spec, and never validated unprompted.</p>
+</div>
+<div class="card card-green in" style="--i:4">
+<h3>Measure the guardrails</h3>
+<p class="card-text">They held under weak agents: 26 of 27 checks in the worst run.</p>
+</div>
+<div class="card in" style="--i:5">
+<h3>Fingerprint everything</h3>
+<p class="card-text">Fingerprints exposed a recorder bug that mislabelled later runs.</p>
+</div>
+</div>
+<div class="pn"></div>
+<aside>All six come from docs/EVALUATION_JOURNEY.md, section 4, each with its evidence there.
+
+The point for judges: the evaluation changed the code. Series validation was hardened (commit 188b298), the recorder was fixed (PR #19), and the scripted user was widened, all before any model was judged again.
+
+Lessons 2 to 4 are still open as tool changes (extra="forbid", recovery hints in error text, a single goal-level calculate tool), and they appear in future work.
+
+The timeline of these phases is in Appendix A5.</aside>
+</section>

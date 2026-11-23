@@ -1,0 +1,54 @@
+{
+  "servers": {
+    "bls_server": {
+      "transport": "streamable_http",
+      "url": "http://127.0.0.1:8821/mcp",
+      "allowed_tools": [
+        "search_series",
+        "describe_series",
+        "get_series_hierarchy",
+        "get_cached_series_data"
+      ],
+      "allowed_resources": [
+        "guide://escalation-workflow",
+        "methodology://composite-index",
+        "methodology://locality-adjustment",
+        "setup://bls-api",
+        "bls://series/{series_id}"
+      ],
+      "allowed_prompts": [
+        "design_escalation_basket"
+      ]
+    },
+    "pars_mcp": {
+      "transport": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "--no-sync",
+        "python",
+        "-m",
+        "src.pars_local_mcp.server"
+      ],
+      "env": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "USERPROFILE": "${USERPROFILE}",
+        "APPDATA": "${APPDATA}",
+        "LOCALAPPDATA": "${LOCALAPPDATA}"
+      },
+      "allowed_tools": [
+        "get_project_info",
+        "get_wbs_by_level",
+        "get_wbs_hierarchy",
+        "get_wbs_lineage",
+        "get_leaf_nodes",
+        "get_wbs_project_descriptions",
+        "get_wbs_rows",
+        "get_wbs_run_status",
+        "list_projects",
+        "search_wbs",
+        "validate_wbs_inputs"
+      ]
+    }
+  }
+}
